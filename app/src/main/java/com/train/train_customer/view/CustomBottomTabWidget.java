@@ -41,21 +41,23 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
     public CustomBottomTabWidget(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        llMenuHome = findViewById(R.id.ll_menu_home_page);
-        llMenuNearby = findViewById(R.id.ll_menu_nearby);
-        llMenuDiscover = findViewById(R.id.ll_menu_discover);
-        llMenuOrder = findViewById(R.id.ll_menu_order);
-        llMenuMine = findViewById(R.id.ll_menu_mine);
-        viewPager = findViewById(R.id.vp_tab_widget);
+        View view = View.inflate(context, R.layout.v_tab_btns, this);
+
+        llMenuHome = view.findViewById(R.id.ll_menu_home_page);
+        llMenuNearby = view.findViewById(R.id.ll_menu_nearby);
+        llMenuDiscover = view.findViewById(R.id.ll_menu_discover);
+        llMenuOrder = view.findViewById(R.id.ll_menu_order);
+        llMenuMine = view.findViewById(R.id.ll_menu_mine);
+        viewPager = view.findViewById(R.id.vp_tab_widget);
 
         //设置默认的选中项
         selectTab(MenuTab.HOME);
 
-        findViewById(R.id.ll_menu_home_page).setOnClickListener(this);
-        findViewById(R.id.ll_menu_nearby).setOnClickListener(this);
-        findViewById(R.id.ll_menu_discover).setOnClickListener(this);
-        findViewById(R.id.ll_menu_order).setOnClickListener(this);
-        findViewById(R.id.ll_menu_mine).setOnClickListener(this);
+        llMenuHome.setOnClickListener(this);
+        llMenuNearby.setOnClickListener(this);
+        llMenuDiscover.setOnClickListener(this);
+        llMenuOrder.setOnClickListener(this);
+        llMenuMine.setOnClickListener(this);
     }
 
     /**
