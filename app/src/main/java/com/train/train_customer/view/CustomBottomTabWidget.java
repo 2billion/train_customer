@@ -19,11 +19,10 @@ import java.util.List;
 
 public class CustomBottomTabWidget extends LinearLayout implements View.OnClickListener{
 
-    LinearLayout llMenuHome;
-    LinearLayout llMenuNearby;
-    LinearLayout llMenuDiscover;
-    LinearLayout llMenuOrder;
-    LinearLayout llMenuMine;
+    LinearLayout llMenuTab1;
+    LinearLayout llMenuTab2;
+    LinearLayout llMenuTab3;
+    LinearLayout llMenuTab4;
     ViewPager viewPager;
 
     private FragmentManager mFragmentManager;
@@ -43,21 +42,19 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
 
         View view = View.inflate(context, R.layout.v_tab_btns, this);
 
-        llMenuHome = view.findViewById(R.id.ll_menu_home_page);
-        llMenuNearby = view.findViewById(R.id.ll_menu_nearby);
-        llMenuDiscover = view.findViewById(R.id.ll_menu_discover);
-        llMenuOrder = view.findViewById(R.id.ll_menu_order);
-        llMenuMine = view.findViewById(R.id.ll_menu_mine);
+        llMenuTab1 = view.findViewById(R.id.ll_menu_home_tab1);
+        llMenuTab2 = view.findViewById(R.id.ll_menu_home_tab2);
+        llMenuTab3 = view.findViewById(R.id.ll_menu_home_tab3);
+        llMenuTab4 = view.findViewById(R.id.ll_menu_home_tab4);
         viewPager = view.findViewById(R.id.vp_tab_widget);
 
         //设置默认的选中项
         selectTab(MenuTab.HOME);
 
-        llMenuHome.setOnClickListener(this);
-        llMenuNearby.setOnClickListener(this);
-        llMenuDiscover.setOnClickListener(this);
-        llMenuOrder.setOnClickListener(this);
-        llMenuMine.setOnClickListener(this);
+        llMenuTab1.setOnClickListener(this);
+        llMenuTab2.setOnClickListener(this);
+        llMenuTab3.setOnClickListener(this);
+        llMenuTab4.setOnClickListener(this);
     }
 
     /**
@@ -99,9 +96,6 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
                     case 3:
                         selectTab(MenuTab.ORDER);
                         break;
-                    case 4:
-                        selectTab(MenuTab.MINE);
-                        break;
                     default:
                         selectTab(MenuTab.HOME);
                         break;
@@ -126,19 +120,17 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
 
         switch (tab) {
             case HOME:
-                llMenuHome.setActivated(true);
+                llMenuTab1.setActivated(true);
                 break;
             case NEARBY:
-                llMenuNearby.setActivated(true);
+                llMenuTab2.setActivated(true);
                 break;
             case DISCOVER:
-                llMenuDiscover.setActivated(true);
+                llMenuTab3.setActivated(true);
                 break;
             case ORDER:
-                llMenuOrder.setActivated(true);
+                llMenuTab4.setActivated(true);
                 break;
-            case MINE:
-                llMenuMine.setActivated(true);
         }
 
     }
@@ -146,36 +138,31 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
 
     //让所有tab都取消选中
     private void unCheckedAll() {
-        llMenuHome.setActivated(false);
-        llMenuNearby.setActivated(false);
-        llMenuDiscover.setActivated(false);
-        llMenuOrder.setActivated(false);
-        llMenuMine.setActivated(false);
+        llMenuTab1.setActivated(false);
+        llMenuTab2.setActivated(false);
+        llMenuTab3.setActivated(false);
+        llMenuTab4.setActivated(false);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_menu_home_page:
+            case R.id.ll_menu_home_tab1:
                 selectTab(MenuTab.HOME);
                 //使ViewPager跟随tab点击事件滑动
                 viewPager.setCurrentItem(0);
                 break;
-            case R.id.ll_menu_nearby:
+            case R.id.ll_menu_home_tab2:
                 selectTab(MenuTab.NEARBY);
                 viewPager.setCurrentItem(1);
                 break;
-            case R.id.ll_menu_discover:
+            case R.id.ll_menu_home_tab3:
                 selectTab(MenuTab.DISCOVER);
                 viewPager.setCurrentItem(2);
                 break;
-            case R.id.ll_menu_order:
+            case R.id.ll_menu_home_tab4:
                 selectTab(MenuTab.ORDER);
                 viewPager.setCurrentItem(3);
-                break;
-            case R.id.ll_menu_mine:
-                selectTab(MenuTab.MINE);
-                viewPager.setCurrentItem(4);
                 break;
         }
     }
@@ -188,6 +175,5 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
         NEARBY,
         DISCOVER,
         ORDER,
-        MINE
     }
 }

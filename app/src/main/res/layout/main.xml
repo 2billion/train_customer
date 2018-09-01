@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.train.train_customer.tab.MainActivity">
+    tools:context="com.train.train_customer.act.MainActivity">
 
     <com.train.train_customer.view.CustomBottomTabWidget
         android:id="@+id/tabWidget"

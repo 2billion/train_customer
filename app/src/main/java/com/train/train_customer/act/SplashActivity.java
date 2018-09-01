@@ -1,9 +1,11 @@
-package com.train.train_customer;
+package com.train.train_customer.act;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.train.train_customer.R;
 
 public class SplashActivity extends Activity {
 
@@ -21,7 +23,7 @@ public class SplashActivity extends Activity {
                 startActivity(i);
                 finish();
             }
-        }, 1000);
+        }, 200);
     }
 
 }

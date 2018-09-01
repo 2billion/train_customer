@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <include layout="@layout/v_search" android:id="@+id/search">
+        </include>
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"></ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+
+            <Button
+                android:id="@+id/btn_create_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/v_btn_blue_light"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="创建订单" />
+
+            <Button
+                android:id="@+id/btn_add_cart"
+                android:background="@drawable/v_btn_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:text="添加购物车" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

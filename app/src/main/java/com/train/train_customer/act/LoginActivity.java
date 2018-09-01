@@ -1,13 +1,14 @@
-package com.train.train_customer;
+package com.train.train_customer.act;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.train.train_customer.tab.MainActivity;
+import com.train.train_customer.R;
 
 public class LoginActivity extends Activity {
     @Override
@@ -31,5 +32,13 @@ public class LoginActivity extends Activity {
 
             }
         });
+
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+        }, 500);
     }
 }
