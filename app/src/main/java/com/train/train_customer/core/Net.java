@@ -31,6 +31,8 @@ public class Net {
         return (BaseApplication) this.ctx.getApplicationContext();
     }
 
+    //    1.1登录（用户名/密码）
+    //    请求地址：/login/checkCustomerPwd
     public void login(Callback callBack, String name, String pwd) {
         String url = HOST + "/login/checkCustomerPwd?userName=" + name + "&password=" + pwd;
         Request request = new Request.Builder().url(url).get().build();
@@ -38,6 +40,8 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    1.3登出
+    //    请求地址：/login/checkout
     public void checkOut(Callback callBack) {
         String url = HOST + "/login/checkout";
         Request request = new Request.Builder().url(url).get().build();
@@ -45,7 +49,19 @@ public class Net {
         call.enqueue(callBack);
     }
 
-    //    partName":"","tsType":"","partNo":"","buPartNo":"","page":1,"pageSize":20
+    //    1.6获取适用车型
+    //    请求地址： /tsType/findTsTypeList
+    public void findTsTypeList(Callback callBack) {
+        String url = HOST + "/tsType/findTsTypeList";
+        Request request = new Request.Builder().url(url).get()
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //     1.7获取配件列表
+    //     请求地址： /part/findPartNumList
+    //     partName":"","tsType":"","partNo":"","buPartNo":"","page":1,"pageSize":20
     public void getPartList(Callback callBack, int page, int pageSize, String partName, String tsType, String partNo, String buPartNo) {
         String url = HOST + "/part/findPartNumList?page=" + page + "&pageSize=" + pageSize + "&partName=" + partName + "&tsType=" + tsType + "&partNo=" + partNo + "&buPartNo=" + buPartNo;
         Request request = new Request.Builder().url(url).get()

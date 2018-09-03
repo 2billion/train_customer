@@ -20,4 +20,8 @@
     <color name="btn_blue_press">#004da0</color>
     <!-- amount -->
     <color name="amount_divider">#ffd2d2d2</color>
+    <!--search tag -->
+    <color name="search_tag_normal">#ecebec</color>
+    <color name="search_tag_click">#f1de96</color>
+    ecebec
 </resources>

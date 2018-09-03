@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -54,7 +53,7 @@ public class ProductAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(this.ctx, R.layout.tab_product_list_item, null);
+            convertView = View.inflate(this.ctx, R.layout.product_list_item, null);
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.select = (RadioButton) convertView.findViewById(R.id.select);
             holder.info1 = (TextView) convertView.findViewById(R.id.info1);
