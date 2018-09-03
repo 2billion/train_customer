@@ -23,7 +23,7 @@ public class Net {
     private Context ctx;
 
     public Net(Context ctx) {
-        client = new OkHttpClient.Builder().readTimeout(5, TimeUnit.SECONDS).build();
+        client = new OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).build();
         this.ctx = ctx;
     }
 

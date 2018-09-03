@@ -20,6 +20,7 @@ public class DataManager {
     public String token = null;
     public String userName = null;
 
+
     //    part list
     public List<PartBean> partList = new ArrayList<>();
 

@@ -14,6 +14,7 @@ import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.LoginBean;
 import com.train.train_customer.base.BaseActivity;
 import com.train.train_customer.base.BaseApplication;
+import com.train.train_customer.core.NetCallback;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -60,18 +61,16 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         String name = et_name.getText().toString();
         String password = et_password.getText().toString();
-        BaseApplication.app.net.login(new Callback() {
+        BaseApplication.app.net.login(new NetCallback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                BaseApplication.app.showToast("请求失败");
+            public void failure(Call call, IOException e) {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String back = response.body().string();
+            public void response(Call call, String responseStr) throws IOException {
                 Type cvbType = new TypeToken<LoginBean>() {
                 }.getType();
-                LoginBean bean = new Gson().fromJson(back, cvbType);
+                LoginBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.showToast("登录成功");
                     BaseApplication.app.dm.token = bean.data.token;
