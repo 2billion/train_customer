@@ -17,17 +17,17 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.train.train_customer.R;
+import com.train.train_customer.core.DataManager;
 import com.train.train_customer.core.Net;
 import com.train.train_customer.core.Cache;
 
 public class BaseApplication extends Application {
 
     public Net net;
+    public DataManager dm;
     private static Toast mToast = null;
     public static Activity curAct = null;
-
-    public String token = null;
-    public String userName = null;
+    public static BaseApplication app = null;
 
     //static 代码段可以防止内存泄露
     static {
@@ -59,8 +59,12 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        BaseApplication.app = this;
         if (net == null) {
             net = new Net(this);
+        }
+        if (dm == null) {
+            dm = new DataManager();
         }
         Cache.init(getApplicationContext());
     }

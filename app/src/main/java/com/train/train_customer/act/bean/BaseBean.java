@@ -2,27 +2,25 @@ package com.train.train_customer.act.bean;
 
 //    {"data":{"userName":"gzdcd","token":"5cb1cd6deb5e4b248c8c0b954e14d7df"},"code":200,"msg":"成功"}
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+
 public class BaseBean {
+
+//    public String jsoStr = null;
+//    public JSONObject jsonObj = null;
+
     public int code = 0;
     public String msg = null;
-    public JSONObject data = null;
 
-    public BaseBean(String str) {
-        JSONObject json = null;
-        try {
-            json = new JSONObject(str);
-            this.code = json.optInt("code");
-            this.msg = json.optString("msg");
-            if (this.code == 200) {
-                this.data = json.optJSONObject("data");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    public BaseBean(String str) {
+//        this.jsoStr = str;
+//    }
 
     public boolean isOK() {
         return this.code == 200;

@@ -1,24 +1,22 @@
 package com.train.train_customer.act;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.train.train_customer.R;
 import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.LoginBean;
 import com.train.train_customer.base.BaseActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.train.train_customer.base.BaseApplication;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,22 +60,26 @@ public class LoginActivity extends BaseActivity {
     private void login() {
         String name = et_name.getText().toString();
         String password = et_password.getText().toString();
-        app().net.login(new Callback() {
+        BaseApplication.app.net.login(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                app().showToast("请求失败");
+                BaseApplication.app.showToast("请求失败");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String back = response.body().string();
-                LoginBean bean = new LoginBean(back);
+                Type cvbType = new TypeToken<LoginBean>() {
+                }.getType();
+                LoginBean bean = new Gson().fromJson(back, cvbType);
                 if (bean.isOK()) {
-                    app().showToast(bean.userName + "登录成功");
+                    BaseApplication.app.showToast("登录成功");
+                    BaseApplication.app.dm.token = bean.data.token;
+                    BaseApplication.app.dm.userName = bean.data.userName;
                     finish();
                     gotoMainAct();
                 } else {
-                    app().showToast("登录失败，请检查账号密码");
+                    BaseApplication.app.showToast(bean.msg);
                 }
             }
         }, name, password);

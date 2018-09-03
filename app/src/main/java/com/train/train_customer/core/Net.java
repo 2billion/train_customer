@@ -27,8 +27,8 @@ public class Net {
         this.ctx = ctx;
     }
 
-    public BaseApplication app(){
-        return (BaseApplication)this.ctx.getApplicationContext();
+    public BaseApplication app() {
+        return (BaseApplication) this.ctx.getApplicationContext();
     }
 
     public void login(Callback callBack, String name, String pwd) {
@@ -38,9 +38,18 @@ public class Net {
         call.enqueue(callBack);
     }
 
-    public void checkOut(Callback callBack){
+    public void checkOut(Callback callBack) {
         String url = HOST + "/login/checkout";
         Request request = new Request.Builder().url(url).get().build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    partName":"","tsType":"","partNo":"","buPartNo":"","page":1,"pageSize":20
+    public void getPartList(Callback callBack, int page, int pageSize, String partName, String tsType, String partNo, String buPartNo) {
+        String url = HOST + "/part/findPartNumList?page=" + page + "&pageSize=" + pageSize + "&partName=" + partName + "&tsType=" + tsType + "&partNo=" + partNo + "&buPartNo=" + buPartNo;
+        Request request = new Request.Builder().url(url).get()
+                .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
