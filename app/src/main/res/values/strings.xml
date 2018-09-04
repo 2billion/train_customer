@@ -3,4 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="search_input_hit"><font size="14">输入BST物资编码</font></string>
+    <string name="product_right_view1"><font size="14">配件名称</font></string>
+    <string name="product_right_view2"><font size="14">BST物资编码</font></string>
+    <string name="product_right_view3"><font size="14">路局物资编码</font></string>
 </resources>

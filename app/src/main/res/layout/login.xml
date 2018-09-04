@@ -43,13 +43,10 @@
         android:text="11111111" />
 
     <Button
-        android:background="@drawable/v_btn_login"
+        style="@style/btn_blue"
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:layout_marginBottom="100dp"
-        android:textSize="@dimen/btn_font_size"
-        android:textColor="#edecf2"
         android:text="登录" />
     <View
         android:layout_width="match_parent"

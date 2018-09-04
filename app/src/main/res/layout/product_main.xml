@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/v_btn_blue_light"
+                    android:background="@drawable/v_btn_block_blue_light"
                     android:text="创建订单"
                     android:textColor="@color/white" />
 
@@ -53,14 +53,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/v_btn_blue"
+                    android:background="@drawable/v_btn_block_blue"
                     android:text="添加购物车"
                     android:textColor="@color/white" />
 
 
             </LinearLayout>
         </LinearLayout>
-        <include layout="@layout/product_right_search"></include>
+        <include layout="@layout/product_right_search" android:visibility="invisible"></include>
     </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>

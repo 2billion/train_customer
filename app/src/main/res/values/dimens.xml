@@ -2,4 +2,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="btn_font_size">20dp</dimen>
     <dimen name="btn_search_font_size">14dp</dimen>
+
+    <dimen name="btn_label">14dp</dimen>
+
 </resources>

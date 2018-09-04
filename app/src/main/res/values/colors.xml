@@ -14,6 +14,8 @@
     <color name="dividerColorF0">#f0f0f0</color>
     <color name="red">#f00</color>
     <!--buttion-->
+    <color name="btn_yellow_light_normal">#eea345</color>
+    <color name="btn_yellow_light_press">#d3903c</color>
     <color name="btn_blue_light_normal">#36a0de</color>
     <color name="btn_blue_light_press">#2d85b9</color>
     <color name="btn_blue_normal">#0062cd</color>
