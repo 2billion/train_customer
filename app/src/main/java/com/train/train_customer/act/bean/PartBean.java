@@ -15,6 +15,9 @@ public class PartBean {
     public String price = null;
     public String partType = null;
 
+    public int count = 0;
+    public boolean showAmountView = false;
+
 }
 
 //{

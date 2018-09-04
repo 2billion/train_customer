@@ -1,6 +1,7 @@
 package com.train.train_customer.act.product;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -82,15 +83,10 @@ public class ProductRightView {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                input_del_1.setVisibility(TextUtils.isEmpty(input1.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
-                if (s.toString() != null || s.toString() != "") {
-                    input_del_1.setVisibility(View.VISIBLE);
-                } else {
-                    input_del_1.setVisibility(View.INVISIBLE);
-                }
             }
         });
         input2 = this.view.findViewById(R.id.et_bst_wz_code);
@@ -100,15 +96,10 @@ public class ProductRightView {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                input_del_2.setVisibility(TextUtils.isEmpty(input2.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
-                if (s.toString() != null || s.toString() != "") {
-                    input_del_2.setVisibility(View.VISIBLE);
-                } else {
-                    input_del_2.setVisibility(View.INVISIBLE);
-                }
             }
         });
         input3 = this.view.findViewById(R.id.et_lj_wz_code);
@@ -118,15 +109,10 @@ public class ProductRightView {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                input_del_3.setVisibility(TextUtils.isEmpty(input3.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
-                if (s.toString() != null || s.toString() != "") {
-                    input_del_3.setVisibility(View.VISIBLE);
-                } else {
-                    input_del_3.setVisibility(View.INVISIBLE);
-                }
             }
         });
 
@@ -226,13 +212,13 @@ public class ProductRightView {
         };
         id_flowlayout.setAdapter(tagAdapter);
         tagAdapter.notifyDataChanged();
-
+        initDelUI();
     }
 
     private void initDelUI() {
-        boolean del1 = input1.getText().toString().equals("");
-        boolean del2 = input1.getText().toString().equals("");
-        boolean del3 = input1.getText().toString().equals("");
+        boolean del1 = TextUtils.isEmpty(input1.getText());
+        boolean del2 = TextUtils.isEmpty(input2.getText());
+        boolean del3 = TextUtils.isEmpty(input3.getText());
         input_del_1.setVisibility(del1 ? View.INVISIBLE : View.VISIBLE);
         input_del_2.setVisibility(del2 ? View.INVISIBLE : View.VISIBLE);
         input_del_3.setVisibility(del3 ? View.INVISIBLE : View.VISIBLE);

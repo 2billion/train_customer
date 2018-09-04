@@ -5,10 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -47,6 +47,9 @@ public class ProductFragment extends BaseFragment {
     ProductAdapter adapter;
     ProductRightView rightView;
 
+    Button btn_create_order;
+    Button btn_add_cart;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,7 +69,7 @@ public class ProductFragment extends BaseFragment {
             }
         });
         list = view.findViewById(R.id.list);
-        adapter = new ProductAdapter(getContext());
+        adapter = new ProductAdapter(this);
         list.setAdapter(adapter);
 
         searchInput = view.findViewById(R.id.search_input);
@@ -100,6 +103,22 @@ public class ProductFragment extends BaseFragment {
                 rightView.switchVisible();
             }
         });
+
+        //        俩按钮
+        btn_create_order = view.findViewById(R.id.btn_create_order);
+        btn_create_order.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                BaseApplication.showToast(BaseApplication.app.dm.partList.get(0).count + "");
+            }
+        });
+        btn_add_cart = view.findViewById(R.id.btn_add_cart);
+        btn_add_cart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+        Button btn_add_cart;
+
 
         //    获取数据放最后
         getDate();
