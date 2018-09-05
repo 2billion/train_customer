@@ -77,4 +77,22 @@ public class Net {
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
+
+
+    //     1.8获取购物车列表
+    //     请求地址： /cart/findCartList
+    //     "tsType":"","bstPartNo":"","buPartNo":""}
+    public void getCartList(Callback callBack, String tsType, String bstPartNo, String buPartNo) {
+        String url = HOST + "/cart/findCartList";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("tsType", tsType);
+        params.add("bstPartNo", bstPartNo);
+        params.add("buPartNo", buPartNo);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
 }

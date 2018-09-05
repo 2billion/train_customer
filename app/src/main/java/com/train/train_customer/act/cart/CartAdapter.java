@@ -1,23 +1,25 @@
-package com.train.train_customer.act.product;
+package com.train.train_customer.act.cart;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.train.train_customer.R;
+import com.train.train_customer.act.bean.CartBean;
 import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.view.AmountView;
 
-public class ProductAdapter extends BaseAdapter {
+public class CartAdapter extends BaseAdapter {
 
-    ProductFragment fragment;
+    CartFragment fragment;
 
 
-    public ProductAdapter(ProductFragment fragment) {
+    public CartAdapter(CartFragment fragment) {
         this.fragment = fragment;
     }
 
@@ -29,14 +31,15 @@ public class ProductAdapter extends BaseAdapter {
         public TextView info3;
         public AmountView amountView;
         public CheckBox checkBox;
+        public Button cart_btn_del;
     }
 
     @Override
     public int getCount() {
-        if (BaseApplication.app.dm.productList == null) {
+        if (BaseApplication.app.dm.cartList == null) {
             return 0;
         } else {
-            return BaseApplication.app.dm.productList.size();
+            return BaseApplication.app.dm.cartList.size();
         }
     }
 
@@ -55,7 +58,7 @@ public class ProductAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(this.fragment.getContext(), R.layout.product_list_item, null);
+            convertView = View.inflate(this.fragment.getContext(), R.layout.cart_list_item, null);
             holder.title = convertView.findViewById(R.id.title);
             holder.select = convertView.findViewById(R.id.select);
             holder.info1 = convertView.findViewById(R.id.info1);
@@ -63,37 +66,45 @@ public class ProductAdapter extends BaseAdapter {
             holder.info3 = convertView.findViewById(R.id.info3);
             holder.amountView = convertView.findViewById(R.id.amount_view);
             holder.checkBox = convertView.findViewById(R.id.select);
+            holder.cart_btn_del = convertView.findViewById(R.id.cart_btn_del);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        PartBean bean = BaseApplication.app.dm.productList.get(position);
-        holder.title.setText(bean.partC);
-        holder.info1.setText("BST物料编码：" + bean.partNo);
+        CartBean bean = BaseApplication.app.dm.cartList.get(position);
+        holder.title.setText(bean.partName);
+        holder.info1.setText("BST物料编码：" + bean.bstPartNo);
         holder.info2.setText("路局物料编码：" + bean.buPartNo);
         holder.info3.setText("适用车型：" + bean.tsType + "(" + bean.contractNo + ")");
 
         holder.checkBox.setTag(bean);
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ((PartBean)buttonView.getTag()).showAmountView = isChecked;
+                ((CartBean) buttonView.getTag()).showAmountView = isChecked;
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     public void run() {
-                        ProductAdapter.this.notifyDataSetChanged();
+                        CartAdapter.this.notifyDataSetChanged();
                     }
                 });
             }
         });
 
-        if (bean.showAmountView) {
-            holder.amountView.setVisibility(View.VISIBLE);
-        } else {
-            holder.amountView.setVisibility(View.GONE);
-        }
+//        if (bean.showAmountView) {
+//            holder.amountView.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.amountView.setVisibility(View.GONE);
+//        }
         holder.amountView.setTag(bean);
         holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
-                ((PartBean) view.getTag()).count = amount;
+                ((CartBean) view.getTag()).count = amount;
+            }
+        });
+        holder.cart_btn_del.setTag(bean);
+        holder.cart_btn_del.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                CartBean bean = (CartBean) v.getTag();
+                BaseApplication.showToast("" + bean.partName);
             }
         });
 

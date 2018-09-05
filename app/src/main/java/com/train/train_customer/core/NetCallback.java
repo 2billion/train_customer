@@ -51,9 +51,9 @@ public abstract class NetCallback implements Callback {
 //        if (bean.isOK()) {
 //        //                   刷新则删除列表
 //        if (page == 1) {
-//        BaseApplication.app.dm.partList.clear();
+//        BaseApplication.app.dm.productList.clear();
 //        }
-//        BaseApplication.app.dm.partList.addAll(bean.data.data);
+//        BaseApplication.app.dm.productList.addAll(bean.data.data);
 //        getActivity().runOnUiThread(new Runnable() {
 //public void run() {
 //        adapter.notifyDataSetChanged();

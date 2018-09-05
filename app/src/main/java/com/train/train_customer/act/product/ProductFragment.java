@@ -108,7 +108,7 @@ public class ProductFragment extends BaseFragment {
         btn_create_order = view.findViewById(R.id.btn_create_order);
         btn_create_order.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.showToast(BaseApplication.app.dm.partList.get(0).count + "");
+                BaseApplication.showToast(BaseApplication.app.dm.productList.get(0).count + "");
             }
         });
         btn_add_cart = view.findViewById(R.id.btn_add_cart);
@@ -117,8 +117,6 @@ public class ProductFragment extends BaseFragment {
 
             }
         });
-        Button btn_add_cart;
-
 
         //    获取数据放最后
         getDate();
@@ -151,9 +149,9 @@ public class ProductFragment extends BaseFragment {
                 if (bean.isOK()) {
                     //                   刷新则删除列表
                     if (page == 1) {
-                        BaseApplication.app.dm.partList.clear();
+                        BaseApplication.app.dm.productList.clear();
                     }
-                    BaseApplication.app.dm.partList.addAll(bean.data.data);
+                    BaseApplication.app.dm.productList.addAll(bean.data.data);
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             adapter.notifyDataSetChanged();
