@@ -6,11 +6,11 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.train.train_customer.R;
 import com.train.train_customer.act.bean.CartBean;
-import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.view.AmountView;
 
@@ -32,6 +32,7 @@ public class CartAdapter extends BaseAdapter {
         public AmountView amountView;
         public CheckBox checkBox;
         public Button cart_btn_del;
+        public EditText etAmount;
     }
 
     @Override
@@ -67,6 +68,7 @@ public class CartAdapter extends BaseAdapter {
             holder.amountView = convertView.findViewById(R.id.amount_view);
             holder.checkBox = convertView.findViewById(R.id.select);
             holder.cart_btn_del = convertView.findViewById(R.id.cart_btn_del);
+            holder.etAmount = convertView.findViewById(R.id.etAmount);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -88,16 +90,16 @@ public class CartAdapter extends BaseAdapter {
                 });
             }
         });
-
-//        if (bean.showAmountView) {
-//            holder.amountView.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.amountView.setVisibility(View.GONE);
-//        }
         holder.amountView.setTag(bean);
+        holder.etAmount.setText("" + (int) (bean.qty));
         holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
-                ((CartBean) view.getTag()).count = amount;
+                CartBean bean = (CartBean) view.getTag();
+                if (bean.qty != amount) {
+                    BaseApplication.showToast("change" + amount);
+                    bean.qty = amount;
+                    fragment.update_cart(bean);
+                }
             }
         });
         holder.cart_btn_del.setTag(bean);

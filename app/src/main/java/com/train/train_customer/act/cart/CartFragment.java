@@ -18,11 +18,16 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_customer.R;
+import com.train.train_customer.act.bean.BaseBean;
+import com.train.train_customer.act.bean.CartBean;
 import com.train.train_customer.act.bean.CartListBean;
+import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.act.bean.PartListBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
 import com.train.train_customer.core.NetCallback;
+
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -182,4 +187,22 @@ public class CartFragment extends BaseFragment {
         CartFragment.this.page++;
         getDate();
     }
+
+    public void update_cart(CartBean bean) {
+        BaseApplication.app.net.updateCartInfo(new NetCallback() {
+            @Override
+            public void failure(Call call, IOException e) {
+            }
+
+            @Override
+            public void response(Call call, String responseStr) throws IOException {
+                BaseBean bean = new BaseBean().onBack(responseStr);
+                if(bean.isOK()){
+                    refresh();
+                }
+                BaseApplication.app.showToast(bean.msg);
+            }
+        }, bean);
+    }
+
 }

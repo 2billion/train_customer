@@ -2,10 +2,13 @@ package com.train.train_customer.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -20,12 +23,12 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             boolean shouldHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            if (shouldHidden){
+            if (shouldHidden) {
                 transaction.hide(this);
-            }else{
+            } else {
                 transaction.show(this);
             }
         }
@@ -41,9 +44,9 @@ public class BaseFragment extends Fragment {
     /**
      * 隐藏键盘
      */
-    public void hideKeyBoard(View view){
+    public void hideKeyBoard(View view) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null){
+        if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

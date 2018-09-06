@@ -2,14 +2,18 @@ package com.train.train_customer.act;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 
 import com.train.train_customer.R;
 import com.train.train_customer.act.cart.CartFragment;
 import com.train.train_customer.act.mine.MineFragment;
 import com.train.train_customer.act.order.OrderFragment;
 import com.train.train_customer.act.product.ProductFragment;
+import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
 import com.train.train_customer.view.CustomBottomTabWidget;
 
@@ -41,4 +45,5 @@ public class MainActivity extends AppCompatActivity {
         //初始化CustomBottomTabWidget
         tabWidget.init(getSupportFragmentManager(), fragmentList);
     }
+
 }

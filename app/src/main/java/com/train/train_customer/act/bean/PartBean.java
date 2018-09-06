@@ -1,5 +1,8 @@
 package com.train.train_customer.act.bean;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class PartBean {
 
     public String partNo = null;
@@ -16,7 +19,22 @@ public class PartBean {
     public String partType = null;
 
     public int count = 0;
-    public boolean showAmountView = false;
+    public boolean isSelected = false;
+
+    //    添加购物车用
+    public JSONObject jsonForCart() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("bstPartNo", partNo);
+            json.put("buPartNo", buPartNo);
+            json.put("contractNo", contractNo);
+            json.put("tsType", tsType);
+            json.put("qty", count);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
 
 }
 

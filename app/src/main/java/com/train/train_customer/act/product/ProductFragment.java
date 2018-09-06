@@ -18,10 +18,14 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_customer.R;
+import com.train.train_customer.act.bean.BaseBean;
+import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.act.bean.PartListBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
 import com.train.train_customer.core.NetCallback;
+
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -114,7 +118,7 @@ public class ProductFragment extends BaseFragment {
         btn_add_cart = view.findViewById(R.id.btn_add_cart);
         btn_add_cart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                add_cart();
             }
         });
 
@@ -184,5 +188,41 @@ public class ProductFragment extends BaseFragment {
         getDate();
     }
 
+    public void add_cart() {
+        JSONArray jsonArray = new JSONArray();
+        for (PartBean bean : BaseApplication.app.dm.productList) {
+            if (bean.isSelected) {
+                jsonArray.put(bean.jsonForCart());
+            }
+        }
+        BaseApplication.app.net.saveCartListInfo(new NetCallback() {
+            @Override
+            public void failure(Call call, IOException e) {
+            }
+
+            @Override
+            public void response(Call call, String responseStr) throws IOException {
+                BaseBean bean = new BaseBean().onBack(responseStr);
+                BaseApplication.app.showToast(bean.msg);
+                if (bean.isOK()) {
+                    initAfterAddCart();
+                }
+            }
+        }, jsonArray);
+    }
+
+    public void initAfterAddCart() {
+        for (PartBean bean : BaseApplication.app.dm.productList) {
+            if (bean.isSelected) {
+                bean.isSelected = false;
+                bean.count = 0;
+            }
+        }
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
 
 }

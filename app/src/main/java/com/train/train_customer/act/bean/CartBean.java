@@ -1,5 +1,8 @@
 package com.train.train_customer.act.bean;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CartBean {
 
     public int customerId;
@@ -9,7 +12,7 @@ public class CartBean {
     public String ume;
     public String tsType;
     public String contractNo;
-    public float Qty;
+    public double qty;
     public String buearuId;
     public String editTime;
     public String price;
@@ -17,9 +20,21 @@ public class CartBean {
     public String requireDate;
 
 
-
-    public int count = 0;
     public boolean showAmountView = false;
+
+    public JSONObject jsonForUpdateCard() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("bstPartNo", bstPartNo);
+            json.put("buPartNo", buPartNo);
+            json.put("contractNo", contractNo);
+            json.put("tsType", tsType);
+            json.put("qty", qty);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
 
 }
 

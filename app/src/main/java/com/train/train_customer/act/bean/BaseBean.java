@@ -5,25 +5,25 @@ package com.train.train_customer.act.bean;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-
 public class BaseBean {
 
-//    public String jsoStr = null;
-//    public JSONObject jsonObj = null;
+    //    public String jsoStr = null;
+    //    public JSONObject jsonObj = null;
 
     public int code = 0;
     public String msg = null;
 
-//    public BaseBean(String str) {
-//        this.jsoStr = str;
-//    }
+    //    public BaseBean(String str) {
+    //        this.jsoStr = str;
+    //    }
 
     public boolean isOK() {
         return this.code == 200;
+    }
+
+    public BaseBean onBack(String responseStr) {
+        return new Gson().fromJson(responseStr, new TypeToken<BaseBean>() {
+        }.getType());
     }
 }
 
