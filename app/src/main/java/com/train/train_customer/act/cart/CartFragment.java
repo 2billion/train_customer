@@ -205,4 +205,21 @@ public class CartFragment extends BaseFragment {
         }, bean);
     }
 
+    public void delete_cart(CartBean bean) {
+        BaseApplication.app.net.deleteCartInfo(new NetCallback() {
+            @Override
+            public void failure(Call call, IOException e) {
+            }
+
+            @Override
+            public void response(Call call, String responseStr) throws IOException {
+                BaseBean bean = new BaseBean().onBack(responseStr);
+                if(bean.isOK()){
+                    refresh();
+                }
+                BaseApplication.app.showToast(bean.msg);
+            }
+        }, bean);
+    }
+
 }

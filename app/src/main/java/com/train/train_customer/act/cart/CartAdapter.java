@@ -106,7 +106,7 @@ public class CartAdapter extends BaseAdapter {
         holder.cart_btn_del.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 CartBean bean = (CartBean) v.getTag();
-                BaseApplication.showToast("" + bean.partName);
+                fragment.delete_cart(bean);
             }
         });
 

@@ -146,5 +146,18 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    {"bstPartNo":"37810095S","buPartNo":"972500010004","contractNo":"790","tsType":"CRH1A-200","qty":"21"}
+    public void deleteCartInfo(Callback callBack, CartBean bean) {
+        String url = HOST + "/cart/deleteCartInfo";
+        FormBody.Builder params = new FormBody.Builder();
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(bean.jsonForUpdateCard());
+        params.add("cartJson", jsonArray.toString());
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
 
 }
