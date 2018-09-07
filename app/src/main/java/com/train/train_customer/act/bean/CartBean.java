@@ -21,8 +21,9 @@ public class CartBean {
 
 
     public boolean showAmountView = false;
+    public boolean ischecked = false;
 
-    public JSONObject jsonForUpdateCard() {
+    public JSONObject api_json() {
         JSONObject json = new JSONObject();
         try {
             json.put("bstPartNo", bstPartNo);

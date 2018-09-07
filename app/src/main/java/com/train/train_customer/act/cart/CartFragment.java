@@ -1,5 +1,7 @@
 package com.train.train_customer.act.cart;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,8 +23,6 @@ import com.train.train_customer.R;
 import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.CartBean;
 import com.train.train_customer.act.bean.CartListBean;
-import com.train.train_customer.act.bean.PartBean;
-import com.train.train_customer.act.bean.PartListBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
 import com.train.train_customer.core.NetCallback;
@@ -113,13 +113,13 @@ public class CartFragment extends BaseFragment {
         btn_create_order = view.findViewById(R.id.btn_create_order);
         btn_create_order.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.showToast(BaseApplication.app.dm.cartList.size()+ "create order");
+                BaseApplication.showToast(BaseApplication.app.dm.cartList.size() + "create order");
             }
         });
         btn_del_cart = view.findViewById(R.id.btn_del_cart);
         btn_del_cart.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.showToast(BaseApplication.app.dm.cartList.size()+ "del");
+                delete_cart_selected();
             }
         });
 
@@ -166,7 +166,7 @@ public class CartFragment extends BaseFragment {
                 }
                 finishLoad();
             }
-        }, cart_tsType,cart_bstPartNo,cart_buPartNo);
+        }, cart_tsType, cart_bstPartNo, cart_buPartNo);
 
     }
 
@@ -197,7 +197,7 @@ public class CartFragment extends BaseFragment {
             @Override
             public void response(Call call, String responseStr) throws IOException {
                 BaseBean bean = new BaseBean().onBack(responseStr);
-                if(bean.isOK()){
+                if (bean.isOK()) {
                     refresh();
                 }
                 BaseApplication.app.showToast(bean.msg);
@@ -205,7 +205,26 @@ public class CartFragment extends BaseFragment {
         }, bean);
     }
 
-    public void delete_cart(CartBean bean) {
+
+    public void delete_cart(final CartBean bean) {
+        showDeleteDialog(bean);
+    }
+
+    public void delete_cart_selected() {
+        JSONArray jsonArray = new JSONArray();
+        for (CartBean bean : BaseApplication.app.dm.cartList) {
+            if (bean.ischecked) {
+                jsonArray.put(bean.api_json());
+            }
+        }
+        if (jsonArray.length() > 0) {
+            showDeleteDialog(jsonArray);
+        } else {
+            BaseApplication.showToast("请选择要删除的配件");
+        }
+    }
+
+    public void do_delete_cart(JSONArray jsonArray) {
         BaseApplication.app.net.deleteCartInfo(new NetCallback() {
             @Override
             public void failure(Call call, IOException e) {
@@ -214,12 +233,38 @@ public class CartFragment extends BaseFragment {
             @Override
             public void response(Call call, String responseStr) throws IOException {
                 BaseBean bean = new BaseBean().onBack(responseStr);
-                if(bean.isOK()){
+                if (bean.isOK()) {
                     refresh();
                 }
                 BaseApplication.app.showToast(bean.msg);
             }
-        }, bean);
+        }, jsonArray);
+
+    }
+
+    public void showDeleteDialog(final JSONArray jsonArray) {
+        new AlertDialog.Builder(getActivity()).setMessage("确定删除所选配件？")
+                .setNeutralButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        do_delete_cart(jsonArray);
+                    }
+                }).show();
+    }
+
+    public void showDeleteDialog(final CartBean bean) {
+        new AlertDialog.Builder(getActivity()).setMessage("确定删除(" + bean.partName + ")？")
+                .setNeutralButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        BaseApplication.showToast("2");
+                        JSONArray jsonArray = new JSONArray();
+                        jsonArray.put(bean.api_json());
+                        do_delete_cart(jsonArray);
+                    }
+                }).show();
     }
 
 }

@@ -109,22 +109,22 @@ public class Net {
     //            "qty": "1"
     //        }
     //    ]
-    //    JSONObject json = new JSONObject();
+    //    JSONObject api_json = new JSONObject();
     //        try {
-    //        json.put("bstPartNo","63810647S");
-    //        json.put("buPartNo","971900020001");
-    //        json.put("contractNo","790");
-    //        json.put("tsType","CRH1A-200");
-    //        json.put("qty","1");
+    //        api_json.put("bstPartNo","63810647S");
+    //        api_json.put("buPartNo","971900020001");
+    //        api_json.put("contractNo","790");
+    //        api_json.put("tsType","CRH1A-200");
+    //        api_json.put("qty","1");
     //    } catch (JSONException e) {
     //        e.printStackTrace();
     //    }
     //    JSONArray jsonArray = new JSONArray();
-    //        jsonArray.put(json);
+    //        jsonArray.put(api_json);
     public void saveCartListInfo(Callback callBack, JSONArray jsonArray) {
         String url = HOST + "/cart/saveCartListInfo";
         FormBody.Builder params = new FormBody.Builder();
-        //        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        //        MediaType JSON = MediaType.parse("application/api_json; charset=utf-8");
         //        okhttp3.RequestBody body = RequestBody.create(JSON, jsonArray.toString());
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
@@ -138,7 +138,7 @@ public class Net {
         String url = HOST + "/cart/updateCartInfo";
         FormBody.Builder params = new FormBody.Builder();
         JSONArray jsonArray = new JSONArray();
-        jsonArray.put(bean.jsonForUpdateCard());
+        jsonArray.put(bean.api_json());
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
@@ -147,11 +147,9 @@ public class Net {
     }
 
     //    {"bstPartNo":"37810095S","buPartNo":"972500010004","contractNo":"790","tsType":"CRH1A-200","qty":"21"}
-    public void deleteCartInfo(Callback callBack, CartBean bean) {
+    public void deleteCartInfo(Callback callBack, JSONArray jsonArray) {
         String url = HOST + "/cart/deleteCartInfo";
         FormBody.Builder params = new FormBody.Builder();
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(bean.jsonForUpdateCard());
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();

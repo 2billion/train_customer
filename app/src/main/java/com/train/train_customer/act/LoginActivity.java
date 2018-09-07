@@ -2,6 +2,7 @@ package com.train.train_customer.act;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.DropBoxManager;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +49,13 @@ public class LoginActivity extends BaseActivity {
                 login();
             }
         });
+        autoLogin();
+    }
 
+    private void autoLogin(){
+        if(BaseApplication.autoLogin){
+            login();
+        }
     }
 
     private void gotoMainAct() {
@@ -56,7 +63,6 @@ public class LoginActivity extends BaseActivity {
         startActivity(i);
         finish();
     }
-
 
     private void login() {
         String name = et_name.getText().toString();

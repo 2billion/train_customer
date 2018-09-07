@@ -52,18 +52,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp">
 
         <Button
             android:id="@+id/cart_btn_del"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="删除" />
+            android:layout_height="36dp"
+            android:background="@drawable/v_btn_hollow_blue"
+            android:text="删除"
+            android:textColor="@color/main_blue"
+            android:textSize="@dimen/btn_label" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            ></View>
+            android:layout_weight="1"></View>
 
         <com.train.train_customer.view.AmountView
             android:id="@+id/amount_view"

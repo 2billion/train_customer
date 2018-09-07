@@ -18,8 +18,8 @@ public class PartBean {
     public String price = null;
     public String partType = null;
 
-    public int count = 0;
-    public boolean isSelected = false;
+    public int count = 1;
+    public boolean isChecked = false;
 
     //    添加购物车用
     public JSONObject jsonForCart() {

@@ -16,6 +16,7 @@ public abstract class NetCallback implements Callback {
     public void onFailure(Call call, IOException e) {
         Log.i("api", "=========url:" + call.request().url().toString());
         BaseApplication.app.showToast("请求失败:" + e.getMessage());
+        BaseApplication.autoLogin = false;
         this.failure(call, e);
     }
 

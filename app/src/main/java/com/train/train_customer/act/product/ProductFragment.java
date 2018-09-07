@@ -191,7 +191,7 @@ public class ProductFragment extends BaseFragment {
     public void add_cart() {
         JSONArray jsonArray = new JSONArray();
         for (PartBean bean : BaseApplication.app.dm.productList) {
-            if (bean.isSelected) {
+            if (bean.isChecked) {
                 jsonArray.put(bean.jsonForCart());
             }
         }
@@ -213,10 +213,8 @@ public class ProductFragment extends BaseFragment {
 
     public void initAfterAddCart() {
         for (PartBean bean : BaseApplication.app.dm.productList) {
-            if (bean.isSelected) {
-                bean.isSelected = false;
-                bean.count = 0;
-            }
+            bean.isChecked = false;
+            bean.count = 0;
         }
         getActivity().runOnUiThread(new Runnable() {
             public void run() {

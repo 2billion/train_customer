@@ -4,6 +4,7 @@ package com.train.train_customer.act.bean;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.train.train_customer.base.BaseApplication;
 
 public class BaseBean {
 
@@ -18,6 +19,7 @@ public class BaseBean {
     //    }
 
     public boolean isOK() {
+        BaseApplication.autoLogin = this.code == 200;
         return this.code == 200;
     }
 

@@ -82,7 +82,7 @@ public class CartAdapter extends BaseAdapter {
         holder.checkBox.setTag(bean);
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ((CartBean) buttonView.getTag()).showAmountView = isChecked;
+                ((CartBean) buttonView.getTag()).ischecked = isChecked;
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         CartAdapter.this.notifyDataSetChanged();
@@ -90,6 +90,7 @@ public class CartAdapter extends BaseAdapter {
                 });
             }
         });
+        holder.checkBox.setChecked(bean.ischecked);
         holder.amountView.setTag(bean);
         holder.etAmount.setText("" + (int) (bean.qty));
         holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {

@@ -17,9 +17,9 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.train.train_customer.R;
+import com.train.train_customer.core.Cache;
 import com.train.train_customer.core.DataManager;
 import com.train.train_customer.core.Net;
-import com.train.train_customer.core.Cache;
 
 public class BaseApplication extends Application {
 
@@ -28,6 +28,7 @@ public class BaseApplication extends Application {
     private static Toast mToast = null;
     public static Activity curAct = null;
     public static BaseApplication app = null;
+    public static boolean autoLogin = true;
 
     //static 代码段可以防止内存泄露
     static {
@@ -91,46 +92,6 @@ public class BaseApplication extends Application {
                 }
             }
         });
-    }
-
-    /**
-     * 显示信息
-     */
-    public static void showBtnMsg(String msgStr, String btnStr, DialogInterface.OnClickListener clickListener) {
-        new AlertDialog.Builder(curAct).setMessage(msgStr)
-                .setPositiveButton(btnStr, clickListener).show();
-    }
-
-    /**
-     * 显示信息，点击确定后退出
-     */
-    public static void showMsgFinish(String msg) {
-        new AlertDialog.Builder(curAct).setMessage(msg)
-                .setNeutralButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        if (curAct != null) {
-                            curAct.finish();
-                        }
-                    }
-                }).show();
-    }
-
-    /**
-     * 显示信息,自定义两个按钮
-     *
-     * @param msg       提示信息
-     * @param clickStr1 按钮文本1
-     * @param click1    按钮点击1
-     * @param clickStr2 按钮文本2
-     * @param click2    按钮点击2
-     * @return
-     */
-    public static Toast showMsg(String msg, String clickStr1,
-                                DialogInterface.OnClickListener click1, String clickStr2, DialogInterface.OnClickListener click2) {
-        new AlertDialog.Builder(curAct).setMessage(msg)
-                .setPositiveButton(clickStr1, click1)
-                .setNeutralButton(clickStr2, click2).show();
-        return null;
     }
 
 }
