@@ -3,6 +3,7 @@ package com.train.train_customer.core;
 import android.content.Context;
 
 import com.train.train_customer.act.bean.CartBean;
+import com.train.train_customer.act.bean.OrderParamsBean;
 import com.train.train_customer.base.BaseApplication;
 
 import org.json.JSONArray;
@@ -133,6 +134,8 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    1.10更新购物车
+    //    请求地址：/cart/updateCartInfo
     //    {"bstPartNo":"37810095S","buPartNo":"972500010004","contractNo":"790","tsType":"CRH1A-200","qty":"21"}
     public void updateCartInfo(Callback callBack, CartBean bean) {
         String url = HOST + "/cart/updateCartInfo";
@@ -146,11 +149,50 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    1.11删除购物车
+    //    请求地址：/cart/deleteCartInfo
     //    {"bstPartNo":"37810095S","buPartNo":"972500010004","contractNo":"790","tsType":"CRH1A-200","qty":"21"}
     public void deleteCartInfo(Callback callBack, JSONArray jsonArray) {
         String url = HOST + "/cart/deleteCartInfo";
         FormBody.Builder params = new FormBody.Builder();
         params.add("cartJson", jsonArray.toString());
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    1.14获取订单详情
+    //    请求地址： /orderDetail/findOrderDetailList
+    //    orderNo	String	否		订单号
+    //    bstPartNo	String	否		BST物资编码
+    //    buPartNo	String	否		路局物资编码
+    //    orderTimeStart	String	否		订单开始时间
+    //    orderTimeEnd	String	否		订单结束时间
+    //    orderCompTimeStart	String	否		订单完成开始时间
+    //    orderCompTimeEnd	String	否		订单完成开始时间
+    //    orderStatus	String	否		订单状态：-1全部0未完成1完成
+    //    partName	String	否		配件名称
+    //    page	int	是		页码
+    //    pageSize	int	是		每页记录数
+    public void findOrderDetailList(Callback callBack, int page, int pageSize, OrderParamsBean bean) {
+        String url = HOST + "/orderDetail/findOrderDetailList";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("page", page + "");
+        params.add("pageSize", pageSize + "");
+
+        params.add("orderNo",bean.orderNo);   //String	否		订单号
+        params.add("bstPartNo",bean.bstPartNo);   //String	否		BST物资编码
+        params.add("buPartNo",bean.buPartNo);   //String	否		路局物资编码
+        params.add("orderTimeStart",bean.orderTimeStart);   //String	否		订单开始时间
+        params.add("orderTimeEnd",bean.orderTimeEnd);   //String	否		订单结束时间
+        params.add("orderCompTimeStart",bean.orderCompTimeStart);   //String	否		订单完成开始时间
+        params.add("orderCompTimeEnd",bean.orderCompTimeEnd);   //String	否		订单完成开始时间
+        params.add("orderStatus",bean.orderStatus);   //String	否		订单状态：-1全部0未完成1完成
+        params.add("partName",bean.partName);   //String	否		配件名称
+
+//        params.add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
+//        2018-08-14%2000%3A00%3A00
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);

@@ -188,7 +188,7 @@ public class ProductRightView {
     private void initTagAdapter() {
         tagAdapter = new TagAdapter(BaseApplication.app.dm.tsTypeList) {
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tag = (TextView) View.inflate(fragment.getContext(), R.layout.product_right_search_item, null);
+                TextView tag = (TextView) View.inflate(fragment.getContext(), R.layout.common_right_search_item, null);
                 String str = BaseApplication.app.dm.tsTypeList.get(position).tsType
                         + "(" + BaseApplication.app.dm.tsTypeList.get(position).contractNo + ")";
                 tag.setText(str);

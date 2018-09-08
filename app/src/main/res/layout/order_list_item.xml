@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="name"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="info1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/info1_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="info1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="info1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/info2_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="info1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/info3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="info1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/info3_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="info1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/info4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="info1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/info4_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="info1"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:gravity="right">
+
+        <Button
+            android:id="@+id/btn_change"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/v_btn_hollow_blue"
+            android:text="申请变更"
+            android:textColor="@color/main_blue"
+            android:textSize="@dimen/btn_label" />
+    </LinearLayout>
+</LinearLayout>

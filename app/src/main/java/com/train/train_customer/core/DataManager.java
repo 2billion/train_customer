@@ -1,6 +1,8 @@
 package com.train.train_customer.core;
 
 import com.train.train_customer.act.bean.CartBean;
+import com.train.train_customer.act.bean.OrderBean;
+import com.train.train_customer.act.bean.OrderParamsBean;
 import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.act.bean.TsTypeDataBean;
 
@@ -28,6 +30,11 @@ public class DataManager {
 
     public List<CartBean> cartList;
 
+    //     订单
+    public List<OrderBean> orderList;
+    public OrderParamsBean orderParamsBean;
+
+
     //    搜索用
     //    ts type list
     public List<TsTypeDataBean> tsTypeList;
@@ -36,5 +43,7 @@ public class DataManager {
         tsTypeList = new ArrayList();
         productList = new ArrayList<>();
         cartList = new ArrayList<>();
+        orderList = new ArrayList<>();
+        orderParamsBean = new OrderParamsBean();
     }
 }
