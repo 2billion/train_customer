@@ -17,9 +17,11 @@
             android:background="#f6f6f6">
 
             <ImageView
+                android:id="@+id/btn_left"
                 android:layout_width="60dp"
+                android:clickable="true"
                 android:layout_height="match_parent"
-                android:background="@drawable/v_btn_arrow"
+                android:background="@drawable/v_header_btn"
                 android:paddingBottom="6dp"
                 android:paddingTop="6dp"
                 android:src="@drawable/ico_arrow" />

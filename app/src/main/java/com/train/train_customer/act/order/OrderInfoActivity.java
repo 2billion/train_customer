@@ -67,6 +67,9 @@ public class OrderInfoActivity extends BaseActivity {
     @BindView(R.id.list)
     LinearLayout list;
 
+    @BindView(R.id.btn_left)
+    View btn_left;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +102,12 @@ public class OrderInfoActivity extends BaseActivity {
         amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
                 BaseApplication.app.dm.orderInfoBean.count = amount;
+            }
+        });
+
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
             }
         });
 

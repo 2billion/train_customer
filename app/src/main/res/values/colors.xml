@@ -7,6 +7,7 @@
     <color name="main_blue">#037fff</color>
     <color name="main_blue_dark">#0064cb</color>
     <color name="gray666">#9f9f9f</color>
+    <color name="gray_light">#f9f9f9</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="dividerColorFA">#fafafa</color>
@@ -27,5 +28,6 @@
     <!--search tag -->
     <color name="search_tag_normal">#ecebec</color>
     <color name="search_tag_click">#f1de96</color>
-    ecebec
+    <color name="btn_item_bg_normal">#ffffff</color>
+    <color name="btn_item_bg_press">#dddddd</color>
 </resources>

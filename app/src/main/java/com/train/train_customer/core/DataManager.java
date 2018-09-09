@@ -5,6 +5,7 @@ import com.train.train_customer.act.bean.OrderBean;
 import com.train.train_customer.act.bean.OrderParamsBean;
 import com.train.train_customer.act.bean.PartBean;
 import com.train.train_customer.act.bean.TsTypeDataBean;
+import com.train.train_customer.act.bean.UserBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,9 @@ public class DataManager {
     //    搜索用
     //    ts type list
     public List<TsTypeDataBean> tsTypeList;
+
+    //    个人信息
+    public UserBean userBean;
 
 
     public DataManager() {

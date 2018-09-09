@@ -23,6 +23,9 @@
         <activity
             android:name=".act.order.OrderInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".act.mine.MineInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".act.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

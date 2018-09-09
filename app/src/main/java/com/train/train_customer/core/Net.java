@@ -53,6 +53,17 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    1.4获取用户信息
+    //    请求地址： /customer/findMyInfo
+    public void findMyInfo(Callback callBack) {
+        String url = HOST + "/customer/findMyInfo";
+        FormBody.Builder params = new FormBody.Builder();
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
     //    1.6获取适用车型
     //    请求地址： /tsType/findTsTypeList
     public void findTsTypeList(Callback callBack) {
