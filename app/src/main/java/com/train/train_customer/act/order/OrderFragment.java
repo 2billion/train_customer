@@ -1,5 +1,6 @@
 package com.train.train_customer.act.order;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -18,16 +18,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_customer.R;
-import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.OrderListBean;
-import com.train.train_customer.act.bean.OrderParamsBean;
-import com.train.train_customer.act.bean.PartBean;
-import com.train.train_customer.act.bean.PartListBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
 import com.train.train_customer.core.NetCallback;
-
-import org.json.JSONArray;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -85,7 +79,7 @@ public class OrderFragment extends BaseFragment {
             }
 
             public void afterTextChanged(Editable s) {
-                BaseApplication.app.dm.orderParamsBean.bstPartNo= s.toString();
+                BaseApplication.app.dm.orderParamsBean.bstPartNo = s.toString();
             }
         });
 
@@ -118,10 +112,10 @@ public class OrderFragment extends BaseFragment {
     public int pageSize = 10;
 
     private void getDate() {
-//        String partName = BaseApplication.app.dm.order_partName;
-//        String tsType = BaseApplication.app.dm.order_tsType;
-//        String partNo = BaseApplication.app.dm.order_bstPartNo;
-//        String buPartNo = BaseApplication.app.dm.order_buPartNo;
+        //        String partName = BaseApplication.app.dm.order_partName;
+        //        String tsType = BaseApplication.app.dm.order_tsType;
+        //        String partNo = BaseApplication.app.dm.order_bstPartNo;
+        //        String buPartNo = BaseApplication.app.dm.order_buPartNo;
 
         BaseApplication.app.net.findOrderDetailList(new NetCallback() {
             @Override
@@ -172,8 +166,9 @@ public class OrderFragment extends BaseFragment {
         getDate();
     }
 
-    public void add_cart() {
-
+    public void gotoOrderInfo() {
+        Intent i = new Intent(getActivity(), OrderInfoActivity.class);
+        startActivity(i);
     }
 
 

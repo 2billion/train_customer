@@ -36,6 +36,21 @@ public class PartBean {
         return json;
     }
 
+    //   创建订单用
+    public JSONObject jsonForCreateOrder() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("bstPartNo", partNo);
+            json.put("buPartNo", buPartNo);
+            json.put("contractNo", contractNo);
+            json.put("tsType", tsType);
+            json.put("totalQty", count);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
 }
 
 //{

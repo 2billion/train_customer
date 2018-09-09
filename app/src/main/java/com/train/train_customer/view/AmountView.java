@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -86,7 +87,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
                 etAmount.setText(amount + "");
             }
         } else if (i == R.id.btnIncrease) {
-//            BaseApplication.showToast("++ " + amount);
+            //            BaseApplication.showToast("++ " + amount);
             if (amount < goods_storage) {
                 amount++;
                 etAmount.setText(amount + "");

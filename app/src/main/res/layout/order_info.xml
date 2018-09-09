@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#edecf2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#f6f6f6">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/v_btn_arrow"
+                android:paddingBottom="6dp"
+                android:paddingTop="6dp"
+                android:src="@drawable/ico_arrow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="订单申请变更"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="60dp"
+                android:layout_height="match_parent"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:id="@+id/order_info_part_name"
+                style="@style/order_info_txt"
+                android:text="配件名：XXX" />
+
+            <TextView
+                android:id="@+id/order_info_ts_type"
+                style="@style/order_info_txt"
+                android:text="配件名：XXX" />
+
+            <TextView
+                android:id="@+id/order_info_order_no"
+                style="@style/order_info_txt"
+                android:text="配件名：XXX" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_info_order_time"
+                    style="@style/order_info_txt"
+                    android:layout_weight="1"
+                    android:text="配件名：XXX" />
+
+                <TextView
+                    android:id="@+id/order_info_o_total_qty"
+                    style="@style/order_info_txt"
+                    android:layout_width="wrap_content"
+                    android:text="配件名：XXX" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_info_bst_part_no"
+                    style="@style/order_info_txt"
+                    android:layout_weight="1"
+                    android:text="配件名：XXX" />
+
+                <TextView
+                    android:id="@+id/order_info_last_qty"
+                    style="@style/order_info_txt"
+                    android:layout_width="wrap_content"
+                    android:text="配件名：XXX" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/order_info_bu_part_no"
+                    style="@style/order_info_txt"
+                    android:layout_weight="1"
+                    android:text="配件名：XXX" />
+
+                <TextView
+                    android:id="@+id/order_info_pick_qty"
+                    style="@style/order_info_txt"
+                    android:layout_width="wrap_content"
+                    android:text="配件名：XXX" />
+            </LinearLayout>
+
+            <TextView
+                style="@style/order_info_txt"
+                android:layout_marginTop="4dp"
+                android:text="变更数量：" />
+
+            <com.train.train_customer.view.AmountView
+                android:id="@+id/amount_view"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_gravity="left"
+                android:layout_margin="4dp"
+                app:btnTextSize="14sp"
+                app:btnWidth="36dp"
+                app:tvWidth="50dp" />
+
+
+            <TextView
+                style="@style/order_info_txt"
+                android:layout_marginTop="4dp"
+                android:text="申请订单变更原因：" />
+
+            <EditText
+                android:id="@+id/reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="3"
+                android:layout_margin="4dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:gravity="top|left"
+                android:hint="@string/order_info_reason"
+                android:paddingBottom="4dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="4dp"
+                android:textColor="@color/gray666"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/btn_label" />
+
+            <Button
+                android:id="@+id/submit"
+                style="@style/btn_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="提交变更申请" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

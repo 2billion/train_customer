@@ -34,10 +34,13 @@ public class DataManager {
     public List<OrderBean> orderList;
     public OrderParamsBean orderParamsBean;
 
+    //     订单详情 bean
+    public OrderBean orderInfoBean;
 
     //    搜索用
     //    ts type list
     public List<TsTypeDataBean> tsTypeList;
+
 
     public DataManager() {
         tsTypeList = new ArrayList();

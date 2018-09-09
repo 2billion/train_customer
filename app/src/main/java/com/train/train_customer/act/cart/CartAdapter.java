@@ -97,7 +97,6 @@ public class CartAdapter extends BaseAdapter {
             public void onAmountChange(View view, int amount) {
                 CartBean bean = (CartBean) view.getTag();
                 if (bean.qty != amount) {
-                    BaseApplication.showToast("change" + amount);
                     bean.qty = amount;
                     fragment.update_cart(bean);
                 }

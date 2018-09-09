@@ -1,5 +1,7 @@
 package com.train.train_customer.act.product;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -112,7 +114,7 @@ public class ProductFragment extends BaseFragment {
         btn_create_order = view.findViewById(R.id.btn_create_order);
         btn_create_order.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.showToast(BaseApplication.app.dm.productList.get(0).count + "");
+                create_order();
             }
         });
         btn_add_cart = view.findViewById(R.id.btn_add_cart);
@@ -223,4 +225,44 @@ public class ProductFragment extends BaseFragment {
         });
     }
 
+    private void create_order() {
+        boolean is_checked_one = false;
+        for (PartBean bean : BaseApplication.app.dm.productList) {
+            if (bean.isChecked) {
+                is_checked_one = true;
+                break;
+            }
+        }
+        if (!is_checked_one) {
+            BaseApplication.showToast("请选择要下单的配件");
+            return;
+        }
+
+        new AlertDialog.Builder(getActivity()).setMessage("确认对选中的配件下单么？")
+                .setNeutralButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        JSONArray jsonArray = new JSONArray();
+                        for (PartBean bean : BaseApplication.app.dm.productList) {
+                            if (bean.isChecked) {
+                                jsonArray.put(bean.jsonForCreateOrder());
+                            }
+                        }
+                        BaseApplication.app.net.saveOrderInfo(new NetCallback() {
+                            public void failure(Call call, IOException e) {
+                            }
+
+                            public void response(Call call, String responseStr) throws IOException {
+                                BaseBean bean = new BaseBean().onBack(responseStr);
+                                if (bean.isOK()) {
+                                    refresh();
+                                }
+                                BaseApplication.app.showToast(bean.msg);
+                            }
+                        }, jsonArray);
+                    }
+                }).show();
+
+    }
 }

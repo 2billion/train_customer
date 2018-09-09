@@ -30,7 +30,21 @@ public class CartBean {
             json.put("buPartNo", buPartNo);
             json.put("contractNo", contractNo);
             json.put("tsType", tsType);
-            json.put("qty", qty);
+            json.put("qty", (int)qty);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    public JSONObject clearCartList_params_json() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("bstPartNo", bstPartNo);
+            json.put("buPartNo", buPartNo);
+            json.put("contractNo", contractNo);
+            json.put("tsType", tsType);
+            json.put("totalQty", qty);
         } catch (JSONException e) {
             e.printStackTrace();
         }

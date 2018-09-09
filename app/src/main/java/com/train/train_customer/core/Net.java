@@ -162,7 +162,41 @@ public class Net {
         call.enqueue(callBack);
     }
 
-    //    1.14获取订单详情
+    //    1.12从购物车创建订单
+    //    请求地址：/cart/clearCartList
+    //    bstPartNo	String	是		BST物资编码
+    //    buPartNo	String	是		路局物资编码
+    //    tsType	String	是		车型
+    //    contractNo	String	是		项目号
+    //    totalQty	Double	是		数量
+    public void clearCartList(Callback callBack, JSONArray jsonArray) {
+        String url = HOST + "/cart/clearCartList";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("cartJson", jsonArray.toString());
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    1.13 创建订单
+    //    请求地址：/order/saveOrderInfo
+    //    bstPartNo	String	是		BST物资编码
+    //    buPartNo	String	是		路局物资编码
+    //    tsType	String	是		车型
+    //    contractNo	String	是		项目号
+    //    totalQty	Double	是		数量
+    public void saveOrderInfo(Callback callBack, JSONArray jsonArray) {
+        String url = HOST + "/order/saveOrderInfo";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("orderDetailJson", jsonArray.toString());
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    1.14 获取订单列表
     //    请求地址： /orderDetail/findOrderDetailList
     //    orderNo	String	否		订单号
     //    bstPartNo	String	否		BST物资编码
@@ -181,18 +215,49 @@ public class Net {
         params.add("page", page + "");
         params.add("pageSize", pageSize + "");
 
-        params.add("orderNo",bean.orderNo);   //String	否		订单号
-        params.add("bstPartNo",bean.bstPartNo);   //String	否		BST物资编码
-        params.add("buPartNo",bean.buPartNo);   //String	否		路局物资编码
-        params.add("orderTimeStart",bean.orderTimeStart);   //String	否		订单开始时间
-        params.add("orderTimeEnd",bean.orderTimeEnd);   //String	否		订单结束时间
-        params.add("orderCompTimeStart",bean.orderCompTimeStart);   //String	否		订单完成开始时间
-        params.add("orderCompTimeEnd",bean.orderCompTimeEnd);   //String	否		订单完成开始时间
-        params.add("orderStatus",bean.orderStatus);   //String	否		订单状态：-1全部0未完成1完成
-        params.add("partName",bean.partName);   //String	否		配件名称
+        params.add("orderNo", bean.orderNo);   //String	否		订单号
+        params.add("bstPartNo", bean.bstPartNo);   //String	否		BST物资编码
+        params.add("buPartNo", bean.buPartNo);   //String	否		路局物资编码
+        params.add("orderTimeStart", bean.orderTimeStart);   //String	否		订单开始时间
+        params.add("orderTimeEnd", bean.orderTimeEnd);   //String	否		订单结束时间
+        params.add("orderCompTimeStart", bean.orderCompTimeStart);   //String	否		订单完成开始时间
+        params.add("orderCompTimeEnd", bean.orderCompTimeEnd);   //String	否		订单完成开始时间
+        params.add("orderStatus", bean.orderStatus);   //String	否		订单状态：-1全部0未完成1完成
+        params.add("partName", bean.partName);   //String	否		配件名称
 
-//        params.add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
-//        2018-08-14%2000%3A00%3A00
+        //        params.add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
+        //        2018-08-14%2000%3A00%3A00
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
+    //    1.15 订单变更
+    //    请求地址：/orderChange/saveOrderChangeInfo
+    //    detailId	String	否		订单详情ID
+    //    changeReason	String	否		变更原因
+    //    changeNum	Double	否		变更后数量
+    public void saveOrderChangeInfo(Callback callBack, String detailId, String changeReason, String changeNum) {
+        String url = HOST + "/orderChange/saveOrderChangeInfo";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("detailId", detailId);
+        params.add("changeReason", changeReason);
+        params.add("changeNum", changeNum);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    1.16 订单变更列表
+    //    请求地址：/orderChange/findOrderChangeByDetailId
+    //    detailId	String	否		订单详情ID
+    public void findOrderChangeByDetailId(Callback callBack, String detailId) {
+        String url = HOST + "/orderChange/findOrderChangeByDetailId";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("detailId", detailId);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);

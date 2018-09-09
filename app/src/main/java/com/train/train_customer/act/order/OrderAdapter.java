@@ -78,17 +78,17 @@ public class OrderAdapter extends BaseAdapter {
         holder.info3.setText("适用车型：" + bean.tsType + "(" + bean.contractNo + ")");
         holder.info4.setText("订单时间：" + bean.orderTime);
 
-        holder.info1_right.setText("总量："+bean.oTotalQty);
-        holder.info2_right.setText("剩余："+bean.lastQty);
-        holder.info3_right.setText("可领："+bean.pickQty);
+        holder.info1_right.setText("总量：" + (int) bean.oTotalQty);
+        holder.info2_right.setText("剩余：" + (int) bean.lastQty);
+        holder.info3_right.setText("可领：" + (int) bean.pickQty);
         holder.info4_right.setText("");
 
         holder.change.setTag(bean);
         holder.change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OrderBean bean = (OrderBean) v.getTag();
-                BaseApplication.showToast("" + bean.partName);
+                BaseApplication.app.dm.orderInfoBean = (OrderBean) v.getTag();
+                fragment.gotoOrderInfo();
             }
         });
 
