@@ -2,16 +2,12 @@ package com.train.train_customer.act;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.DropBoxManager;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.train.train_customer.R;
-import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.LoginBean;
 import com.train.train_customer.base.BaseActivity;
 import com.train.train_customer.base.BaseApplication;
@@ -23,8 +19,6 @@ import java.lang.reflect.Type;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity {
 
@@ -52,8 +46,8 @@ public class LoginActivity extends BaseActivity {
         autoLogin();
     }
 
-    private void autoLogin(){
-        if(BaseApplication.autoLogin){
+    private void autoLogin() {
+        if (BaseApplication.app.getAutoLogin()) {
             login();
         }
     }
@@ -79,6 +73,7 @@ public class LoginActivity extends BaseActivity {
                 LoginBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.showToast("登录成功");
+                    BaseApplication.app.setAutoLogin(true);
                     BaseApplication.app.dm.token = bean.data.token;
                     BaseApplication.app.dm.userName = bean.data.userName;
                     finish();

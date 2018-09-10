@@ -1,10 +1,9 @@
 package com.train.train_customer.base;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,7 +27,14 @@ public class BaseApplication extends Application {
     private static Toast mToast = null;
     public static Activity curAct = null;
     public static BaseApplication app = null;
-    public static boolean autoLogin = true;
+
+    public void setAutoLogin(boolean b) {
+        Cache.i().setBoolean("autoLogin", b);
+    }
+
+    public boolean getAutoLogin() {
+        return Cache.i().getBoolean("autoLogin", false);
+    }
 
     //static 代码段可以防止内存泄露
     static {
@@ -55,6 +61,17 @@ public class BaseApplication extends Application {
      */
     public void initApp(Activity act) {
         curAct = act;
+    }
+
+
+    public void restart() {
+        //        ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(getApplicationContext().ACTIVITY_SERVICE);
+        //        am.restartPackage("com.train.train_customer");
+        BaseApplication.app.setAutoLogin(false);
+        Intent k = getApplicationContext().getPackageManager()
+                .getLaunchIntentForPackage("com.train.train_customer");
+        k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getApplicationContext().startActivity(k);
     }
 
     @Override

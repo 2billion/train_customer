@@ -19,7 +19,7 @@ public class BaseBean {
     //    }
 
     public boolean isOK() {
-        BaseApplication.autoLogin = this.code == 200;
+        BaseApplication.app.setAutoLogin(this.code == 200);
         return this.code == 200;
     }
 

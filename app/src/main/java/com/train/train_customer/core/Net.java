@@ -63,6 +63,17 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    1.5获取用户信息
+    //    请求地址： /customer/updateCustomerPassword
+    public void updateCustomerPassword(Callback callBack, String password, String newPassword) {
+        String url = HOST + "/customer/updateCustomerPassword";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("password", password);
+        params.add("newPassword", newPassword);
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
 
     //    1.6获取适用车型
     //    请求地址： /tsType/findTsTypeList
@@ -269,6 +280,28 @@ public class Net {
         String url = HOST + "/orderChange/findOrderChangeByDetailId";
         FormBody.Builder params = new FormBody.Builder();
         params.add("detailId", detailId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
+    //    1.18 订单变更列表
+    //    请求地址：/customer/updateCustomerInfo
+    //    customerName	"String"	否		姓名
+    //    customerSex	int	否		性别
+    //    customerTel	String	否		电话
+    //    customerMail	String	否		邮箱
+    //    customerAddr	String	否		地址
+    public void updateCustomerInfo(Callback callBack, String customerName, String customerSex, String customerTel, String customerMail, String customerAddr) {
+        String url = HOST + "/customer/updateCustomerInfo";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("customerName", customerName);
+        params.add("customerSex", customerSex);
+        params.add("customerTel", customerTel);
+        params.add("customerMail", customerMail);
+        params.add("customerAddr", customerAddr);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);

@@ -8,13 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.train.train_customer.R;
-import com.train.train_customer.act.LoginActivity;
-import com.train.train_customer.act.MainActivity;
 import com.train.train_customer.act.bean.UserDataBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
@@ -44,6 +43,9 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.change_psw_view)
     View changePswView;
 
+    @BindView(R.id.submit)
+    Button submit;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class MineFragment extends BaseFragment {
         });
         changePswView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MineInfoActivity.class));
+                startActivity(new Intent(getActivity(), MinePwdActivity.class));
             }
         });
 
@@ -78,6 +80,31 @@ public class MineFragment extends BaseFragment {
                 if (bean.isOK()) {
                     BaseApplication.app.dm.userBean = bean.data;
                     initUI();
+                } else {
+                    BaseApplication.app.showToast("请求失败" + bean.msg);
+                }
+            }
+        });
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                restart();
+
+            }
+        });
+    }
+
+    public void restart(){
+        BaseApplication.app.net.checkOut(new NetCallback() {
+            public void failure(Call call, IOException e) {
+            }
+
+            public void response(Call call, String responseStr) throws IOException {
+                Type cvbType = new TypeToken<UserDataBean>() {
+                }.getType();
+                UserDataBean bean = new Gson().fromJson(responseStr, cvbType);
+                if (bean.isOK()) {
+                    BaseApplication.app.restart();
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
                 }

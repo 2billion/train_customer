@@ -1,6 +1,5 @@
 package com.train.train_customer.act.mine;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,7 +12,7 @@ import com.train.train_customer.base.BaseApplication;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MineInfoActivity extends BaseActivity {
+public class MineInfoUpdateActivity extends BaseActivity {
 
     @BindView(R.id.btn_left)
     View btn_left;
@@ -40,7 +39,7 @@ public class MineInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mine_info);
+        setContentView(R.layout.mine_info_update);
         ButterKnife.bind(this);
         init();
     }
@@ -54,7 +53,7 @@ public class MineInfoActivity extends BaseActivity {
         });
         btn_right.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(MineInfoActivity.this, MineInfoUpdateActivity.class));
+                do_submit();
             }
         });
         UserBean bean = BaseApplication.app.dm.userBean;

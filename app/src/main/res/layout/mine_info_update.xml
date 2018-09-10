@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="个人中心"
+            android:text="修改信息"
             android:textSize="18dp" />
 
         <TextView
@@ -37,13 +37,13 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:gravity="center"
-            android:text="修改"
+            android:text="保存"
             android:textColor="@color/main_blue"
             android:textSize="@dimen/btn_label" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="1dp"
         android:background="@color/gray666"></View>
 
     <View
@@ -246,5 +246,16 @@
             android:textSize="16dp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        style="@style/btn_blue"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="4dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="退出登录" />
 
 </LinearLayout>
