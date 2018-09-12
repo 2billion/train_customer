@@ -3,14 +3,20 @@ package com.train.train_customer.act.mine;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.train.train_customer.R;
+import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.UserBean;
 import com.train.train_customer.base.BaseActivity;
 import com.train.train_customer.base.BaseApplication;
+import com.train.train_customer.core.NetCallback;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 
 public class MineInfoUpdateActivity extends BaseActivity {
 
@@ -23,9 +29,6 @@ public class MineInfoUpdateActivity extends BaseActivity {
     @BindView(R.id.customer_name)
     EditText customer_name;
 
-    @BindView(R.id.customer_sex)
-    EditText customerSex;
-
     @BindView(R.id.customer_tel)
     EditText customer_tel;
 
@@ -34,6 +37,15 @@ public class MineInfoUpdateActivity extends BaseActivity {
 
     @BindView(R.id.customer_addr)
     EditText customer_addr;
+
+    @BindView(R.id.submit)
+    View submit;
+
+    @BindView(R.id.boy)
+    RadioButton boy;
+
+    @BindView(R.id.girl)
+    RadioButton girl;
 
 
     @Override
@@ -51,11 +63,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 finish();
             }
         });
-        btn_right.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                do_submit();
-            }
-        });
+
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
             if (bean.customerName != null) {
@@ -63,8 +71,8 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 customer_name.setSelection(customer_name.getText().toString().length());
             }
             if (bean.customerSex > -1) {
-                customerSex.setText(bean.customerSex == 0 ? "男" : "女");
-                customerSex.setSelection(customerSex.getText().toString().length());
+                boy.setSelected(bean.customerSex == 0);
+                girl.setSelected(bean.customerSex != 0);
             }
             if (bean.customerTel != null) {
                 customer_tel.setText(bean.customerTel);
@@ -76,43 +84,35 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 customer_addr.setText(bean.customerAddr);
             }
         }
-        customer_name.setEnabled(false);
-        customerSex.setEnabled(false);
-        customer_tel.setEnabled(false);
-        customer_mail.setEnabled(false);
-        customer_addr.setEnabled(false);
-
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                do_submit();
+            }
+        });
     }
 
     private void do_submit() {
-        //        String
 
-        //        String reason_str = reason.getText().toString();
-        //        if (reason_str.isEmpty()) {
-        //            BaseApplication.showToast("请填写变更原因");
-        //            return;
-        //        }
+        String customerName = customer_name.getText().toString();
+        int customerSex = boy.isSelected() ? 1 : 0;
+        String customerTel = customer_tel.getText().toString();
+        String customerMail = customer_mail.getText().toString();
+        String customerAddr = customer_addr.getText().toString();
 
-        //        String customerName = user_name.getText().toString();
-        //        String customerSex = customer_name.getText().toString();
-        //        String customerTel = user_name.getText().toString();
-        //        String customerMail = user_name.getText().toString();
-        //        String customerAddr = user_name.getText().toString();
         //
-        //
-        //        BaseApplication.app.net.updateCustomerInfo(new NetCallback() {
-        //            public void failure(Call call, IOException e) {
-        //            }
-        //
-        //            public void response(Call call, String responseStr) throws IOException {
-        //                BaseBean bean = new BaseBean().onBack(responseStr);
-        //                if (bean.isOK()) {
-        //                    BaseApplication.app.showToast(bean.msg);
-        //                } else {
-        //                    BaseApplication.app.showToast("请求失败" + bean.msg);
-        //                }
-        //            }
-        //        }, customerName, customerSex, customerTel, customerMail, customerAddr);
+        BaseApplication.app.net.updateCustomerInfo(new NetCallback() {
+            public void failure(Call call, IOException e) {
+            }
+
+            public void response(Call call, String responseStr) throws IOException {
+                BaseBean bean = new BaseBean().onBack(responseStr);
+                if (bean.isOK()) {
+                    BaseApplication.app.showToast(bean.msg);
+                } else {
+                    BaseApplication.app.showToast("请求失败" + bean.msg);
+                }
+            }
+        }, customerName, "" + customerSex, customerTel, customerMail, customerAddr);
     }
 
 

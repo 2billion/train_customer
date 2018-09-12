@@ -18,7 +18,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--菜单栏的图标样式-->
-    <style name="menuIconStyle" >
+    <style name="menuIconStyle">
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
     </style>
@@ -33,15 +33,18 @@
     </style>
 
     <style name="btn_blue">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/v_btn_blue</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textSize">@dimen/btn_font_size</item>
         <item name="android:textColor">#edecf2</item>
     </style>
 
     <style name="btn_yellow">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/v_btn_yellow</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textSize">@dimen/btn_font_size</item>
         <item name="android:textColor">#edecf2</item>
     </style>
@@ -51,6 +54,27 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">14dp</item>
         <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <!-- EditText 输入框 -->
+    <style name="input_update_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/v_input_login</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:gravity">center|left</item>
+    </style>
+
+    <style name="input_update_item_lable">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

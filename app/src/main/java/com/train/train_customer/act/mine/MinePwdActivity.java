@@ -2,8 +2,11 @@ package com.train.train_customer.act.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.train.train_customer.R;
@@ -38,6 +41,9 @@ public class MinePwdActivity extends BaseActivity {
     @BindView(R.id.submit)
     Button submit;
 
+    @BindView(R.id.show_psw)
+    CheckBox show_psw;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,21 @@ public class MinePwdActivity extends BaseActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 do_submit();
+            }
+        });
+
+        show_psw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                BaseApplication.showToast("ische"+isChecked);
+                if(isChecked){
+                    pwd_old.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    pwd_new.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    pwd_confirm.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }else{
+                    pwd_old.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    pwd_new.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    pwd_confirm.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
             }
         });
 
@@ -93,7 +114,6 @@ public class MinePwdActivity extends BaseActivity {
             BaseApplication.showToast("新密码与旧密码一致");
             return;
         }
-
 
         BaseApplication.app.net.updateCustomerPassword(new NetCallback() {
             public void failure(Call call, IOException e) {
