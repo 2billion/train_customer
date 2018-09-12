@@ -1,6 +1,11 @@
 package com.train.train_customer.core;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.os.Environment;
+import android.util.Log;
 
 import com.train.train_customer.act.bean.CartBean;
 import com.train.train_customer.act.bean.OrderParamsBean;
@@ -8,13 +13,20 @@ import com.train.train_customer.base.BaseApplication;
 
 import org.json.JSONArray;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class Net {
     public static final String HOST = "http://115.28.136.235:8080/bstapi/";
@@ -308,5 +320,32 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //  获取头像
+    public void getAvatar(Callback callBack, String path) {
+        Request request = new Request.Builder().url(HOST + path).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //  上传头像
+    public void uploadFile(Callback callBack, String path) {
+        String url = HOST + "/customer/updateCustomerIcon";
+        File file = new File(path);
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (file != null) {
+            // MediaType.parse() 里面是上传的文件类型。
+            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+            String filename = file.getName();
+            // 参数分别为， 请求key ，文件名称 ， RequestBody
+            requestBody.addFormDataPart("file", file.getName(), body);
+
+        }else{
+            Log.e("app","===================File is null");
+        }
+        //        RequestBody body = RequestBody.create(MediaType.parse(path), file);
+        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
 
 }

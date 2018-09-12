@@ -9,14 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.picasso.Picasso;
 import com.train.train_customer.R;
+import com.train.train_customer.act.bean.BaseBean;
 import com.train.train_customer.act.bean.UserDataBean;
 import com.train.train_customer.base.BaseApplication;
 import com.train.train_customer.base.BaseFragment;
+import com.train.train_customer.core.CircleTransform;
+import com.train.train_customer.core.Net;
 import com.train.train_customer.core.NetCallback;
 
 import java.io.IOException;
@@ -45,6 +50,9 @@ public class MineFragment extends BaseFragment {
 
     @BindView(R.id.submit)
     Button submit;
+
+    @BindView(R.id.avatar)
+    ImageView avatar;
 
     @Nullable
     @Override
@@ -94,15 +102,15 @@ public class MineFragment extends BaseFragment {
         });
     }
 
-    public void restart(){
+    public void restart() {
         BaseApplication.app.net.checkOut(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
             public void response(Call call, String responseStr) throws IOException {
-                Type cvbType = new TypeToken<UserDataBean>() {
+                Type cvbType = new TypeToken<BaseBean>() {
                 }.getType();
-                UserDataBean bean = new Gson().fromJson(responseStr, cvbType);
+                BaseBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.restart();
                 } else {
@@ -117,7 +125,28 @@ public class MineFragment extends BaseFragment {
             public void run() {
                 loginName.setText(BaseApplication.app.dm.userBean.userName);
                 nickname.setText(BaseApplication.app.dm.userBean.customerName);
+                loadAvatar();
             }
         });
+    }
+
+    private void loadAvatar() {
+        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
+        avatar.setPadding(0, 0, 0, 0);
+        Picasso.get()
+                .load(url)
+                .resize(200, 200)
+                .transform(new CircleTransform(getActivity()))
+                .centerCrop()
+                .into(avatar);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.customerImg == null) {
+            return;
+        }
+        loadAvatar();
     }
 }

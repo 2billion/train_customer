@@ -47,6 +47,40 @@
     <include layout="@layout/v_line" />
 
     <LinearLayout
+        android:id="@+id/avatar_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/v_item_bg"
+        android:clickable="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <TextView
+            style="@style/input_update_item_lable"
+            android:text="头像" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"></View>
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/v_header_view_bg"
+            android:src="@drawable/ico_head" />
+
+    </LinearLayout>
+
+    <include layout="@layout/v_line" />
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"

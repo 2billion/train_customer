@@ -85,6 +85,11 @@ public class BaseApplication extends Application {
             dm = new DataManager();
         }
         Cache.init(getApplicationContext());
+        initImagePicker();
+    }
+
+    public void initImagePicker() {
+
     }
 
     public void info() {

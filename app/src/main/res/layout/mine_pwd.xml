@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="个人中心"
+            android:text="修改密码"
             android:textSize="18dp" />
 
         <TextView
@@ -43,7 +43,7 @@
 
     <include layout="@layout/v_line_top" />
 
-
+    <include layout="@layout/v_line" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

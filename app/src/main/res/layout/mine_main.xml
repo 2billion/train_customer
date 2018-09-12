@@ -16,10 +16,12 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/avatar"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/v_header_view_bg"
-                android:padding="14dp"
+                android:scaleType="centerCrop"
+                android:padding="10dp"
                 android:src="@drawable/ico_head" />
 
             <TextView
