@@ -50,7 +50,7 @@
         android:padding="3dp"
         android:text="info3" />
 
-    <com.train.train_customer.view.AmountView
+    <com.train.train_manager.view.AmountView
         android:visibility="gone"
         android:id="@+id/amount_view"
         android:layout_width="wrap_content"

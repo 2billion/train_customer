@@ -69,7 +69,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"></View>
 
-        <com.train.train_customer.view.AmountView
+        <com.train.train_manager.view.AmountView
             android:id="@+id/amount_view"
             android:layout_width="wrap_content"
             android:layout_height="36dp"

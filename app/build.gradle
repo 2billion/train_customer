@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+    }
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.train.train_customer"
+        applicationId "com.train.train_manager"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -15,6 +17,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    //添加如下配置就ok了
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -35,12 +42,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     implementation 'com.squareup.picasso:picasso:2.71828'
-//    image
-//    implementation 'com.jaikydota.imagespickers:imagespickers:1.0.6'
+    //    image
+    //    implementation 'com.jaikydota.imagespickers:imagespickers:1.0.6'
     //如果使用图片加载框架，添加依赖，下面用Glide示例
-//    implementation 'com.github.bumptech.glide:glide:3.6.1'
-
+    //    implementation 'com.github.bumptech.glide:glide:3.6.1'
     implementation 'com.linchaolong.android:imagepicker:1.5'
-
-
 }
