@@ -108,6 +108,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 BaseBean bean = new BaseBean().onBack(responseStr);
                 if (bean.isOK()) {
                     BaseApplication.app.showToast(bean.msg);
+                    finish();
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
                 }
