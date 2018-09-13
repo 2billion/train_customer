@@ -191,11 +191,17 @@ public class ProductFragment extends BaseFragment {
     }
 
     public void add_cart() {
+        int a = 0;
+        int b = a / 0;
         JSONArray jsonArray = new JSONArray();
         for (PartBean bean : BaseApplication.app.dm.productList) {
             if (bean.isChecked) {
                 jsonArray.put(bean.jsonForCart());
             }
+        }
+        if (jsonArray.length() == 0) {
+            BaseApplication.showToast("请选择添加购物车的配件");
+            return;
         }
         BaseApplication.app.net.saveCartListInfo(new NetCallback() {
             @Override

@@ -74,7 +74,6 @@ public class MinePwdActivity extends BaseActivity {
 
         show_psw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                BaseApplication.showToast("ische"+isChecked);
                 if(isChecked){
                     pwd_old.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     pwd_new.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);

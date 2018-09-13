@@ -103,7 +103,6 @@
             android:gravity="center|right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="user_name"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -133,7 +132,6 @@
             android:gravity="center|right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="customer_name"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -163,7 +161,6 @@
             android:gravity="center|right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="user_name"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -193,7 +190,6 @@
             android:gravity="center|right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="user_name"
             android:textSize="16dp" />
 
     </LinearLayout>
@@ -224,7 +220,6 @@
             android:gravity="center|right"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="customer_des"
             android:textSize="16dp" />
 
     </LinearLayout>

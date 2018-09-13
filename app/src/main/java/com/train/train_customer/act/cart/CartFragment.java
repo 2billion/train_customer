@@ -260,7 +260,6 @@ public class CartFragment extends BaseFragment {
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        BaseApplication.showToast("2");
                         JSONArray jsonArray = new JSONArray();
                         jsonArray.put(bean.api_json());
                         do_delete_cart(jsonArray);

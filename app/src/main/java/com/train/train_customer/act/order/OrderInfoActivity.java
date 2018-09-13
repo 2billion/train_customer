@@ -152,10 +152,9 @@ public class OrderInfoActivity extends BaseActivity {
                 }.getType();
                 OrderChangeListBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
-                    BaseApplication.app.showToast(bean.msg);
                     showOrderHistory(bean);
                 } else {
-                    BaseApplication.app.showToast("请求失败" + bean.msg);
+                    BaseApplication.app.showToast(bean.msg);
                 }
             }
         }, detailId);

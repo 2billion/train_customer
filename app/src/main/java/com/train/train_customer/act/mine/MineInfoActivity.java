@@ -96,7 +96,7 @@ public class MineInfoActivity extends BaseActivity {
             if (bean.customerMail != null) {
                 customer_mail.setText(bean.customerMail);
             }
-            if (bean.customerDes != null) {
+            if (bean.customerAddr != null) {
                 customer_addr.setText(bean.customerAddr);
             }
         }

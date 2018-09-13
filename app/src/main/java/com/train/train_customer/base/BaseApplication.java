@@ -86,6 +86,9 @@ public class BaseApplication extends Application {
         }
         Cache.init(getApplicationContext());
         initImagePicker();
+        // 捕捉异常
+        AppUncaughtExceptionHandler crashHandler = AppUncaughtExceptionHandler.getInstance();
+        crashHandler.init(getApplicationContext());
     }
 
     public void initImagePicker() {
