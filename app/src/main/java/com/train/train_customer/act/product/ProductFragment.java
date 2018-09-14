@@ -191,8 +191,6 @@ public class ProductFragment extends BaseFragment {
     }
 
     public void add_cart() {
-        int a = 0;
-        int b = a / 0;
         JSONArray jsonArray = new JSONArray();
         for (PartBean bean : BaseApplication.app.dm.productList) {
             if (bean.isChecked) {
