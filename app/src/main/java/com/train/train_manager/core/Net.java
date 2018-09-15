@@ -61,6 +61,55 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    2.7 修改用户信息
+    //    请求地址：/user/editpersonal
+    //    userName	String	是		用户姓名
+    //    userDesc	String	否		描述
+    //    post	String	否		职位
+    public void editpersonal(Callback callBack, String userName, String userDesc, String post) {
+        String url = HOST + "/user/editpersonal";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("userName", userName);
+        params.add("userDesc", userDesc);
+        params.add("post", post);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //  上传头像
+    public void uploadAvatar(Callback callBack, String path) {
+        String url = HOST + "/user/uploadAvatar";
+        File file = new File(path);
+        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        if (file != null) {
+            // MediaType.parse() 里面是上传的文件类型。
+            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+            String filename = file.getName();
+            // 参数分别为， 请求key ，文件名称 ， RequestBody
+            requestBody.addFormDataPart("avatarFile", file.getName(), body);
+        } else {
+            Log.e("app", "===================File is null");
+        }
+        //        RequestBody body = RequestBody.create(MediaType.parse(path), file);
+        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.5修改密码
+    //    请求地址： /user/password
+    public void password(Callback callBack, String password, String newPassword) {
+        String url = HOST + "/user/password";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("oldPassWord", password);
+        params.add("Password", newPassword);
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 以下为客户端
@@ -97,7 +146,7 @@ public class Net {
         call.enqueue(callBack);
     }
 
-    //    1.5获取用户信息
+    //    1.5修改密码
     //    请求地址： /customer/updateCustomerPassword
     public void updateCustomerPassword(Callback callBack, String password, String newPassword) {
         String url = HOST + "/customer/updateCustomerPassword";
@@ -321,7 +370,7 @@ public class Net {
     }
 
 
-    //    1.18 订单变更列表
+    //    1.18 修改用户信息
     //    请求地址：/customer/updateCustomerInfo
     //    customerName	"String"	否		姓名
     //    customerSex	int	否		性别

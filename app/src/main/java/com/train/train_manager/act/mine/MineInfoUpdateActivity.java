@@ -3,7 +3,6 @@ package com.train.train_manager.act.mine;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
 
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.BaseBean;
@@ -26,27 +25,17 @@ public class MineInfoUpdateActivity extends BaseActivity {
     @BindView(R.id.btn_right)
     View btn_right;
 
-    @BindView(R.id.customer_name)
-    EditText customer_name;
+    @BindView(R.id.user_name)
+    EditText user_name;
 
-    @BindView(R.id.customer_tel)
-    EditText customer_tel;
+    @BindView(R.id.user_desc)
+    EditText user_desc;
 
-    @BindView(R.id.customer_mail)
-    EditText customer_mail;
-
-    @BindView(R.id.customer_addr)
-    EditText customer_addr;
+    @BindView(R.id.post)
+    EditText post;
 
     @BindView(R.id.submit)
     View submit;
-
-    @BindView(R.id.boy)
-    RadioButton boy;
-
-    @BindView(R.id.girl)
-    RadioButton girl;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,22 +55,15 @@ public class MineInfoUpdateActivity extends BaseActivity {
 
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
-            if (bean.customerName != null) {
-                customer_name.setText(bean.customerName);
-                customer_name.setSelection(customer_name.getText().toString().length());
+            if (bean.userName != null) {
+                user_name.setText(bean.userName);
+                user_name.setSelection(user_name.getText().toString().length());
             }
-            if (bean.customerSex > -1) {
-                boy.setSelected(bean.customerSex == 0);
-                girl.setSelected(bean.customerSex != 0);
+            if (bean.userDesc != null) {
+                user_desc.setText(bean.userDesc);
             }
-            if (bean.customerTel != null) {
-                customer_tel.setText(bean.customerTel);
-            }
-            if (bean.customerMail != null) {
-                customer_mail.setText(bean.customerMail);
-            }
-            if (bean.customerDes != null) {
-                customer_addr.setText(bean.customerAddr);
+            if (bean.post != null) {
+                post.setText(bean.post);
             }
         }
         submit.setOnClickListener(new View.OnClickListener() {
@@ -93,27 +75,24 @@ public class MineInfoUpdateActivity extends BaseActivity {
 
     private void do_submit() {
 
-        String customerName = customer_name.getText().toString();
-        int customerSex = boy.isSelected() ? 1 : 0;
-        String customerTel = customer_tel.getText().toString();
-        String customerMail = customer_mail.getText().toString();
-        String customerAddr = customer_addr.getText().toString();
+        String user_name_str = user_name.getText().toString();
+        String user_desc_str = user_desc.getText().toString();
+        String post_str = post.getText().toString();
 
-        //
-        BaseApplication.app.net.updateCustomerInfo(new NetCallback() {
+        BaseApplication.app.net.editpersonal(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
             public void response(Call call, String responseStr) throws IOException {
                 BaseBean bean = new BaseBean().onBack(responseStr);
                 if (bean.isOK()) {
-                    BaseApplication.app.showToast(bean.msg);
+                    BaseApplication.app.showToast("保存成功");
                     finish();
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
                 }
             }
-        }, customerName, "" + customerSex, customerTel, customerMail, customerAddr);
+        }, user_name_str, user_desc_str, post_str);
     }
 
 

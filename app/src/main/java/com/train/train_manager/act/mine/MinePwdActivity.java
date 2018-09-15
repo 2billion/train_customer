@@ -114,7 +114,7 @@ public class MinePwdActivity extends BaseActivity {
             return;
         }
 
-        BaseApplication.app.net.updateCustomerPassword(new NetCallback() {
+        BaseApplication.app.net.password(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 

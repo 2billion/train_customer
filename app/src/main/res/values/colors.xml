@@ -5,6 +5,7 @@
     <color name="colorAccent">#9f9f9f</color>
     <!--app-->
     <color name="main_blue">#037fff</color>
+    <color name="main_blue_light">#2ea8e0</color>
     <color name="main_blue_dark">#0064cb</color>
     <color name="gray666">#9f9f9f</color>
     <color name="gray_light">#dfdfdf</color>
@@ -19,8 +20,8 @@
     <color name="btn_yellow_light_press">#d3903c</color>
     <color name="btn_blue_light_normal">#36a0de</color>
     <color name="btn_blue_light_press">#2d85b9</color>
-    <color name="btn_blue_normal">#0062cd</color>
-    <color name="btn_blue_press">#004da0</color>
+    <color name="btn_blue_normal">#005880</color>
+    <color name="btn_blue_press">#004565</color>
     <color name="btn_arraw_press">#ababb0</color>
     <color name="btn_arraw_normal">#00000000</color>
     <!-- amount -->

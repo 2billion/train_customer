@@ -2,12 +2,9 @@ package com.train.train_manager.act.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,8 +15,8 @@ import com.squareup.picasso.Picasso;
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.BaseBean;
 import com.train.train_manager.act.bean.UserDataBean;
+import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
-import com.train.train_manager.base.BaseFragment;
 import com.train.train_manager.core.CircleTransform;
 import com.train.train_manager.core.Net;
 import com.train.train_manager.core.NetCallback;
@@ -35,7 +32,7 @@ import okhttp3.Call;
  * Created by solo on 2018/1/8.
  */
 
-public class MineFragment extends BaseFragment {
+public class MineActivity extends BaseActivity {
     @BindView(R.id.login_name)
     TextView loginName;
 
@@ -54,29 +51,29 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.avatar)
     ImageView avatar;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.mine_main, null);
-        ButterKnife.bind(this, view);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mine_main);
+        ButterKnife.bind(this);
+        //初始化
         init();
-        return view;
     }
 
     private void init() {
 
         infoView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MineInfoActivity.class));
+                startActivity(new Intent(MineActivity.this, MineInfoActivity.class));
             }
         });
         changePswView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MinePwdActivity.class));
+                startActivity(new Intent(MineActivity.this, MinePwdActivity.class));
             }
         });
 
-        BaseApplication.app.net.findMyInfo(new NetCallback() {
+        BaseApplication.app.net.info(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
@@ -121,22 +118,25 @@ public class MineFragment extends BaseFragment {
     }
 
     public void initUI() {
-        getActivity().runOnUiThread(new Runnable() {
+        runOnUiThread(new Runnable() {
             public void run() {
                 loginName.setText(BaseApplication.app.dm.userBean.userName);
-                nickname.setText(BaseApplication.app.dm.userBean.customerName);
+                nickname.setText(BaseApplication.app.dm.userBean.userId);
                 loadAvatar();
             }
         });
     }
 
     private void loadAvatar() {
-        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
+        if (BaseApplication.app.dm.userBean.userHeader == null){
+            return ;
+        }
+        String url = Net.HOST + BaseApplication.app.dm.userBean.userHeader;
         avatar.setPadding(0, 0, 0, 0);
         Picasso.get()
                 .load(url)
                 .resize(200, 200)
-                .transform(new CircleTransform(getActivity()))
+                .transform(new CircleTransform(MineActivity.this))
                 .centerCrop()
                 .into(avatar);
     }
@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.customerImg == null) {
+        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.userHeader == null) {
             return;
         }
         loadAvatar();

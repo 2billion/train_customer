@@ -39,20 +39,20 @@ public class MineInfoActivity extends BaseActivity {
     @BindView(R.id.btn_right)
     View btn_right;
 
-    @BindView(R.id.customer_name)
-    EditText customer_name;
+    @BindView(R.id.user_id)
+    EditText user_id;
 
-    @BindView(R.id.customer_sex)
-    EditText customerSex;
+    @BindView(R.id.user_name)
+    EditText user_name;
 
-    @BindView(R.id.customer_tel)
-    EditText customer_tel;
+    @BindView(R.id.user_desc)
+    EditText user_desc;
 
-    @BindView(R.id.customer_mail)
-    EditText customer_mail;
+    @BindView(R.id.dept_name)
+    EditText dept_name;
 
-    @BindView(R.id.customer_addr)
-    EditText customer_addr;
+    @BindView(R.id.post)
+    EditText post;
 
     @BindView(R.id.avatar)
     ImageView avatar;
@@ -82,29 +82,28 @@ public class MineInfoActivity extends BaseActivity {
         });
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
-            if (bean.customerName != null) {
-                customer_name.setText(bean.customerName);
-                customer_name.setSelection(customer_name.getText().toString().length());
+            if (bean.userId != null) {
+                user_id.setText(bean.userId);
+                user_id.setSelection(user_id.getText().toString().length());
             }
-            if (bean.customerSex > -1) {
-                customerSex.setText(bean.customerSex == 0 ? "男" : "女");
-                customerSex.setSelection(customerSex.getText().toString().length());
+            if (bean.userName != null) {
+                user_name.setText(bean.userName);
             }
-            if (bean.customerTel != null) {
-                customer_tel.setText(bean.customerTel);
+            if (bean.userDesc != null) {
+                user_desc.setText(bean.userDesc);
             }
-            if (bean.customerMail != null) {
-                customer_mail.setText(bean.customerMail);
+            if (bean.deptName != null) {
+                dept_name.setText(bean.deptName);
             }
-            if (bean.customerAddr != null) {
-                customer_addr.setText(bean.customerAddr);
+            if (bean.post != null) {
+                post.setText(bean.post);
             }
         }
-        customer_name.setEnabled(false);
-        customerSex.setEnabled(false);
-        customer_tel.setEnabled(false);
-        customer_mail.setEnabled(false);
-        customer_addr.setEnabled(false);
+        user_id.setEnabled(false);
+        user_name.setEnabled(false);
+        user_desc.setEnabled(false);
+        dept_name.setEnabled(false);
+        post.setEnabled(false);
 
         load_avatar();
         initImagePicker();
@@ -129,7 +128,6 @@ public class MineInfoActivity extends BaseActivity {
                 path = imageUri.getPath();
                 BaseApplication.showToast("裁剪成功，开始上传");
                 upload_avatar();
-                //                draweeView.getHierarchy().setRoundingParams(RoundingParams.asCircle());
             }
 
 
@@ -159,47 +157,13 @@ public class MineInfoActivity extends BaseActivity {
         imagePicker.setTitle("设置头像");
         // 设置是否裁剪图片
         imagePicker.setCropImage(true);
-        // 启动图片选择器
-        //        imagePicker.startChooser(this, new ImagePicker.Callback() {
-        //            // 选择图片回调
-        //            @Override
-        //            public void onPickImage(Uri imageUri) {
-        //            }
-        //
-        //            // 裁剪图片回调
-        //            @Override
-        //            public void onCropImage(Uri imageUri) {
-        //                Log.e("app", "onCropImage=============== " + imageUri.getPath());
-        //                avatar.setImageURI(imageUri);
-        //                //                draweeView.getHierarchy().setRoundingParams(RoundingParams.asCircle());
-        //            }
-        //
-        //            // 自定义裁剪配置
-        //            @Override
-        //            public void cropConfig(CropImage.ActivityBuilder builder) {
-        //                builder
-        //                        // 是否启动多点触摸
-        //                        .setMultiTouchEnabled(false)
-        //                        // 设置网格显示模式
-        //                        .setGuidelines(CropImageView.Guidelines.OFF)
-        //                        // 圆形/矩形
-        //                        .setCropShape(CropImageView.CropShape.RECTANGLE)
-        //                        // 调整裁剪后的图片最终大小
-        //                        .setRequestedSize(200, 200)
-        //                        // 宽高比
-        //                        .setAspectRatio(1, 1);
-        //            }
-        //
-        //            // 用户拒绝授权回调
-        //            @Override
-        //            public void onPermissionDenied(int requestCode, String[] permissions,
-        //                                           int[] grantResults) {
-        //            }
-        //        });
     }
 
     private void load_avatar() {
-        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
+        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.userHeader == null) {
+            return;
+        }
+        String url = Net.HOST + BaseApplication.app.dm.userBean.userHeader;
         Picasso.get()
                 .load(url)
                 .resize(200, 200)
@@ -223,7 +187,7 @@ public class MineInfoActivity extends BaseActivity {
     }
 
     private void upload_avatar() {
-        BaseApplication.app.net.uploadFile(new NetCallback() {
+        BaseApplication.app.net.uploadAvatar(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 

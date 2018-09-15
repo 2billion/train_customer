@@ -71,8 +71,8 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:scaleType="centerCrop"
             android:background="@drawable/v_header_view_bg"
+            android:scaleType="centerCrop"
             android:src="@drawable/ico_head" />
 
     </LinearLayout>
@@ -92,10 +92,99 @@
 
         <TextView
             style="@style/input_update_item_lable"
+            android:text="账号" />
+
+        <EditText
+            android:id="@+id/user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center|right"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/v_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/v_item_bg"
+        android:clickable="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <TextView
+            style="@style/input_update_item_lable"
             android:text="姓名" />
 
         <EditText
-            android:id="@+id/customer_name"
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center|right"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/v_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/v_item_bg"
+        android:clickable="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <TextView
+            style="@style/input_update_item_lable"
+            android:text="描述" />
+
+        <EditText
+            android:id="@+id/user_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:inputType="textMultiLine"
+            android:gravity="center|right"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <include layout="@layout/v_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/v_item_bg"
+        android:clickable="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+
+        <TextView
+            style="@style/input_update_item_lable"
+            android:text="部门" />
+
+        <EditText
+            android:id="@+id/dept_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -121,98 +210,10 @@
 
         <TextView
             style="@style/input_update_item_lable"
-            android:text="性别" />
+            android:text="职位" />
 
         <EditText
-            android:id="@+id/customer_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center|right"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="16dp" />
-
-    </LinearLayout>
-
-    <include layout="@layout/v_line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/v_item_bg"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-
-        <TextView
-            style="@style/input_update_item_lable"
-            android:text="电话" />
-
-        <EditText
-            android:id="@+id/customer_tel"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center|right"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="16dp" />
-
-    </LinearLayout>
-
-    <include layout="@layout/v_line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/v_item_bg"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-
-        <TextView
-            style="@style/input_update_item_lable"
-            android:text="邮箱" />
-
-        <EditText
-            android:id="@+id/customer_mail"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center|right"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="16dp" />
-
-    </LinearLayout>
-
-    <include layout="@layout/v_line" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/v_item_bg"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-
-        <TextView
-            style="@style/input_update_item_lable"
-            android:text="地址" />
-
-        <EditText
-            android:id="@+id/customer_addr"
+            android:id="@+id/post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

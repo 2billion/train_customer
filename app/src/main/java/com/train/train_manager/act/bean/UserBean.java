@@ -2,70 +2,33 @@ package com.train.train_manager.act.bean;
 
 public class UserBean {
 
-    public String customerId; //    String	是		客户ID
-    public String orgId; //    String	是		客户单位
-    public String userName; //    String	是		客户用户名
-    public String customerName; //    String	是		客户姓名
-    public int customerSex; //    int	是		性别
-    public String customerTel; //    String	否		电话
-    public String customerMail; //    String	否		邮箱
-    public String customerAddr; //    String	否		地址
-    public String customerDes; //    String	否		描述
-    public String customerImg; //    String	否		头像
+    public String userId; // String	是		用户ID
+    public String userName; // String	是		用户姓名
+    public String userHeader; // String	否		用户头像
+    public String userDesc; // String	否		描述
+    public String post; // String	否		职位
+    public String createTime; // String	否		创建时间
+    public String updateTime; // String	否		更新时间
+    public String lastLoginTime; // String	否		最近登录时间
+    public String deptId; // Int	是		部门ID
+    public String deptName; // String	否		部门名称
 
 }
 
+
 //{
 //        "data": {
-//        "userName": "gzdcd",
-//        "password": "1BBD886460827015E5D605ED44252251",
-//        "orgId": 2,
-//        "buearuId": null,
-//        "customerId": 104,
-//        "orgName": null,
-//        "customerName": "广州动车段",
-//        "customerSex": null,
-//        "customerTel": null,
-//        "customerMail": null,
-//        "customerAddr": null,
-//        "customerDes": "null",
-//        "newPassword": null,
-//        "reNewPassword": null,
-//        "customerImg": null,
-//        "cardId": null
+//        "userName": "超级管理员1",
+//        "deptId": 2,
+//        "userHeader": null,
+//        "userDesc": null,
+//        "post": "系统管理",
+//        "createTime": null,
+//        "lastLoginTime": null,
+//        "updateTime": "2018-06-02 13:44:25",
+//        "userId": "admin",
+//        "deptName": null
 //        },
 //        "code": 200,
-//        "msg": "获得个人信息成功！"
-//        }
-
-
-//customerId	String	是		客户ID
-//orgId	String	是		客户单位
-//userName	String	是		客户用户名
-//customerName	String	是		客户姓名
-//customerSex	int	是		性别
-//customerTel	String	否		电话
-//customerMail	String	否		邮箱
-//customerAddr	String	否		地址
-//customerDes	String	否		描述
-//customerImg	String	否		头像
-
-//Json示例：
-//        {
-//        "code": 200,
-//        "msg": "个人信息加载成功！"
-//        "data": {
-//        "userName": "customer",
-//        "orgId": 1,
-//        "buearuId": 1,
-//        "customerId": 1,
-//        "customerName": "上海动车段",
-//        "customerSex": 0,
-//        "customerTel": "18363671109",
-//        "customerMail": "971059634@qq.com",
-//        "customerAddr": "上海市",
-//        "customerDes": "上海动车段",
-//        "customerImg": null
-//        },
-//
+//        "msg": "参数不正确！"
 //        }

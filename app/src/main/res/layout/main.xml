@@ -8,34 +8,150 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
+        android:background="@color/main_blue_light"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="库存查询" />
+            android:layout_marginTop="20dp"
+            android:text="库存查询"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
         <EditText
-            android:id="@+id/kuweibianma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="库位编码" />
+            android:id="@+id/input_kuwei"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/v_input_round"
+            android:ems="10"
+            android:gravity="center_vertical|left"
+            android:hint="@string/hint_main_kuwei"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/gray666"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/btn_search_font_size" />
 
         <EditText
-            android:id="@+id/bst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="BST物料编码" />
+            android:id="@+id/input_bst"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/v_input_round"
+            android:ems="10"
+            android:gravity="center_vertical|left"
+            android:hint="@string/hint_main_bst"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/gray666"
+            android:textCursorDrawable="@null"
+            android:textSize="@dimen/btn_search_font_size" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="查询" />
+            android:layout_margin="20dp"
+            android:background="@drawable/v_btn_blue_round"
+            android:text="查询"
+            android:textColor="@color/white"
+            android:textSize="@dimen/btn_font_size" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main_btn_ico_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="入库" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_btn_ico_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="入库记录" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_btn_ico_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出库" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_btn_ico_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移库" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:id="@+id/main_btn_ico_5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,14 +163,14 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ff6600" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_5" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="入库" />
+                android:text="设置" />
         </LinearLayout>
 
         <LinearLayout
@@ -62,17 +178,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ff6600" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="入库" />
         </LinearLayout>
 
         <LinearLayout
@@ -80,17 +193,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ff6600" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="入库" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,73 +208,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ff6600" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="入库" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="#ff6600" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="入库" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/main_i_5" />
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
 
     </LinearLayout>
 

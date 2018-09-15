@@ -62,7 +62,7 @@
             android:text="姓名" />
 
         <EditText
-            android:id="@+id/customer_name"
+            android:id="@+id/user_name"
             style="@style/input_update_item" />
 
     </LinearLayout>
@@ -81,47 +81,10 @@
 
         <TextView
             style="@style/input_update_item_lable"
-            android:text="性别" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/boy"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:text="男" />
-
-            <RadioButton
-                android:id="@+id/girl"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:text="女" />
-        </RadioGroup>
-
-    </LinearLayout>
-
-    <include layout="@layout/v_line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/v_item_bg"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-
-        <TextView
-            style="@style/input_update_item_lable"
-            android:text="电话" />
+            android:text="职位" />
 
         <EditText
-            android:id="@+id/customer_tel"
+            android:id="@+id/post"
             style="@style/input_update_item"
             android:inputType="phone" />
 
@@ -141,36 +104,18 @@
 
         <TextView
             style="@style/input_update_item_lable"
-            android:text="邮箱" />
+            android:text="描述" />
 
         <EditText
-            android:id="@+id/customer_mail"
+            android:id="@+id/user_desc"
+            android:minLines="3"
+            android:layout_height="100dp"
             style="@style/input_update_item"
-            android:inputType="textEmailAddress" />
+            android:inputType="textMultiLine" />
 
     </LinearLayout>
 
     <include layout="@layout/v_line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/v_item_bg"
-        android:clickable="true"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-
-        <TextView
-            style="@style/input_update_item_lable"
-            android:text="地址" />
-
-        <EditText
-            android:id="@+id/customer_addr"
-            style="@style/input_update_item" />
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/submit"

@@ -11,4 +11,7 @@
     <string name="right_view_date_pick1"><font size="14">选择开始时间</font></string>
     <string name="right_view_date_pick2"><font size="14">选择结束时间</font></string>
     <string name="order_info_reason"><font size="16">请填写申请订单变更原因</font></string>
+
+    <string name="hint_main_kuwei"><font size="14">库位编码</font></string>
+    <string name="hint_main_bst"><font size="14">BST物料编码</font></string>
 </resources>

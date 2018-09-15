@@ -69,7 +69,7 @@ public class BaseApplication extends Application {
         //        am.restartPackage("com.train.train_customer");
         BaseApplication.app.setAutoLogin(false);
         Intent k = getApplicationContext().getPackageManager()
-                .getLaunchIntentForPackage("com.train.train_customer");
+                .getLaunchIntentForPackage("com.train.train_manager");
         k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         getApplicationContext().startActivity(k);
     }

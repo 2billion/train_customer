@@ -1,28 +1,61 @@
 package com.train.train_manager.act;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.train.train_manager.R;
+import com.train.train_manager.act.mine.MineActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity {
+
+    @BindView(R.id.input_kuwei)
+    EditText kuwei;
+    @BindView(R.id.input_bst)
+    EditText bst;
+    @BindView(R.id.submit)
+    Button submit;
+
+    @BindView(R.id.main_btn_ico_1)
+    View main_btn_ico_1;
+    @BindView(R.id.main_btn_ico_2)
+    View main_btn_ico_2;
+    @BindView(R.id.main_btn_ico_3)
+    View main_btn_ico_3;
+    @BindView(R.id.main_btn_ico_4)
+    View main_btn_ico_4;
+    @BindView(R.id.main_btn_ico_5)
+    View main_btn_ico_5;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        ButterKnife.bind(this);
         //初始化
         init();
     }
 
     private void init() {
+        main_btn_ico_5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MineActivity.class));
+
+            }
+        });
 
     }
 
