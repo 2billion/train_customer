@@ -107,7 +107,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
             public void response(Call call, String responseStr) throws IOException {
                 BaseBean bean = new BaseBean().onBack(responseStr);
                 if (bean.isOK()) {
-                    BaseApplication.app.showToast(bean.msg);
+                    BaseApplication.app.showToast("修改成功");
                     finish();
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
