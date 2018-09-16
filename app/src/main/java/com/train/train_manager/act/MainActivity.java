@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.train.train_manager.R;
+import com.train.train_manager.act.chuku.ChuKuActivity;
+import com.train.train_manager.act.kucun.KuCunActivity;
 import com.train.train_manager.act.mine.MineActivity;
 import com.train.train_manager.act.ruku.RukuActivity;
 import com.train.train_manager.act.ruku_record.RukuRecordActivity;
@@ -52,6 +56,35 @@ public class MainActivity extends BaseActivity {
     }
 
     private void init() {
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, KuCunActivity.class));
+            }
+        });
+
+        kuwei.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            public void afterTextChanged(Editable s) {
+                BaseApplication.app.dm.kuCunParams.location = s.toString();
+            }
+        });
+        bst.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            public void afterTextChanged(Editable s) {
+                BaseApplication.app.dm.kuCunParams.bstPartNo = s.toString();
+            }
+        });
     }
 
     @OnClick({R.id.main_btn_ico_1, R.id.main_btn_ico_2, R.id.main_btn_ico_3, R.id.main_btn_ico_4, R.id.main_btn_ico_5})
@@ -64,10 +97,10 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, RukuRecordActivity.class));
                 break;
             case R.id.main_btn_ico_3:
-                startActivity(new Intent(MainActivity.this, RukuActivity.class));
+                startActivity(new Intent(MainActivity.this, ChuKuActivity.class));
                 break;
             case R.id.main_btn_ico_4:
-                startActivity(new Intent(MainActivity.this, RukuActivity.class));
+                BaseApplication.showToast("此功能还未开放");
                 break;
             case R.id.main_btn_ico_5:
                 startActivity(new Intent(MainActivity.this, MineActivity.class));

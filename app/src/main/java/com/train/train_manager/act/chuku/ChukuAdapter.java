@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_record;
+package com.train.train_manager.act.chuku;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,16 +8,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.train.train_manager.R;
-import com.train.train_manager.act.bean.InABean;
-import com.train.train_manager.act.ruku_info.RukuInfoActivity;
+import com.train.train_manager.act.bean.OutBean;
+import com.train.train_manager.act.chuku_info.ChukuInfoActivity;
 import com.train.train_manager.base.BaseApplication;
 
-public class RukuRecordAdapter extends BaseAdapter {
+public class ChukuAdapter extends BaseAdapter {
 
-    RukuRecordActivity activity;
+    ChuKuActivity activity;
 
 
-    public RukuRecordAdapter(RukuRecordActivity activity) {
+    public ChukuAdapter(ChuKuActivity activity) {
         this.activity = activity;
     }
 
@@ -26,6 +26,9 @@ public class RukuRecordAdapter extends BaseAdapter {
         public CheckBox select;
         public TextView info1;
         public TextView info2;
+        public TextView info3;
+        public TextView info4;
+        public TextView info5;
         public TextView status;
 
         public View item;
@@ -33,10 +36,10 @@ public class RukuRecordAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (BaseApplication.app.dm.listInA == null) {
+        if (BaseApplication.app.dm.outList == null) {
             return 0;
         } else {
-            return BaseApplication.app.dm.listInA.size();
+            return BaseApplication.app.dm.outList.size();
         }
     }
 
@@ -55,35 +58,49 @@ public class RukuRecordAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(this.activity, R.layout.ruku_record_list_item, null);
+            convertView = View.inflate(this.activity, R.layout.chuku_record_list_item, null);
             holder.title = convertView.findViewById(R.id.title);
             holder.select = convertView.findViewById(R.id.select);
             holder.info1 = convertView.findViewById(R.id.info1);
             holder.info2 = convertView.findViewById(R.id.info2);
+            holder.info3 = convertView.findViewById(R.id.info3);
+            holder.info4 = convertView.findViewById(R.id.info4);
+            holder.info5 = convertView.findViewById(R.id.info5);
             holder.status = convertView.findViewById(R.id.status);
             holder.item = convertView.findViewById(R.id.item);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        InABean bean = BaseApplication.app.dm.listInA.get(position);
+        OutBean bean = BaseApplication.app.dm.outList.get(position);
 
-        holder.title.setText(bean.compTimeStr() + " 一类入库单");
-        holder.info1.setText("入库单号：" + bean.transNo);
-        holder.info2.setText("创建时间：" + bean.operTime);
-        if (bean.status == 1) {
-            holder.status.setText("已启动");
+        holder.title.setText(bean.store + "库-WO:" + bean.wo + "-CSSALE");
+        holder.info1.setText("领料单号：" + bean.pickNo);
+        holder.info2.setText("日期：" + bean.genTime);
+        holder.info3.setText("发料原因：" + bean.reason);
+        holder.info4.setText("联系人：" + bean.analyst);
+        holder.info5.setText("发送到：" + bean.deliveryTo);
+
+        if (bean.status == 0) {
+            holder.status.setText("带下架");
             holder.status.setBackgroundResource(R.drawable.v_label_round_blue);
+        } else if (bean.status == 1) {
+            holder.status.setText("下架中");
+            holder.status.setBackgroundResource(R.drawable.v_label_round_gray);
         } else if (bean.status == 2) {
+            holder.status.setText("待交接");
+            holder.status.setBackgroundResource(R.drawable.v_label_round_red);
+        } else if (bean.status == 3) {
             holder.status.setText("已完成");
             holder.status.setBackgroundResource(R.drawable.v_label_round_green);
         }
+
         holder.item.setTag(bean);
         holder.item.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                InABean bean = (InABean) v.getTag();
-                BaseApplication.app.dm.info_InABean = bean;
-                activity.startActivity(new Intent(activity, RukuInfoActivity.class));
+                OutBean bean = (OutBean) v.getTag();
+                BaseApplication.app.dm.outBean = bean;
+                activity.startActivity(new Intent(activity, ChukuInfoActivity.class));
             }
         });
 

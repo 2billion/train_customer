@@ -16,4 +16,13 @@
     <string name="hint_main_bst"><font size="14">BST物料编码</font></string>
 
     <string name="hint_ina_top_search"><font size="14">输入入库单号</font></string>
+
+    <item name="reku_record_adapter_1" type="id"></item>
+    <item name="reku_record_adapter_2" type="id"></item>
+
+    <string name="hint_out_right_view_1"><font size="14">订单编号</font></string>
+    <string name="hint_out_right_view_2"><font size="14">领料编号</font></string>
+
+    <string name="hint_kucun_top_search"><font size="14">库位/物资编码查询</font></string>
+
 </resources>

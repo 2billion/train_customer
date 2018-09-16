@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.train.train_manager.R;
+import com.train.train_manager.act.ruku_add.RukuAddActivity;
 import com.train.train_manager.act.ruku_record.RukuRecordActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
@@ -31,7 +32,7 @@ public class RukuActivity extends BaseActivity {
     public void click(View view) {
         switch (view.getId()) {
             case R.id.line1:
-                startActivity(new Intent(RukuActivity.this, RukuRecordActivity.class));
+                startActivity(new Intent(RukuActivity.this, RukuAddActivity.class));
                 break;
             case R.id.line2:
                 BaseApplication.showToast("暂时不能选择二类入库单");

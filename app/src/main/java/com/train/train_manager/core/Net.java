@@ -4,10 +4,15 @@ import android.content.Context;
 import android.util.Log;
 
 import com.train.train_manager.act.bean.CartBean;
+import com.train.train_manager.act.bean.InAAddParamsBean;
+import com.train.train_manager.act.bean.KuCunParams;
 import com.train.train_manager.act.bean.OrderParamsBean;
+import com.train.train_manager.act.bean.OutParamsBean;
 import com.train.train_manager.base.BaseApplication;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +61,7 @@ public class Net {
     public void info(Callback callBack) {
         String url = HOST + "/user/info";
         FormBody.Builder params = new FormBody.Builder();
-        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -73,7 +78,7 @@ public class Net {
         params.add("userDesc", userDesc);
         params.add("post", post);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -93,7 +98,7 @@ public class Net {
             Log.e("app", "===================File is null");
         }
         //        RequestBody body = RequestBody.create(MediaType.parse(path), file);
-        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -105,7 +110,38 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("oldPassWord", password);
         params.add("Password", newPassword);
-        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.9保存一类入库单
+    //    请求地址：/trans/saveInA
+    //    transNo	String	否		入库单号，如果为空，则为新单据
+    //    detail	String	是		入库单物料明细
+
+    //    transId	int	否		物料明细ID,如果为空为新增，否则为修改
+    //    bstPartNo	String	是		BST物资编码
+    //    tLocation	String	是		入库库位
+    //    qty	Double	是		数量
+
+    public void saveInA(Callback callBack) {
+        InAAddParamsBean bean = BaseApplication.app.dm.inaAddBean;
+        String url = HOST + "/trans/saveInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", bean.transNo);
+        JSONObject jsonArray = new JSONObject();
+        try {
+            jsonArray.put("transId", bean.transId);
+            jsonArray.put("bstPartNo", bean.bstPartNo);
+            jsonArray.put("tLocation", bean.tLocation);
+            jsonArray.put("qty", bean.qty);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        params.add("detail", jsonArray.toString());
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -128,7 +164,82 @@ public class Net {
         params.add("page", page);
         params.add("pageSize", pageSize);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //     2.11 一类入库单详情
+    //    请求地址： /trans/getDetailByTransNo
+    //    transNo	String	否		入库单号
+    public void getDetailByTransNo(Callback callBack, String transNo) {
+        String url = HOST + "/trans/getDetailByTransNo";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.12获取手工领料单基本信息列表
+    //    请求地址：/pick/listforstock
+    //    orderNo	String	否		订单号
+    //    pickNo	String	否		领料单号
+    //    genTimeStart	String	否		生成开始时间
+    //    genTimeEnd	String	否		生成结束时间
+    //    status	int	否		状态
+    //    page	int	是		页码
+    //    pageSize	int	是		每页记录数
+    public void listforstock(Callback callBack, OutParamsBean bean, String page, String pageSize) {
+        String url = HOST + "/pick/listforstock";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("orderNo", bean.orderNo);
+        params.add("pickNo", bean.pickNo);
+        params.add("genTimeStart", bean.genTimeStart);
+        params.add("genTimeEnd", bean.genTimeEnd);
+        params.add("status", bean.status);
+        params.add("page", page);
+        params.add("pageSize", pageSize);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.13 手工领料单 详情
+    //    请求地址： /pick/detail
+    //    transNo	String	否		入库单号
+    public void pick_detail(Callback callBack, String pickId) {
+        String url = HOST + "/pick/detail";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
+    //    2.19库存查询
+    //    请求地址：/stock/list
+
+    //    location	String	否		库位
+    //    contractNo 	String	否		项目号
+    //    bstPartNo	String	否		BST物资编码
+    //    page	int	是		页码
+    //    pageSize	int	是		每页记录数
+    public void stock_list(Callback callBack, String page, String pageSize) {
+        KuCunParams bean = BaseApplication.app.dm.kuCunParams;
+        String url = HOST + "/stock/list";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("location", bean.location);
+        params.add("contractNo", bean.contractNo);
+        params.add("bstPartNo", bean.bstPartNo);
+        params.add("page", page);
+        params.add("pageSize", pageSize);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -164,7 +275,7 @@ public class Net {
     public void findMyInfo(Callback callBack) {
         String url = HOST + "/customer/findMyInfo";
         FormBody.Builder params = new FormBody.Builder();
-        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -176,7 +287,7 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("password", password);
         params.add("newPassword", newPassword);
-        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -187,7 +298,7 @@ public class Net {
         String url = HOST + "/tsType/findTsTypeList";
         FormBody.Builder params = new FormBody.Builder();
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -205,7 +316,7 @@ public class Net {
         params.add("partNo", partNo);
         params.add("buPartNo", buPartNo);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -221,7 +332,7 @@ public class Net {
         params.add("bstPartNo", bstPartNo);
         params.add("buPartNo", buPartNo);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -257,7 +368,7 @@ public class Net {
         //        okhttp3.RequestBody body = RequestBody.create(JSON, jsonArray.toString());
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -272,7 +383,7 @@ public class Net {
         jsonArray.put(bean.api_json());
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -285,7 +396,7 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -302,7 +413,7 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("cartJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -319,7 +430,7 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("orderDetailJson", jsonArray.toString());
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -356,7 +467,7 @@ public class Net {
         //        params.ico_add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
         //        2018-08-14%2000%3A00%3A00
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -374,7 +485,7 @@ public class Net {
         params.add("changeReason", changeReason);
         params.add("changeNum", changeNum);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -387,7 +498,7 @@ public class Net {
         FormBody.Builder params = new FormBody.Builder();
         params.add("detailId", detailId);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -409,7 +520,7 @@ public class Net {
         params.add("customerMail", customerMail);
         params.add("customerAddr", customerAddr);
         Request request = new Request.Builder().url(url).post(params.build())
-                .addHeader("token", BaseApplication.app.dm.token).build();
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
@@ -437,7 +548,7 @@ public class Net {
             Log.e("app", "===================File is null");
         }
         //        RequestBody body = RequestBody.create(MediaType.parse(path), file);
-        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.token).build();
+        Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }

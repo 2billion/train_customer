@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@color/main_blue_light"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:id="@+id/btn_left"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/v_header_btn"
+        android:clickable="true"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ico_arrow_white" />
+
+
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/v_input_search"
+        android:ems="10"
+        android:hint="@string/hint_kucun_top_search"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/gray666"
+        android:textCursorDrawable="@null"
+        android:textSize="@dimen/btn_search_font_size" />
+
+    <TextView
+        android:id="@+id/search_btn"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/v_header_btn"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="搜索"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_search_font_size" />
+
+
+</LinearLayout>

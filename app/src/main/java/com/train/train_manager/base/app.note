@@ -9,5 +9,8 @@
     {{host}}/user/uploadAvatar
     {"data":null,"code":302,"msg":"头像上传失败！"}
 
+2、接口参数无效
+    {{host}}/pick/listforstock
+    20180902231330183
 
 

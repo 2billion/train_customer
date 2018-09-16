@@ -6,12 +6,6 @@
     android:padding="6dp">
 
     <LinearLayout
-        android:id="@+id/item"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -26,41 +20,37 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ico_right_arrow" />
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unit"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/info1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:padding="2dp"
         android:text="info1"
-        android:textSize="16sp" />
+        android:textSize="14dp" />
 
     <TextView
         android:id="@+id/info2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="3dp"
+        android:padding="2dp"
         android:text="info2"
-        android:textSize="16sp" />
+        android:textSize="14dp" />
 
     <TextView
-        android:id="@+id/status"
+        android:id="@+id/info3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:background="@drawable/v_label_round_green"
-        android:gravity="right"
-        android:paddingBottom="4dp"
-        android:paddingLeft="6dp"
-        android:paddingRight="6dp"
-        android:paddingTop="4dp"
-        android:text="已完成"
-        android:textColor="@color/white" />
-    </LinearLayout>
+        android:padding="2dp"
+        android:text="info3"
+        android:textSize="14dp" />
+
 </LinearLayout>

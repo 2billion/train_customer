@@ -36,6 +36,12 @@
         <activity android:name=".act.ruku.RukuActivity"></activity>
 
         <activity android:name=".act.ruku_record.RukuRecordActivity"></activity>
+        <activity android:name=".act.ruku_info.RukuInfoActivity"></activity>
+        <activity android:name=".act.ruku_add.RukuAddActivity"></activity>
+        <activity android:name=".act.ruku_add.RukuDoAddActivity"></activity>
+        <activity android:name=".act.chuku.ChuKuActivity"></activity>
+        <activity android:name=".act.chuku_info.ChukuInfoActivity"></activity>
+        <activity android:name=".act.kucun.KuCunActivity"></activity>
 
 
         <!-- end -->

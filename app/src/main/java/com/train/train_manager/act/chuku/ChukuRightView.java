@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_record;
+package com.train.train_manager.act.chuku;
 
 import android.app.DatePickerDialog;
 import android.text.Editable;
@@ -30,20 +30,24 @@ import java.util.Locale;
  * partNo":"338 -2
  * "buPartNo":"978" -3
  */
-public class RukuRecordRightView {
+public class ChukuRightView {
     View view;
     TagFlowLayout id_flowlayout;
-    RukuRecordActivity activity;
+    ChuKuActivity activity;
     TagAdapter tagAdapter;
     View right_search_view;
 
-    EditText input0;
-    View input_del_0;
+    EditText input1;
+    View input1_del;
+
+
+    EditText input2;
+    View input2_del;
 
     Button data_picker_1;
     Button data_picker_2;
 
-    public RukuRecordRightView(RukuRecordActivity activity, View view) {
+    public ChukuRightView(ChuKuActivity activity, View view) {
         this.activity = activity;
         this.view = view;
 
@@ -56,24 +60,23 @@ public class RukuRecordRightView {
         //        搜索
         view.findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.app.dm.ina_transNo = input0.getText().toString();
+                BaseApplication.app.dm.outParams.orderNo = input1.getText().toString();
+                BaseApplication.app.dm.outParams.orderNo = input1.getText().toString();
 
-                BaseApplication.app.dm.ina_timeStart = getDateTime(data_picker_1);
-                BaseApplication.app.dm.ina_timeEnd = getDateTime(data_picker_2);
-
-                Log.e("app", "===============");
-                Log.e("app", "" + getDateTime(data_picker_1));
+                BaseApplication.app.dm.outParams.genTimeStart= getDateTime(data_picker_1);
+                BaseApplication.app.dm.outParams.genTimeEnd= getDateTime(data_picker_2);
 
                 switchVisible();
                 activity.refresh();
                 activity.hideKeyBoard(v);
-                activity.searchInput.setText(input0.getText().toString() + "");
+                activity.searchInput.setText(input2.getText().toString() + "");
             }
         });
         //        重置
         view.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                input0.setText("");
+                input1.setText("");
+                input2.setText("");
                 initDelUI();
                 tagAdapter.setSelectedList();
                 data_picker_1.setText("");
@@ -82,14 +85,14 @@ public class RukuRecordRightView {
             }
         });
 
-        input0 = this.view.findViewById(R.id.et_order_no);
-        input0.setText(BaseApplication.app.dm.ina_transNo);
-        input0.addTextChangedListener(new TextWatcher() {
+        input1 = this.view.findViewById(R.id.et_order_no);
+        input1.setText(BaseApplication.app.dm.outParams.orderNo);
+        input1.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input_del_0.setVisibility(TextUtils.isEmpty(input0.getText()) ? View.INVISIBLE : View.VISIBLE);
+                input1_del.setVisibility(TextUtils.isEmpty(input1.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
@@ -97,17 +100,39 @@ public class RukuRecordRightView {
             }
         });
 
-        input_del_0 = this.view.findViewById(R.id.input_del_order_no);
-        input_del_0.setOnClickListener(new View.OnClickListener() {
+        input1_del = this.view.findViewById(R.id.input_del_order_no);
+        input1_del.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                input0.setText("");
+                input1.setText("");
+            }
+        });
+
+        input2 = this.view.findViewById(R.id.et_order_no);
+        input2.setText(BaseApplication.app.dm.outParams.orderNo);
+        input2.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                input2_del.setVisibility(TextUtils.isEmpty(input2.getText()) ? View.INVISIBLE : View.VISIBLE);
+            }
+
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        input2_del = this.view.findViewById(R.id.input_del_order_no);
+        input2_del.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                input2.setText("");
             }
         });
 
         view.findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switchVisible();
-                activity.searchInput.setText(input0.getText().toString() + "");
+                activity.searchInput.setText(input2.getText().toString() + "");
             }
         });
 
@@ -131,39 +156,30 @@ public class RukuRecordRightView {
         } else {
             this.right_search_view.setVisibility(View.INVISIBLE);
         }
-        input0.setText(BaseApplication.app.dm.ina_transNo);
+        input1.setText(BaseApplication.app.dm.outParams.orderNo);
+        input2.setText(BaseApplication.app.dm.outParams.pickNo);
     }
 
+    ArrayList<String> list = new ArrayList<>();
+
     private void initTagAdapter() {
-        ArrayList<String> list = new ArrayList<>();
+
         list.add("全部");
-        list.add("已启动");
+        list.add("待下架");
+        list.add("下架中");
+        list.add("待交接");
         list.add("已完成");
         tagAdapter = new TagAdapter(list) {
             public View getView(FlowLayout parent, int position, Object o) {
                 TextView tag = (TextView) View.inflate(activity, R.layout.common_right_search_item, null);
-                String txt = "全部";
-                if (position == 1) {
-                    txt = "已启动";
-                } else if (position == 2) {
-                    txt = "已完成";
-                }
-                tag.setText(txt);
+                tag.setText(list.get(position));
                 return tag;
             }
 
             @Override
             public void onSelected(int position, View view) {
                 super.onSelected(position, view);
-                int value = 0;
-                if (position == 0) {
-                    value = 0;
-                } else if (position == 1) {
-                    value = 1;
-                } else if (position == 2) {
-                    value = 2;
-                }
-                BaseApplication.app.dm.ina_status = value;
+                BaseApplication.app.dm.outParams.status = (position - 1) + "";
             }
 
             @Override
@@ -178,8 +194,8 @@ public class RukuRecordRightView {
     }
 
     private void initDelUI() {
-        boolean del0 = TextUtils.isEmpty(input0.getText());
-        input_del_0.setVisibility(del0 ? View.INVISIBLE : View.VISIBLE);
+        input1_del.setVisibility(TextUtils.isEmpty(input1.getText()) ? View.INVISIBLE : View.VISIBLE);
+        input2_del.setVisibility(TextUtils.isEmpty(input2.getText()) ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void showDatePicker(final Button btn) {
