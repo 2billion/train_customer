@@ -110,6 +110,29 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //     2.10 一类入库单列表
+    //     请求地址： /trans/listInA
+    //    transNo	String	否		入库单号
+    //    timeStart	String	否		创建开始时间
+    //    timeEnd	String	否		创建结束时间
+    //    status	int	否		状态：1已启动2已完成
+    //    page	int	是		页码
+    //    pageSize	int	是		每页记录数
+    public void listInA(Callback callBack, String page, String pageSize, String transNo, String timeStart, String timeEnd, String status) {
+        String url = HOST + "/trans/listInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        params.add("timeStart", timeStart);
+        params.add("timeEnd", timeEnd);
+        params.add("status", status);
+        params.add("page", page);
+        params.add("pageSize", pageSize);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.token).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // 以下为客户端
@@ -330,7 +353,7 @@ public class Net {
         params.add("orderStatus", bean.orderStatus);   //String	否		订单状态：-1全部0未完成1完成
         params.add("partName", bean.partName);   //String	否		配件名称
 
-        //        params.add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
+        //        params.ico_add("orderCompTimeStart","2018-08-14 00:00:00");   //String	否		配件名称
         //        2018-08-14%2000%3A00%3A00
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();

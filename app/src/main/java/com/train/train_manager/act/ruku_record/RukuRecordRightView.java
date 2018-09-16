@@ -1,4 +1,4 @@
-package com.train.train_manager.act.order;
+package com.train.train_manager.act.ruku_record;
 
 import android.app.DatePickerDialog;
 import android.text.Editable;
@@ -29,29 +29,21 @@ import java.util.Locale;
  * partNo":"338 -2
  * "buPartNo":"978" -3
  */
-public class OrderRightView {
+public class RukuRecordRightView {
     View view;
     TagFlowLayout id_flowlayout;
-    OrderFragment fragment;
+    RukuRecordActivity activity;
     TagAdapter tagAdapter;
     View right_search_view;
 
     EditText input0;
-    EditText input1;
-    EditText input2;
-    EditText input3;
     View input_del_0;
-    View input_del_1;
-    View input_del_2;
-    View input_del_3;
 
     Button data_picker_1;
     Button data_picker_2;
-    Button data_picker_3;
-    Button data_picker_4;
 
-    public OrderRightView(OrderFragment fragment, View view) {
-        this.fragment = fragment;
+    public RukuRecordRightView(RukuRecordActivity activity, View view) {
+        this.activity = activity;
         this.view = view;
 
         initRightView();//    右侧数据
@@ -63,40 +55,31 @@ public class OrderRightView {
         //        搜索
         view.findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                BaseApplication.app.dm.orderParamsBean.orderNo = input0.getText().toString();
-                BaseApplication.app.dm.orderParamsBean.partName = input1.getText().toString();
-                BaseApplication.app.dm.orderParamsBean.bstPartNo = input2.getText().toString();
-                BaseApplication.app.dm.orderParamsBean.buPartNo = input3.getText().toString();
+                BaseApplication.app.dm.ina_transNo = input0.getText().toString();
 
-                BaseApplication.app.dm.orderParamsBean.orderTimeStart = getDateTime(data_picker_1);
-                BaseApplication.app.dm.orderParamsBean.orderTimeEnd = getDateTime(data_picker_2);
-                BaseApplication.app.dm.orderParamsBean.orderCompTimeStart = getDateTime(data_picker_3);
-                BaseApplication.app.dm.orderParamsBean.orderCompTimeEnd = getDateTime(data_picker_4);
+                BaseApplication.app.dm.ina_timeStart = getDateTime(data_picker_1);
+                BaseApplication.app.dm.ina_timeStart = getDateTime(data_picker_2);
 
                 switchVisible();
-                fragment.refresh();
-                fragment.hideKeyBoard(v);
-                fragment.searchInput.setText(input2.getText().toString() + "");
+                activity.refresh();
+                activity.hideKeyBoard(v);
+                activity.searchInput.setText(input0.getText().toString() + "");
             }
         });
         //        重置
         view.findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 input0.setText("");
-                input1.setText("");
-                input2.setText("");
-                input3.setText("");
                 initDelUI();
                 tagAdapter.setSelectedList();
                 data_picker_1.setText("");
                 data_picker_2.setText("");
-                data_picker_3.setText("");
-                data_picker_4.setText("");
                 BaseApplication.app.dm.orderParamsBean.orderStatus = "";
             }
         });
 
         input0 = this.view.findViewById(R.id.et_order_no);
+        input0.setText(BaseApplication.app.dm.ina_transNo);
         input0.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -110,45 +93,6 @@ public class OrderRightView {
             }
         });
 
-        input1 = this.view.findViewById(R.id.et_name);
-        input1.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input_del_1.setVisibility(TextUtils.isEmpty(input1.getText()) ? View.INVISIBLE : View.VISIBLE);
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        input2 = this.view.findViewById(R.id.et_bst_wz_code);
-        input2.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input_del_2.setVisibility(TextUtils.isEmpty(input2.getText()) ? View.INVISIBLE : View.VISIBLE);
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        input3 = this.view.findViewById(R.id.et_lj_wz_code);
-        input3.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                input_del_3.setVisibility(TextUtils.isEmpty(input3.getText()) ? View.INVISIBLE : View.VISIBLE);
-            }
-
-            public void afterTextChanged(Editable s) {
-            }
-        });
         input_del_0 = this.view.findViewById(R.id.input_del_order_no);
         input_del_0.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -156,29 +100,10 @@ public class OrderRightView {
             }
         });
 
-        input_del_1 = this.view.findViewById(R.id.input_del_1);
-        input_del_1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                input1.setText("");
-            }
-        });
-        input_del_2 = this.view.findViewById(R.id.input_del_2);
-        input_del_2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                input2.setText("");
-            }
-        });
-        input_del_3 = this.view.findViewById(R.id.input_del_3);
-        input_del_3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                input3.setText("");
-            }
-        });
-
         view.findViewById(R.id.hide).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 switchVisible();
-                fragment.searchInput.setText(input2.getText().toString() + "");
+                activity.searchInput.setText(input0.getText().toString() + "");
             }
         });
 
@@ -189,12 +114,8 @@ public class OrderRightView {
         };
         data_picker_1 = this.view.findViewById(R.id.data_picker_1);
         data_picker_2 = this.view.findViewById(R.id.data_picker_2);
-        data_picker_3 = this.view.findViewById(R.id.data_picker_3);
-        data_picker_4 = this.view.findViewById(R.id.data_picker_4);
         data_picker_1.setOnClickListener(listener);
         data_picker_2.setOnClickListener(listener);
-        data_picker_3.setOnClickListener(listener);
-        data_picker_4.setOnClickListener(listener);
 
         initTagAdapter();
     }
@@ -206,24 +127,20 @@ public class OrderRightView {
         } else {
             this.right_search_view.setVisibility(View.INVISIBLE);
         }
-        input0.setText(BaseApplication.app.dm.orderParamsBean.orderNo);
-        input1.setText(BaseApplication.app.dm.orderParamsBean.partName);
-        input2.setText(BaseApplication.app.dm.orderParamsBean.bstPartNo);
-        input3.setText(BaseApplication.app.dm.orderParamsBean.buPartNo);
-
+        input0.setText(BaseApplication.app.dm.ina_transNo);
     }
 
     private void initTagAdapter() {
         ArrayList<String> list = new ArrayList<>();
         list.add("全部");
-        list.add("未完成");
+        list.add("已启动");
         list.add("已完成");
         tagAdapter = new TagAdapter(list) {
             public View getView(FlowLayout parent, int position, Object o) {
-                TextView tag = (TextView) View.inflate(fragment.getContext(), R.layout.common_right_search_item, null);
+                TextView tag = (TextView) View.inflate(activity, R.layout.common_right_search_item, null);
                 String txt = "全部";
                 if (position == 1) {
-                    txt = "未完成";
+                    txt = "已启动";
                 } else if (position == 2) {
                     txt = "已完成";
                 }
@@ -234,21 +151,21 @@ public class OrderRightView {
             @Override
             public void onSelected(int position, View view) {
                 super.onSelected(position, view);
-                String value = "-1";
+                int value = 0;
                 if (position == 0) {
-                    value = "-1";
+                    value = 0;
                 } else if (position == 1) {
-                    value = "0";
+                    value = 1;
                 } else if (position == 2) {
-                    value = "1";
+                    value = 2;
                 }
-                BaseApplication.app.dm.orderParamsBean.orderStatus = value;
+                BaseApplication.app.dm.ina_status = value;
             }
 
             @Override
             public void unSelected(int position, View view) {
                 super.unSelected(position, view);
-                BaseApplication.app.dm.orderParamsBean.orderStatus = "-1";
+                BaseApplication.app.dm.ina_status= 0;
             }
         };
         id_flowlayout.setAdapter(tagAdapter);
@@ -258,13 +175,7 @@ public class OrderRightView {
 
     private void initDelUI() {
         boolean del0 = TextUtils.isEmpty(input0.getText());
-        boolean del1 = TextUtils.isEmpty(input1.getText());
-        boolean del2 = TextUtils.isEmpty(input2.getText());
-        boolean del3 = TextUtils.isEmpty(input3.getText());
         input_del_0.setVisibility(del0 ? View.INVISIBLE : View.VISIBLE);
-        input_del_1.setVisibility(del1 ? View.INVISIBLE : View.VISIBLE);
-        input_del_2.setVisibility(del2 ? View.INVISIBLE : View.VISIBLE);
-        input_del_3.setVisibility(del3 ? View.INVISIBLE : View.VISIBLE);
     }
 
     private void showDatePicker(final Button btn) {
@@ -283,7 +194,7 @@ public class OrderRightView {
             e.printStackTrace();
         }
 
-        DatePickerDialog dateDialog = new DatePickerDialog(fragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dateDialog = new DatePickerDialog(activity, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker arg0, int year, int monthOfYear,
                                   int dayOfMonth) {
                 // 把获取的日期显示在文本框内，月份从0开始计数，所以要加1

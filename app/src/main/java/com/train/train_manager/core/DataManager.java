@@ -1,6 +1,7 @@
 package com.train.train_manager.core;
 
 import com.train.train_manager.act.bean.CartBean;
+import com.train.train_manager.act.bean.InABean;
 import com.train.train_manager.act.bean.OrderBean;
 import com.train.train_manager.act.bean.OrderParamsBean;
 import com.train.train_manager.act.bean.PartBean;
@@ -15,6 +16,19 @@ public class DataManager {
     //    login
     public String token = null;
     public String userName = null;
+
+    //    个人信息
+    public UserBean userBean;
+
+    // 一类入库单
+    public List<InABean> listInA = new ArrayList<>();
+    public String ina_transNo = "";
+    public String ina_timeStart = "";
+    public String ina_timeEnd = "";
+    public int ina_status = 0;  //状态：1已启动2已完成
+
+
+    //=============================
 
     //    配件列表
     //    part list
@@ -41,9 +55,6 @@ public class DataManager {
     //    搜索用
     //    ts type list
     public List<TsTypeDataBean> tsTypeList;
-
-    //    个人信息
-    public UserBean userBean;
 
 
     public DataManager() {

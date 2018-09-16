@@ -12,7 +12,7 @@
         android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
-        android:label="@string/app_name"
+        android:label="服务端"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -27,18 +27,20 @@
         </activity>
         <activity
             android:name=".act.MainActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".act.LoginActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <!-- 我的 -->
         <activity android:name=".act.mine.MineActivity"></activity>
+        <activity android:name=".act.ruku.RukuActivity"></activity>
+
+        <activity android:name=".act.ruku_record.RukuRecordActivity"></activity>
+
 
         <!-- end -->
         <activity
-            android:name=".act.order.OrderInfoActivity"
+            android:name=".act.old.order.OrderInfoActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".act.mine.MineInfoActivity"

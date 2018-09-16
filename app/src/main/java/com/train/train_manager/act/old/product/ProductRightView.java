@@ -1,4 +1,4 @@
-package com.train.train_manager.act.product;
+package com.train.train_manager.act.old.product;
 
 import android.text.Editable;
 import android.text.TextUtils;

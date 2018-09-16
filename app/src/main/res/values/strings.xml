@@ -14,4 +14,6 @@
 
     <string name="hint_main_kuwei"><font size="14">库位编码</font></string>
     <string name="hint_main_bst"><font size="14">BST物料编码</font></string>
+
+    <string name="hint_ina_top_search"><font size="14">输入入库单号</font></string>
 </resources>
