@@ -85,20 +85,6 @@ public class RukuAddActivity extends BaseActivity {
             }
         });
 
-        // 状态
-        //        InABean bean = BaseApplication.app.dm.info_InABean;
-        //        if (bean.status == 1) {
-        //            btn_right.setVisibility(View.VISIBLE);
-        //            bottom_btn_2.setClickable(true);
-        //            bottom_btn_2.setEnabled(true);
-        //            bottom_btn_2.setText("确认入库");
-        //        } else if (bean.status == 2) {
-        //            btn_right.setVisibility(View.INVISIBLE);
-        //            bottom_btn_2.setClickable(false);
-        //            bottom_btn_2.setEnabled(false);
-        //            bottom_btn_2.setText("已完成");
-        //
-        //        }
 
         bottom_btn_2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -152,6 +138,11 @@ public class RukuAddActivity extends BaseActivity {
     private void updateUI() {
         adapter.notifyDataSetChanged();
         bottom_btn_1.setText("记录数：" + BaseApplication.app.dm.list_InAInfo.size());
+        if (BaseApplication.app.dm.list_InAInfo.size() == 0) {
+            view_none.setVisibility(View.VISIBLE);
+        } else {
+            view_none.setVisibility(View.GONE);
+        }
     }
 
     public void finishLoad() {

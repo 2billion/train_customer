@@ -57,6 +57,11 @@ public class RukuDoAddActivity extends BaseActivity {
     }
 
     public void init() {
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
         input1.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -91,10 +96,26 @@ public class RukuDoAddActivity extends BaseActivity {
 
             public void afterTextChanged(Editable s) {
                 if (s.toString().equals("")) {
-                    BaseApplication.app.dm.inaAddBean.qty = "0";
+                    BaseApplication.app.dm.inaAddBean.qty = 0;
                 } else {
-                    BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(s.toString()) + "";
+                    BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(s.toString());
                 }
+            }
+        });
+
+        input_del_1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                input1.setText("");
+            }
+        });
+        input_del_2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                input2.setText("");
+            }
+        });
+        input_del_3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                input3.setText("");
             }
         });
 
@@ -109,6 +130,13 @@ public class RukuDoAddActivity extends BaseActivity {
                 do_add();
             }
         });
+
+        input1.setText("D0104A");
+        input2.setText("37810095S");
+        input3.setText("2");
+
+
+
     }
 
     private void do_add() {
@@ -119,6 +147,8 @@ public class RukuDoAddActivity extends BaseActivity {
             BaseApplication.showToast("请填写BST物料编码");
             return;
         }
+
+        hideKeyBoard(input1);
 
         BaseApplication.app.net.saveInA(new NetCallback() {
             @Override

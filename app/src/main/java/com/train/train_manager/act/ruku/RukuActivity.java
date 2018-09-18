@@ -6,14 +6,17 @@ import android.view.View;
 
 import com.train.train_manager.R;
 import com.train.train_manager.act.ruku_add.RukuAddActivity;
-import com.train.train_manager.act.ruku_record.RukuRecordActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RukuActivity extends BaseActivity {
+
+    @BindView(R.id.btn_left)
+    View btn_left;
 
 
     @Override
@@ -25,6 +28,11 @@ public class RukuActivity extends BaseActivity {
     }
 
     private void init() {
+        btn_left.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 

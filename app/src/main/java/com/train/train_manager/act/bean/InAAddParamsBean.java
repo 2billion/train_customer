@@ -6,6 +6,6 @@ public class InAAddParamsBean {
     public String transId = "";
     public String bstPartNo = "";
     public String tLocation = "";
-    public String qty = "";
+    public int qty = 1;
 
 }

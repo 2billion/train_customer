@@ -220,6 +220,66 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    2.14出库（手工领料单下架）
+    //    请求地址：/pick/onpick
+    public void pick_onpick(Callback callBack, String pickId, String detail) {
+        String url = HOST + "/pick/onpick";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
+        params.add("detail", detail);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.15 完成下架（到达待出库区）
+    //    请求地址：/pick/onoutstock
+    public void pick_onoutstock(Callback callBack, String pickId) {
+        String url = HOST + "/pick/onoutstock";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.16 完成交接
+    //    请求地址：/pick/confirm
+    public void pick_confirm(Callback callBack, String pickId) {
+        String url = HOST + "/pick/confirm";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.17手工领料单打印
+    //    请求地址：/pick/print
+    public void pick_print(Callback callBack, String pickId) {
+        String url = HOST + "/pick/print";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.18一类入库单打印
+    //    请求地址： /trans/printInA
+    public void printInA(Callback callBack, String pickId, String transNo) {
+        String url = HOST + "/trans/printInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
 
     //    2.19库存查询
     //    请求地址：/stock/list
@@ -238,6 +298,55 @@ public class Net {
         params.add("bstPartNo", bean.bstPartNo);
         params.add("page", page);
         params.add("pageSize", pageSize);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.20 一类入库单确认完成
+    //    请求地址： /trans/compInA
+    public void compInA(Callback callBack, String transNo) {
+        String url = HOST + "/trans/compInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.21删除一类入库单
+    //    请求地址：/trans/deleteInA
+    public void deleteInA(Callback callBack, String transNo) {
+        String url = HOST + "/trans/deleteInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.22 删除一类入库单单个物料
+    //    请求地址：/trans/deleteDetailInA
+    public void deleteDetailInA(Callback callBack, String transNo, String transId) {
+        String url = HOST + "/trans/deleteDetailInA";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("transNo", transNo);
+        params.add("transId", transId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    2.23 手工领料单确认接单
+    //    请求地址：/pick/ontake
+    public void pick_ontake(Callback callBack, String pickId) {
+        String url = HOST + "/pick/ontake";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("pickId", pickId);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);

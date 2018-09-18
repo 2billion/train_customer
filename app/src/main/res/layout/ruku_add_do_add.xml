@@ -59,13 +59,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
             <EditText
                 android:id="@+id/input_1"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/v_input_login"
                 android:hint="@string/hint_main_kuwei"
                 android:paddingLeft="10dp"
@@ -80,10 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical|right"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
-                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ico_del_48_light"
                 android:visibility="invisible" />
         </FrameLayout>
@@ -107,7 +106,6 @@
                 android:id="@+id/input_2"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/v_input_login"
                 android:hint="@string/hint_main_bst"
                 android:paddingLeft="10dp"
@@ -122,9 +120,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical|right"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:padding="8dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ico_del_48_light"
                 android:visibility="invisible" />
@@ -149,7 +146,6 @@
                 android:id="@+id/input_3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/v_input_login"
                 android:inputType="number"
                 android:paddingLeft="10dp"
@@ -164,9 +160,9 @@
                 android:id="@+id/input_del_3"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:padding="5dp"
+                android:layout_gravity="center_vertical|right"
+                android:padding="8dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ico_del_48_light"
                 android:visibility="invisible" />
