@@ -47,4 +47,5 @@ dependencies {
     //如果使用图片加载框架，添加依赖，下面用Glide示例
     //    implementation 'com.github.bumptech.glide:glide:3.6.1'
     implementation 'com.linchaolong.android:imagepicker:1.5'
+//    implementation files('libs/DataCollection.jar')
 }

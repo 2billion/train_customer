@@ -8,11 +8,20 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.honeywell.aidc.AidcManager;
+import com.honeywell.aidc.BarcodeFailureEvent;
+import com.honeywell.aidc.BarcodeReadEvent;
+import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.ScannerNotClaimedException;
+import com.honeywell.aidc.ScannerUnavailableException;
+import com.honeywell.aidc.TriggerStateChangeEvent;
+import com.honeywell.aidc.UnsupportedPropertyException;
 import com.train.train_manager.R;
 import com.train.train_manager.act.chuku.ChuKuActivity;
 import com.train.train_manager.act.kucun.KuCunActivity;
@@ -22,11 +31,15 @@ import com.train.train_manager.act.ruku_record.RukuRecordActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeListener,
+        BarcodeReader.TriggerListener{
 
     @BindView(R.id.input_kuwei)
     EditText kuwei;
@@ -53,7 +66,54 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         //初始化
         init();
+
+        AidcManager.create(this, new AidcManager.CreatedCallback() {
+            @Override
+            public void onCreated(AidcManager aidcManager) {
+                manager = aidcManager;
+                barcodeReader = manager.createBarcodeReader();
+
+                // set the trigger mode to client control
+                try {
+                    barcodeReader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+                            BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
+                } catch (UnsupportedPropertyException e) {
+                    BaseApplication.showToast("Failed to apply properties");
+                }
+
+                barcodeReader.addBarcodeListener(MainActivity.this);
+                barcodeReader.addTriggerListener(MainActivity.this);
+                Log.e("app","init OK");
+
+
+//                Map<String, Object> properties = new HashMap<String, Object>();
+//                // Set Symbologies On/Off
+//                properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+//                properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+//                properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+//                properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+//                properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+//                properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+//                properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+//                properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+//                properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+//                properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+//                properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+//                // Set Max Code 39 barcode length
+//                properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+//                // Turn on center decoding
+//                properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+//                // Enable bad read response
+//                properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
+//                // Apply the settings
+//                barcodeReader.setProperties(properties);
+            }
+        });
+
+
     }
+    private static BarcodeReader barcodeReader;
+    private AidcManager manager;
 
     private void init() {
 
@@ -140,6 +200,86 @@ public class MainActivity extends BaseActivity {
         } else {
             finish();
             System.exit(0);
+        }
+    }
+
+    @Override
+    public void onBarcodeEvent(final BarcodeReadEvent event) {
+        Log.e("app","============================================onBarcodeEvent");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // update UI to reflect the data
+                Log.e("app","============================================");
+                Log.e("app","Barcode data: " + event.getBarcodeData());
+                Log.e("app","Character Set: " + event.getCharset());
+                Log.e("app","Code ID: " + event.getCodeId());
+                Log.e("app","AIM ID: " + event.getAimId());
+                Log.e("app","Timestamp: " + event.getTimestamp());
+            }
+        });
+    }
+
+    @Override
+    public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
+        Log.e("app","============================================onFailureEvent");
+        runOnUiThread(new Runnable() {
+            public void run() {
+                Log.e("app","=========== no data" );
+            }
+        });
+    }
+
+    @Override
+    public void onTriggerEvent(TriggerStateChangeEvent event) {
+        Log.e("app","============================================onTriggerEvent");
+        try {
+            // only handle trigger presses
+            // turn on/off aimer, illumination and decoding
+            barcodeReader.aim(event.getState());
+            barcodeReader.light(event.getState());
+            barcodeReader.decode(event.getState());
+
+        } catch (ScannerNotClaimedException e) {
+            e.printStackTrace();
+            BaseApplication.showToast("Scanner is not claimed");
+        } catch (ScannerUnavailableException e) {
+            e.printStackTrace();
+            BaseApplication.showToast("Scanner unavailable");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (barcodeReader != null) {
+            try {
+                barcodeReader.claim();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+                BaseApplication.showToast("Scanner unavailable");
+            }
+        }
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (barcodeReader != null) {
+            // release the scanner claim so we don't get any scanner
+            // notifications while paused.
+            barcodeReader.release();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (barcodeReader != null) {
+            // unregister barcode event listener
+            barcodeReader.removeBarcodeListener(this);
+
+            // unregister trigger state change listener
+            barcodeReader.removeTriggerListener(this);
         }
     }
 }
