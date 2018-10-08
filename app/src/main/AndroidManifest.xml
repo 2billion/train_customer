@@ -44,6 +44,7 @@
         <activity android:name=".act.chuku.ChuKuActivity"></activity>
         <activity android:name=".act.chuku_info.ChukuInfoActivity"></activity>
         <activity android:name=".act.kucun.KuCunActivity"></activity>
+        <activity android:name=".act.ruku.RukuOKActivity"></activity>
 
 
         <!-- end -->

@@ -1,5 +1,7 @@
 package com.train.train_manager.act.ruku_add;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.train.train_manager.R;
+import com.train.train_manager.act.bean.CompInABean;
 import com.train.train_manager.act.bean.InAInfoListBean;
+import com.train.train_manager.act.ruku.RukuOKActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.core.NetCallback;
@@ -95,14 +99,60 @@ public class RukuAddActivity extends BaseActivity {
     }
 
     private void ruku() {
-        BaseApplication.showToast("入库");
+        if (BaseApplication.app.dm.list_InAInfo.size() > 0) {
+            new AlertDialog.Builder(this).setMessage("确定入库？")
+                    .setNeutralButton("取消", null)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            do_ruku();
+                        }
+                    }).show();
+        } else {
+            BaseApplication.showToast("还没有入库配件");
+        }
+    }
+
+    private void do_ruku() {
+        String transNo = BaseApplication.app.dm.inaAddBean.transNo;
+        if (transNo == null || transNo == "") {
+            return;
+        }
+
+        BaseApplication.app.net.compInA(new NetCallback() {
+            @Override
+            public void failure(Call call, IOException e) {
+                finishLoad();
+            }
+
+            @Override
+            public void response(Call call, String responseStr) throws IOException {
+                Type cvbType = new TypeToken<CompInABean>() {
+                }.getType();
+                CompInABean bean = new Gson().fromJson(responseStr, cvbType);
+                if (bean.isOK()) {
+                    do_ruku_back(bean);
+                } else {
+                    BaseApplication.app.showToast("请求失败" + bean.msg);
+                }
+                finishLoad();
+            }
+        }, transNo);
+    }
+
+    private void do_ruku_back(CompInABean bean) {
+        if (BaseApplication.app.dm.inaAddBean.transNo.equals(bean.data.transNo)) {
+            BaseApplication.showToast("添加成功");
+            BaseApplication.app.dm.inaAddBean.clear();
+            startActivity(new Intent(RukuAddActivity.this, RukuOKActivity.class));
+        }
     }
 
     public int page = 1;
     public int pageSize = 10;
 
     private void getDate() {
-//        String transNo = BaseApplication.app.dm.info_InABean.transNo;
+        //        String transNo = BaseApplication.app.dm.info_InABean.transNo;
         String transNo = BaseApplication.app.dm.inaAddBean.transNo;
         if (transNo == null || transNo == "") {
             return;

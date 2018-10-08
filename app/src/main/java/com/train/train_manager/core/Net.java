@@ -140,6 +140,7 @@ public class Net {
             e.printStackTrace();
         }
         params.add("detail", jsonArray.toString());
+
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
@@ -306,6 +307,7 @@ public class Net {
 
     //    2.20 一类入库单确认完成
     //    请求地址： /trans/compInA
+//    {"data":{"transNo":"20181008224232847"},"code":200,"msg":"成功"}
     public void compInA(Callback callBack, String transNo) {
         String url = HOST + "/trans/compInA";
         FormBody.Builder params = new FormBody.Builder();
