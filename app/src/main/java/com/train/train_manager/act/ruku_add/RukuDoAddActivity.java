@@ -71,7 +71,7 @@ public class RukuDoAddActivity extends BaseActivity {
             }
 
             public void afterTextChanged(Editable s) {
-                BaseApplication.app.dm.inaAddBean.transId = s.toString();
+                BaseApplication.app.dm.inaAddBean.tLocation = s.toString();
             }
         });
         input2.addTextChangedListener(new TextWatcher() {
@@ -135,6 +135,9 @@ public class RukuDoAddActivity extends BaseActivity {
         input2.setText("37810095S");
         input3.setText("2");
 
+        BaseApplication.app.dm.inaAddBean.tLocation = input1.getText().toString();
+        BaseApplication.app.dm.inaAddBean.bstPartNo = input2.getText().toString();
+        BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(input3.getText().toString());
 
 
     }
@@ -162,11 +165,9 @@ public class RukuDoAddActivity extends BaseActivity {
                 InAAddBackListBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.showToast("添加成功");
-                    //                    runOnUiThread(new Runnable() {
-                    //                        public void run() {
-                    //                            updateUI();
-                    //                        }
-                    //                    });
+                    BaseApplication.app.dm.inaAddBean.transNo = bean.data.transNo;
+                    BaseApplication.app.dm.inaAddBean.transId = bean.data.transId;
+
                 } else {
                     BaseApplication.app.showToast(bean.msg);
                 }

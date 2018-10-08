@@ -9,7 +9,6 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.InAInfoListBean;
 import com.train.train_manager.base.BaseActivity;
@@ -55,12 +54,13 @@ public class RukuAddActivity extends BaseActivity {
     public void init() {
         refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setEnableAutoLoadMore(false);
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refresh();
-            }
-        });
+        //        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        //            public void onRefresh(RefreshLayout refreshlayout) {
+        //                refresh();
+        //            }
+        //        });
         refreshLayout.setEnableLoadMore(false);
+        refreshLayout.setEnableRefresh(false);
         //        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
         //            @Override
         //            public void onLoadMore(RefreshLayout refreshlayout) {
@@ -102,7 +102,11 @@ public class RukuAddActivity extends BaseActivity {
     public int pageSize = 10;
 
     private void getDate() {
-        String transNo = BaseApplication.app.dm.info_InABean.transNo;
+//        String transNo = BaseApplication.app.dm.info_InABean.transNo;
+        String transNo = BaseApplication.app.dm.inaAddBean.transNo;
+        if (transNo == null || transNo == "") {
+            return;
+        }
 
         BaseApplication.app.net.getDetailByTransNo(new NetCallback() {
             @Override
@@ -167,5 +171,12 @@ public class RukuAddActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         BaseApplication.app.dm.info_InABean = null;
+    }
+
+    @Override
+    protected void onResume() {
+        log("onResume-----------------");
+        super.onResume();
+        refresh();
     }
 }

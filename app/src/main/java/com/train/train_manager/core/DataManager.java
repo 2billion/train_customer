@@ -37,7 +37,7 @@ public class DataManager {
     public int ina_status = 0;  //状态：1已启动2已完成
 
     // 一类入库单 详情
-    public InABean info_InABean; // 临时详情参数
+    public InABean info_InABean=new InABean(); // 临时详情参数
     public List<InAInfoBean> list_InAInfo = new ArrayList<>(); // 临时入库单详情
 
     // 添加参数

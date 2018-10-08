@@ -87,6 +87,17 @@ public class RukuRecordAdapter extends BaseAdapter {
             }
         });
 
+        holder.item.setOnLongClickListener(new View.OnLongClickListener() {
+            public boolean onLongClick(View v) {
+                InABean bean = (InABean) v.getTag();
+                BaseApplication.app.dm.info_InABean = bean;
+//                activity.startActivity(new Intent(activity, RukuInfoActivity.class));
+                BaseApplication.showToast("shanchu "+BaseApplication.app.dm.info_InABean.transNo);
+                return false;
+            }
+        });
+
+
 
         //        holder.info3.setText("适用车型：" + bean.tsType + "(" + bean.contractNo + ")");
 

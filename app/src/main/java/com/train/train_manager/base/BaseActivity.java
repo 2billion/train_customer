@@ -3,16 +3,17 @@ package com.train.train_manager.base;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
-public abstract class BaseActivity extends Activity{
+public abstract class BaseActivity extends Activity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ButterKnife.bind(this);
+        //        ButterKnife.bind(this);
     }
 
 
@@ -29,6 +30,10 @@ public abstract class BaseActivity extends Activity{
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public void log(String str) {
+        Log.e("app", "" + str);
     }
 
 
