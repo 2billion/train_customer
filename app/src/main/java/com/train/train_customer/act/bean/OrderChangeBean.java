@@ -9,7 +9,7 @@ public class OrderChangeBean {
     public String changeUser;   //String	是		变更用户ID
     public String changeReason; //String	是		变更原因
     public String oldTotalQty;  //String	是		变更前总数量
-    public Double newTotalQty;  //Double	是		变更后总数量
+    public int newTotalQty;  //Double	是		变更后总数量
     public String oldLastQty;   //String	是		变更前剩余数量
     public Double newLastQty;   //Double	是		变更后剩余数量
     public Double status;   //Double	是		状态 0待审核1审核通过2审核不通过

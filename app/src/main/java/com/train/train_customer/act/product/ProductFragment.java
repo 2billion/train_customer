@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,6 +128,7 @@ public class ProductFragment extends BaseFragment {
         //    获取数据放最后
         getDate();
 
+        Log.e("app", "----------------- product onCreateView ");
 
         return view;
     }
@@ -220,13 +222,14 @@ public class ProductFragment extends BaseFragment {
     public void initAfterAddCart() {
         for (PartBean bean : BaseApplication.app.dm.productList) {
             bean.isChecked = false;
-            bean.count = 0;
+            bean.count = 1;
         }
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 adapter.notifyDataSetChanged();
             }
         });
+        BaseApplication.app.reload_list_cart = true;
     }
 
     private void create_order() {
@@ -267,6 +270,17 @@ public class ProductFragment extends BaseFragment {
                         }, jsonArray);
                     }
                 }).show();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("app", "----------------- product onResume ");
+    }
+
+    public void reload_list() {
 
     }
+
 }

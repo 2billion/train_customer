@@ -72,6 +72,7 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
      * 初始化 ViewPager
      */
     private void initViewPager() {
+        viewPager.setOffscreenPageLimit(3);
         mAdapter = new TabPagerAdapter(mFragmentManager, mFragmentList);
         viewPager.setAdapter(mAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -88,9 +89,11 @@ public class CustomBottomTabWidget extends LinearLayout implements View.OnClickL
                         selectTab(MenuTab.HOME);
                         break;
                     case 1:
+                        mFragmentList.get(1).reload_list();
                         selectTab(MenuTab.NEARBY);
                         break;
                     case 2:
+                        mFragmentList.get(2).reload_list();
                         selectTab(MenuTab.DISCOVER);
                         break;
                     case 3:

@@ -124,14 +124,14 @@ public class MineFragment extends BaseFragment {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 loginName.setText(BaseApplication.app.dm.userBean.userName);
-                nickname.setText(BaseApplication.app.dm.userBean.customerName);
+                nickname.setText(BaseApplication.app.dm.userBean.userId+"");
                 loadAvatar();
             }
         });
     }
 
     private void loadAvatar() {
-        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
+        String url = Net.HOST + BaseApplication.app.dm.userBean.portrait;
         avatar.setPadding(0, 0, 0, 0);
         Picasso.get()
                 .load(url)
@@ -144,9 +144,18 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.customerImg == null) {
+        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.portrait == null) {
             return;
         }
         loadAvatar();
+    }
+
+    @Override
+    public void reload_list() {
+        if (BaseApplication.app.reload_mine) {
+            BaseApplication.app.reload_mine = false;
+            initUI();
+        }
+
     }
 }

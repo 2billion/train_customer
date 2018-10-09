@@ -66,23 +66,23 @@ public class MineInfoUpdateActivity extends BaseActivity {
 
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
-            if (bean.customerName != null) {
-                customer_name.setText(bean.customerName);
+            if (bean.userName != null) {
+                customer_name.setText(bean.userName);
                 customer_name.setSelection(customer_name.getText().toString().length());
             }
-            if (bean.customerSex > -1) {
-                boy.setSelected(bean.customerSex == 0);
-                girl.setSelected(bean.customerSex != 0);
-            }
-            if (bean.customerTel != null) {
-                customer_tel.setText(bean.customerTel);
-            }
-            if (bean.customerMail != null) {
-                customer_mail.setText(bean.customerMail);
-            }
-            if (bean.customerDes != null) {
-                customer_addr.setText(bean.customerAddr);
-            }
+//            if (bean.customerSex > -1) {
+//                boy.setSelected(bean.customerSex == 0);
+//                girl.setSelected(bean.customerSex != 0);
+//            }
+//            if (bean.customerTel != null) {
+//                customer_tel.setText(bean.customerTel);
+//            }
+//            if (bean.customerMail != null) {
+//                customer_mail.setText(bean.customerMail);
+//            }
+//            if (bean.customerDes != null) {
+//                customer_addr.setText(bean.customerAddr);
+//            }
         }
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -108,6 +108,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 BaseBean bean = new BaseBean().onBack(responseStr);
                 if (bean.isOK()) {
                     BaseApplication.app.showToast("修改成功");
+                    BaseApplication.app.reload_mine = true;
                     finish();
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);

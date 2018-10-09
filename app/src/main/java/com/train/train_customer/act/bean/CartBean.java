@@ -30,7 +30,7 @@ public class CartBean {
             json.put("buPartNo", buPartNo);
             json.put("contractNo", contractNo);
             json.put("tsType", tsType);
-            json.put("qty", (int)qty);
+            json.put("qty", (int)qty+"");
         } catch (JSONException e) {
             e.printStackTrace();
         }

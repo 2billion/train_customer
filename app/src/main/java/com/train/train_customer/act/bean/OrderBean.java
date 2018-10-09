@@ -18,7 +18,7 @@ public class OrderBean {
     public double pickQty; //	Double	否		当前可领数量
     public String orderTime; //	String	否		订单时间
 
-    public int count; // 申请变更
+    public int count = 1; // 申请变更
 
 
     //    public JSONObject api_json() {

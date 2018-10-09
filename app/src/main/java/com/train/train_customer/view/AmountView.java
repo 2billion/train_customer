@@ -28,7 +28,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
 
     private OnAmountChangeListener mListener;
 
-    private EditText etAmount;
+    public EditText etAmount;
     private Button btnDecrease;
     private Button btnIncrease;
 

@@ -88,6 +88,7 @@ public class OrderAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 BaseApplication.app.dm.orderInfoBean = (OrderBean) v.getTag();
+                BaseApplication.app.dm.orderInfoBean.count = (int) BaseApplication.app.dm.orderInfoBean.oTotalQty;
                 fragment.gotoOrderInfo();
             }
         });

@@ -98,6 +98,7 @@ public class OrderInfoActivity extends BaseActivity {
                 do_submit();
             }
         });
+        amountView.etAmount.setText("" + (int) bean.oTotalQty);
         amountView.setGoods_storage((int) bean.lastQty);
         amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
@@ -135,7 +136,7 @@ public class OrderInfoActivity extends BaseActivity {
                     BaseApplication.app.showToast(bean.msg);
                     finish();
                 } else {
-                    BaseApplication.app.showToast("请求失败" + bean.msg);
+                    BaseApplication.app.showToast(bean.msg);
                 }
             }
         }, detailId, changeReason, changeNum);
@@ -171,8 +172,16 @@ public class OrderInfoActivity extends BaseActivity {
                         status = "审核不通过";
                     }
                     TextView textView = (TextView) View.inflate(OrderInfoActivity.this, R.layout.order_change_list_item, null);
-                    textView.setText(b.changeTime + "\n" + b.partName + " 数量变更：" + b.newTotalQty + ", 原因：" + b.changeReason + ", 状态：" + status);
+                    String str = "变更时间：" + b.changeTime + "\n"
+                            + "变更前总数：" + b.oldTotalQty + "\n"
+                            + "变更后数量：" + b.newTotalQty + "\n"
+                            + "状态：" + status + "\n"
+                            + "审核意见：" + (b.authOpinion == null ? "" : b.authOpinion) + "\n"
+                            + "变更原因：" + b.changeReason + "\n"
+                            + "";
+                    textView.setText(str);
                     list.addView(textView);
+                    list.addView(View.inflate(OrderInfoActivity.this, R.layout.v_lint_in_list, null));
                 }
             }
         });

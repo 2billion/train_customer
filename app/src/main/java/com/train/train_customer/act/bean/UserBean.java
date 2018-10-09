@@ -2,18 +2,50 @@ package com.train.train_customer.act.bean;
 
 public class UserBean {
 
-    public String customerId; //    String	是		客户ID
-    public String orgId; //    String	是		客户单位
-    public String userName; //    String	是		客户用户名
-    public String customerName; //    String	是		客户姓名
-    public int customerSex; //    int	是		性别
-    public String customerTel; //    String	否		电话
-    public String customerMail; //    String	否		邮箱
-    public String customerAddr; //    String	否		地址
-    public String customerDes; //    String	否		描述
-    public String customerImg; //    String	否		头像
+    // old
+    //    public String customerId; //    String	是		客户ID
+    //    public String orgId; //    String	是		客户单位
+    //    public String userName; //    String	是		客户用户名
+    //    public String customerName; //    String	是		客户姓名
+    //    public int customerSex; //    int	是		性别
+    //    public String customerTel; //    String	否		电话
+    //    public String customerMail; //    String	否		邮箱
+    //    public String customerAddr; //    String	否		地址
+    //    public String customerDes; //    String	否		描述
+    //    public String customerImg; //    String	否		头像
 
+
+//    public String token;
+    public String userName;
+//    public String theme;
+//    public int platform;
+    public String userId;
+//    public long expiry;
+//    public String lastTokenTime;
+    public String portrait;
+//    public int appType;
+//    public String permissionModule;
+//    public String permissionInf;
+//    public String permissionRes;
 }
+
+
+//{"count":null
+//        "token":"cde9333db9bd4be2a6d447e9bf5ca17b"
+//        "userName":"广州动车段1测试-1"
+//        "theme":""
+//        "platform":1
+//        "userId":"104"
+//        "expiry":1539107268414
+//        "lastTokenTime":"2018-10-09 23:47:48"
+//        "portrait":"/upload/20181009/pic20181009234202.jpg"
+//        "appType":1
+//        "permissionModule":[]
+//        "permissionInf":"
+//        ","permissionRes":{}},"msg":"获得个人信息成功！","code":200}
+//
+//
+
 
 //{
 //        "data": {

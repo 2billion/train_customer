@@ -1,6 +1,5 @@
 package com.train.train_customer.act.product;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -77,7 +76,7 @@ public class ProductAdapter extends BaseAdapter {
         holder.checkBox.setTag(bean);
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                PartBean bean= (PartBean) buttonView.getTag();
+                PartBean bean = (PartBean) buttonView.getTag();
                 bean.isChecked = isChecked;
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     public void run() {
@@ -93,6 +92,7 @@ public class ProductAdapter extends BaseAdapter {
             holder.amountView.setVisibility(View.GONE);
         }
         holder.amountView.setTag(bean);
+        holder.amountView.etAmount.setText("" + bean.count);
         holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
                 ((PartBean) view.getTag()).count = amount;

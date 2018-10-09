@@ -127,6 +127,8 @@ public class CartFragment extends BaseFragment {
         //    获取数据放最后
         getDate();
 
+        Log.e("app", "----------------- cart onCreateView ");
+
         return view;
     }
 
@@ -301,6 +303,7 @@ public class CartFragment extends BaseFragment {
                                     refresh();
                                 }
                                 BaseApplication.app.showToast(bean.msg);
+                                BaseApplication.app.reload_list_order = true;
                             }
                         }, jsonArray);
                     }
@@ -309,4 +312,19 @@ public class CartFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("app", "----------------- cart onResume ");
+    }
+
+    @Override
+    public void reload_list() {
+        Log.e("app", "----------------- cart reload_list ");
+        if (BaseApplication.app.reload_list_cart) {
+            BaseApplication.app.reload_list_cart = false;
+            Log.e("app", "----------------- cart reload_list start... ");
+            refresh();
+        }
+    }
 }

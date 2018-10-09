@@ -1,10 +1,6 @@
 package com.train.train_customer.core;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.Environment;
 import android.util.Log;
 
 import com.train.train_customer.act.bean.CartBean;
@@ -14,9 +10,6 @@ import com.train.train_customer.base.BaseApplication;
 import org.json.JSONArray;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -174,9 +167,11 @@ public class Net {
     public void updateCartInfo(Callback callBack, CartBean bean) {
         String url = HOST + "/cart/updateCartInfo";
         FormBody.Builder params = new FormBody.Builder();
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put(bean.api_json());
-        params.add("cartJson", jsonArray.toString());
+        params.add("bstPartNo", bean.bstPartNo);
+        params.add("buPartNo", bean.buPartNo);
+        params.add("contractNo", bean.contractNo);
+        params.add("tsType", bean.tsType);
+        params.add("qty", bean.qty + "");
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);
@@ -309,11 +304,12 @@ public class Net {
     public void updateCustomerInfo(Callback callBack, String customerName, String customerSex, String customerTel, String customerMail, String customerAddr) {
         String url = HOST + "/customer/updateCustomerInfo";
         FormBody.Builder params = new FormBody.Builder();
+//        params.add("customerName", customerName);
+//        params.add("customerSex", customerSex);
+//        params.add("customerTel", customerTel);
+//        params.add("customerMail", customerMail);
+//        params.add("customerAddr", customerAddr);
         params.add("customerName", customerName);
-        params.add("customerSex", customerSex);
-        params.add("customerTel", customerTel);
-        params.add("customerMail", customerMail);
-        params.add("customerAddr", customerAddr);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);
@@ -339,8 +335,8 @@ public class Net {
             // 参数分别为， 请求key ，文件名称 ， RequestBody
             requestBody.addFormDataPart("file", file.getName(), body);
 
-        }else{
-            Log.e("app","===================File is null");
+        } else {
+            Log.e("app", "===================File is null");
         }
         //        RequestBody body = RequestBody.create(MediaType.parse(path), file);
         Request request = new Request.Builder().url(url).post(requestBody.build()).addHeader("token", BaseApplication.app.dm.token).build();

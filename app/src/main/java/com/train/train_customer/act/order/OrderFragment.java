@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,6 +105,8 @@ public class OrderFragment extends BaseFragment {
         //    获取数据放最后
         getDate();
 
+        Log.e("app","----------------- order onCreateView ");
+
         return view;
     }
 
@@ -171,5 +174,19 @@ public class OrderFragment extends BaseFragment {
         startActivity(i);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("app","----------------- order onResume ");
+    }
 
+    @Override
+    public void reload_list() {
+        Log.e("app", "----------------- order reload_list ");
+        if (BaseApplication.app.reload_list_order) {
+            BaseApplication.app.reload_list_order = false;
+            refresh();
+            Log.e("app", "----------------- order reload_list start... ");
+        }
+    }
 }

@@ -28,6 +28,10 @@ public class BaseApplication extends Application {
     public static Activity curAct = null;
     public static BaseApplication app = null;
 
+    public boolean reload_list_cart = false;
+    public boolean reload_list_order = false;
+    public boolean reload_mine = false;
+
     public void setAutoLogin(boolean b) {
         Cache.i().setBoolean("autoLogin", b);
     }

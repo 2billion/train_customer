@@ -1,5 +1,6 @@
 package com.train.train_customer.act.cart;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -96,6 +97,7 @@ public class CartAdapter extends BaseAdapter {
         holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
             public void onAmountChange(View view, int amount) {
                 CartBean bean = (CartBean) view.getTag();
+                Log.e("app","amount + " + amount + "bean" + bean.qty);
                 if (bean.qty != amount) {
                     bean.qty = amount;
                     fragment.update_cart(bean);
