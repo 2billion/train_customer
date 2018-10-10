@@ -61,7 +61,7 @@ public class ChukuRightView {
         view.findViewById(R.id.ok).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 BaseApplication.app.dm.outParams.orderNo = input1.getText().toString();
-                BaseApplication.app.dm.outParams.orderNo = input1.getText().toString();
+                BaseApplication.app.dm.outParams.pickNo = input2.getText().toString();
 
                 BaseApplication.app.dm.outParams.genTimeStart= getDateTime(data_picker_1);
                 BaseApplication.app.dm.outParams.genTimeEnd= getDateTime(data_picker_2);
@@ -107,8 +107,8 @@ public class ChukuRightView {
             }
         });
 
-        input2 = this.view.findViewById(R.id.et_order_no);
-        input2.setText(BaseApplication.app.dm.outParams.orderNo);
+        input2 = this.view.findViewById(R.id.et_pick_no);
+        input2.setText(BaseApplication.app.dm.outParams.pickNo);
         input2.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -122,7 +122,7 @@ public class ChukuRightView {
             }
         });
 
-        input2_del = this.view.findViewById(R.id.input_del_order_no);
+        input2_del = this.view.findViewById(R.id.input_del_pick_no);
         input2_del.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 input2.setText("");
@@ -163,7 +163,7 @@ public class ChukuRightView {
     ArrayList<String> list = new ArrayList<>();
 
     private void initTagAdapter() {
-
+//    TODO 状态
         list.add("全部");
         list.add("待下架");
         list.add("下架中");

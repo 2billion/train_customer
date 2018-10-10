@@ -74,11 +74,11 @@ public class ChukuAdapter extends BaseAdapter {
         }
         OutBean bean = BaseApplication.app.dm.outList.get(position);
 
-        holder.title.setText(bean.store + "库-WO:" + bean.wo + "-CSSALE");
+        holder.title.setText(bean.store + "库-WO:" + bean.pickId + "-CSSALE");
         holder.info1.setText("领料单号：" + bean.pickNo);
         holder.info2.setText("日期：" + bean.genTime);
         holder.info3.setText("发料原因：" + bean.reason);
-        holder.info4.setText("联系人：" + bean.analyst);
+        holder.info4.setText("联系人：" + bean.contractNo);
         holder.info5.setText("发送到：" + bean.deliveryTo);
 
         if (bean.status == 0) {

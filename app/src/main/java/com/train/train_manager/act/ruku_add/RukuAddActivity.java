@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.train.train_manager.R;
+import com.train.train_manager.act.bean.BaseBean;
 import com.train.train_manager.act.bean.CompInABean;
 import com.train.train_manager.act.bean.InAInfoListBean;
 import com.train.train_manager.act.ruku.RukuOKActivity;
@@ -238,5 +239,28 @@ public class RukuAddActivity extends BaseActivity {
         } else {
             refresh();
         }
+    }
+
+    //    删除一类入库
+    public void delete_one(final String transNo, final String transId, String name) {
+        new AlertDialog.Builder(this).setMessage("确认删除配件【" + name + "】？")
+                .setNeutralButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        BaseApplication.app.net.deleteDetailInA(new NetCallback() {
+                            public void failure(Call call, IOException e) {
+                            }
+
+                            public void response(Call call, String responseStr) throws IOException {
+                                BaseBean bean = new BaseBean().onBack(responseStr);
+                                if (bean.isOK()) {
+                                    refresh();
+                                }
+                                BaseApplication.app.showToast(bean.msg);
+                            }
+                        }, transNo, transId);
+                    }
+                }).show();
     }
 }

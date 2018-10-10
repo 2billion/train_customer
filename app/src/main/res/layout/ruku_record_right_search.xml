@@ -79,7 +79,7 @@
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/v_input_login"
-                        android:hint="@string/right_view0"
+                        android:hint="@string/hint_out_right_view_1"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="@color/gray666"
@@ -96,6 +96,50 @@
 
                     <ImageView
                         android:id="@+id/input_del_order_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ico_del_48_light"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/et_pick_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/v_input_login"
+                        android:hint="@string/hint_out_right_view_2"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/gray666"
+                        android:textCursorDrawable="@null"
+                        android:textSize="@dimen/btn_label" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right|center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/input_del_pick_no"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginBottom="10dp"

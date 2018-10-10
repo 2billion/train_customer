@@ -87,6 +87,14 @@ public class RukuAddAdapter extends BaseAdapter {
                 activity.startActivity(new Intent(activity, RukuUpdateActivity.class));
             }
         });
+        holder.item.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                InAInfoBean bean = (InAInfoBean) v.getTag();
+                activity.delete_one(bean.transNo, bean.transId + "", bean.des);
+                return false;
+            }
+        });
         return convertView;
     }
 }
