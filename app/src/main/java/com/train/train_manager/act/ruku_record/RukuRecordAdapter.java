@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.InABean;
-import com.train.train_manager.act.ruku_info.RukuInfoActivity;
+import com.train.train_manager.act.ruku_add.RukuAddActivity;
 import com.train.train_manager.base.BaseApplication;
 
 public class RukuRecordAdapter extends BaseAdapter {
@@ -82,8 +82,10 @@ public class RukuRecordAdapter extends BaseAdapter {
         holder.item.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 InABean bean = (InABean) v.getTag();
-                BaseApplication.app.dm.info_InABean = bean;
-                activity.startActivity(new Intent(activity, RukuInfoActivity.class));
+                BaseApplication.app.dm.inaAddBean.transNo = bean.transNo;
+                BaseApplication.app.dm.inaAddBean.status = bean.status;
+                activity.startActivity(new Intent(activity, RukuAddActivity.class));
+
             }
         });
 
@@ -91,40 +93,11 @@ public class RukuRecordAdapter extends BaseAdapter {
             public boolean onLongClick(View v) {
                 InABean bean = (InABean) v.getTag();
                 BaseApplication.app.dm.info_InABean = bean;
-//                activity.startActivity(new Intent(activity, RukuInfoActivity.class));
-                BaseApplication.showToast("shanchu "+BaseApplication.app.dm.info_InABean.transNo);
+                activity.delete_ruku_record(bean.transNo);
                 return false;
             }
         });
 
-
-
-        //        holder.info3.setText("适用车型：" + bean.tsType + "(" + bean.contractNo + ")");
-
-        //        holder.checkBox.setTag(bean);
-        //        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-        //            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        //                PartBean bean= (PartBean) buttonView.getTag();
-        //                bean.isChecked = isChecked;
-        //                activity.runOnUiThread(new Runnable() {
-        //                    public void run() {
-        //                        RukuRecordAdapter.this.notifyDataSetChanged();
-        //                    }
-        //                });
-        //            }
-        //        });
-        //        holder.checkBox.setChecked(bean.isChecked);
-        //        if (bean.isChecked) {
-        //            holder.amountView.setVisibility(View.VISIBLE);
-        //        } else {
-        //            holder.amountView.setVisibility(View.GONE);
-        //        }
-        //        holder.amountView.setTag(bean);
-        //        holder.amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
-        //            public void onAmountChange(View view, int amount) {
-        //                ((PartBean) view.getTag()).count = amount;
-        //            }
-        //        });
 
         return convertView;
     }

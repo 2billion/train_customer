@@ -50,5 +50,12 @@ public class RukuActivity extends BaseActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (BaseApplication.app.goHome == true) {
+            BaseApplication.app.goHome = false;
+            finish();
+        }
+    }
 }

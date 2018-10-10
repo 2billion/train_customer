@@ -27,6 +27,7 @@ public class BaseApplication extends Application {
     private static Toast mToast = null;
     public static Activity curAct = null;
     public static BaseApplication app = null;
+    public boolean goHome = false;
 
     public void setAutoLogin(boolean b) {
         Cache.i().setBoolean("autoLogin", b);
@@ -87,8 +88,8 @@ public class BaseApplication extends Application {
         Cache.init(getApplicationContext());
         initImagePicker();
         // 捕捉异常
-//        AppUncaughtExceptionHandler crashHandler = AppUncaughtExceptionHandler.getInstance();
-//        crashHandler.init(getApplicationContext());
+        //        AppUncaughtExceptionHandler crashHandler = AppUncaughtExceptionHandler.getInstance();
+        //        crashHandler.init(getApplicationContext());
     }
 
     public void initImagePicker() {

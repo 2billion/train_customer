@@ -1,5 +1,7 @@
 package com.train.train_manager.act.ruku_record;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,8 +15,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_manager.R;
+import com.train.train_manager.act.bean.BaseBean;
 import com.train.train_manager.act.bean.InAListBean;
-import com.train.train_manager.act.bean.PartBean;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.core.NetCallback;
@@ -171,5 +173,38 @@ public class RukuRecordActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         BaseApplication.app.dm.ina_transNo = "";
+    }
+
+    //    删除一类入库
+    public void delete_ruku_record(final String transNo) {
+        new AlertDialog.Builder(this).setMessage("确认要删除这条入库单吗？")
+                .setNeutralButton("取消", null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        BaseApplication.app.net.deleteInA(new NetCallback() {
+                            public void failure(Call call, IOException e) {
+                            }
+
+                            public void response(Call call, String responseStr) throws IOException {
+                                BaseBean bean = new BaseBean().onBack(responseStr);
+                                if (bean.isOK()) {
+                                    refresh();
+                                }
+                                BaseApplication.app.showToast(bean.msg);
+                            }
+                        }, transNo);
+                    }
+                }).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (BaseApplication.app.goHome == true) {
+            finish();
+        } else {
+            refresh();
+        }
     }
 }

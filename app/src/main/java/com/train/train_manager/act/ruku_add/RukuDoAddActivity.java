@@ -139,7 +139,6 @@ public class RukuDoAddActivity extends BaseActivity {
         BaseApplication.app.dm.inaAddBean.bstPartNo = input2.getText().toString();
         BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(input3.getText().toString());
 
-
     }
 
     private void do_add() {
@@ -164,7 +163,7 @@ public class RukuDoAddActivity extends BaseActivity {
                 }.getType();
                 InAAddBackListBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
-                    BaseApplication.app.showToast("添加成功");
+                    BaseApplication.app.showToast(bean.msg);
                     BaseApplication.app.dm.inaAddBean.transNo = bean.data.transNo;
                     BaseApplication.app.dm.inaAddBean.transId = bean.data.transId;
 

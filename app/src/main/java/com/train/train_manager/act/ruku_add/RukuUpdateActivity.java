@@ -96,13 +96,9 @@ public class RukuUpdateActivity extends BaseActivity {
             }
         });
 
-        lable1.setText("库位编码： D0104A");
-        lable2.setText("BST物料编码： 37810095S");
-        input3.setText("2");
-
-        BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(input3.getText().toString());
-
-
+        lable1.setText("库位编码：" + BaseApplication.app.dm.inaAddBean.tLocation);
+        lable2.setText("BST物料编码：" + BaseApplication.app.dm.inaAddBean.bstPartNo);
+        input3.setText("" + BaseApplication.app.dm.inaAddBean.qty);
     }
 
     private void do_add() {

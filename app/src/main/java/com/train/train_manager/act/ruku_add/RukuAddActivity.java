@@ -144,6 +144,7 @@ public class RukuAddActivity extends BaseActivity {
         if (BaseApplication.app.dm.inaAddBean.transNo.equals(bean.data.transNo)) {
             BaseApplication.showToast("添加成功");
             BaseApplication.app.dm.inaAddBean.clear();
+            BaseApplication.app.dm.list_InAInfo.clear();
             startActivity(new Intent(RukuAddActivity.this, RukuOKActivity.class));
         }
     }
@@ -152,7 +153,6 @@ public class RukuAddActivity extends BaseActivity {
     public int pageSize = 10;
 
     private void getDate() {
-        //        String transNo = BaseApplication.app.dm.info_InABean.transNo;
         String transNo = BaseApplication.app.dm.inaAddBean.transNo;
         if (transNo == null || transNo == "") {
             updateUI();
@@ -198,6 +198,13 @@ public class RukuAddActivity extends BaseActivity {
         } else {
             view_none.setVisibility(View.GONE);
         }
+        if (BaseApplication.app.dm.inaAddBean.status == 2) {
+            bottom_btn_2.setEnabled(false);
+            bottom_btn_2.setText("已完成");
+        } else {
+            bottom_btn_2.setEnabled(true);
+            bottom_btn_2.setText("确认入库");
+        }
     }
 
     public void finishLoad() {
@@ -221,13 +228,15 @@ public class RukuAddActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BaseApplication.app.dm.info_InABean = null;
     }
 
     @Override
     protected void onResume() {
-        log("onResume-----------------");
         super.onResume();
-        refresh();
+        if (BaseApplication.app.goHome == true) {
+            finish();
+        } else {
+            refresh();
+        }
     }
 }

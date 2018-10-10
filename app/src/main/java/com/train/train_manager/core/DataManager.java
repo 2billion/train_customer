@@ -5,7 +5,6 @@ import com.train.train_manager.act.bean.InAAddParamsBean;
 import com.train.train_manager.act.bean.InABean;
 import com.train.train_manager.act.bean.InAInfoBean;
 import com.train.train_manager.act.bean.KuCunBean;
-import com.train.train_manager.act.bean.KuCunListBean;
 import com.train.train_manager.act.bean.KuCunParams;
 import com.train.train_manager.act.bean.OrderBean;
 import com.train.train_manager.act.bean.OrderParamsBean;
@@ -29,19 +28,18 @@ public class DataManager {
     //    个人信息
     public UserBean userBean;
 
-    // 一类入库单
+    // 一类入库单 入库记录筛选
     public List<InABean> listInA = new ArrayList<>();
     public String ina_transNo = "";
     public String ina_timeStart = "";
     public String ina_timeEnd = "";
     public int ina_status = 0;  //状态：1已启动2已完成
 
-    // 一类入库单 详情
-    public InABean info_InABean=new InABean(); // 临时详情参数
-    public List<InAInfoBean> list_InAInfo = new ArrayList<>(); // 临时入库单详情
-
-    // 添加参数
+    // 一类入库单 列表
     public InAAddParamsBean inaAddBean = new InAAddParamsBean();
+    public List<InAInfoBean> list_InAInfo = new ArrayList<>(); // 临时入库单列表
+    public InABean info_InABean = new InABean(); // 临时详情参数
+
 
     //   出库
     public OutParamsBean outParams = new OutParamsBean();
