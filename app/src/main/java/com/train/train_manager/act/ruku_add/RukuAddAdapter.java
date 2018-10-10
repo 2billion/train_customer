@@ -1,5 +1,6 @@
 package com.train.train_manager.act.ruku_add;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -7,7 +8,6 @@ import android.widget.TextView;
 
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.InAInfoBean;
-import com.train.train_manager.act.ruku_info.RukuInfoActivity;
 import com.train.train_manager.base.BaseApplication;
 
 public class RukuAddAdapter extends BaseAdapter {
@@ -25,6 +25,8 @@ public class RukuAddAdapter extends BaseAdapter {
         public TextView info2;
         public TextView info3;
         public TextView info;
+
+        public View item;
     }
 
     @Override
@@ -57,6 +59,8 @@ public class RukuAddAdapter extends BaseAdapter {
             holder.info2 = convertView.findViewById(R.id.info2);
             holder.info3 = convertView.findViewById(R.id.info3);
             holder.info = convertView.findViewById(R.id.info);
+            holder.item = convertView.findViewById(R.id.item);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -67,7 +71,22 @@ public class RukuAddAdapter extends BaseAdapter {
         holder.info1.setText("BST物料编码：" + bean.bstPartNo);
         holder.info2.setText("入库库位：" + bean.tLocation);
         holder.info3.setText("入库时间：" + bean.operTime);
-        holder.info.setText((int)bean.qty + bean.ume);
+        holder.info.setText((int) bean.qty + bean.ume);
+        holder.item.setTag(bean);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InAInfoBean bean = (InAInfoBean) v.getTag();
+
+                BaseApplication.app.dm.inaAddBean.transNo = bean.transNo;
+                BaseApplication.app.dm.inaAddBean.transId = bean.transId;
+                BaseApplication.app.dm.inaAddBean.bstPartNo = bean.bstPartNo;
+                BaseApplication.app.dm.inaAddBean.tLocation = bean.tLocation;
+                BaseApplication.app.dm.inaAddBean.qty = (int) bean.qty;
+
+                activity.startActivity(new Intent(activity, RukuUpdateActivity.class));
+            }
+        });
         return convertView;
     }
 }

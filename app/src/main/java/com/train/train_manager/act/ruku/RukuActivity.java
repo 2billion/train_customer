@@ -40,6 +40,7 @@ public class RukuActivity extends BaseActivity {
     public void click(View view) {
         switch (view.getId()) {
             case R.id.line1:
+                BaseApplication.app.dm.list_InAInfo.clear();
                 startActivity(new Intent(RukuActivity.this, RukuAddActivity.class));
                 break;
             case R.id.line2:

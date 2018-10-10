@@ -155,6 +155,7 @@ public class RukuAddActivity extends BaseActivity {
         //        String transNo = BaseApplication.app.dm.info_InABean.transNo;
         String transNo = BaseApplication.app.dm.inaAddBean.transNo;
         if (transNo == null || transNo == "") {
+            updateUI();
             return;
         }
 

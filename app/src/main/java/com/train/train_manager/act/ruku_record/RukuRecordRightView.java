@@ -79,6 +79,7 @@ public class RukuRecordRightView {
                 data_picker_1.setText("");
                 data_picker_2.setText("");
                 BaseApplication.app.dm.orderParamsBean.orderStatus = "";
+                BaseApplication.app.dm.ina_status = 0;
             }
         });
 

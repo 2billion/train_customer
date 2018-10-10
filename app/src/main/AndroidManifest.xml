@@ -46,6 +46,8 @@
         <activity android:name=".act.kucun.KuCunActivity"></activity>
         <activity android:name=".act.ruku.RukuOKActivity"></activity>
 
+        <activity android:name=".act.ruku_add.RukuUpdateActivity"></activity>
+
 
         <!-- end -->
         <activity
