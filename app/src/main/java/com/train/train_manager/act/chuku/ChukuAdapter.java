@@ -79,10 +79,10 @@ public class ChukuAdapter extends BaseAdapter {
         holder.info2.setText("日期：" + bean.genTime);
         holder.info3.setText("发料原因：" + bean.reason);
         holder.info4.setText("联系人：" + bean.contractNo);
-        holder.info5.setText("发送到：" + bean.deliveryTo);
+        holder.info5.setText("发送到：" + (bean.deliveryTo == null ? "" : bean.deliveryTo));
 
         if (bean.status == 0) {
-            holder.status.setText("带下架");
+            holder.status.setText("待下架");
             holder.status.setBackgroundResource(R.drawable.v_label_round_blue);
         } else if (bean.status == 1) {
             holder.status.setText("下架中");

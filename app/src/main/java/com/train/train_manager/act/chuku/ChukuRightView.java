@@ -81,7 +81,7 @@ public class ChukuRightView {
                 tagAdapter.setSelectedList();
                 data_picker_1.setText("");
                 data_picker_2.setText("");
-                BaseApplication.app.dm.orderParamsBean.orderStatus = "";
+                BaseApplication.app.dm.outParams.status = "";
             }
         });
 
@@ -185,7 +185,8 @@ public class ChukuRightView {
             @Override
             public void unSelected(int position, View view) {
                 super.unSelected(position, view);
-                BaseApplication.app.dm.ina_status = 0;
+                BaseApplication.app.dm.ina_status = -1;
+                BaseApplication.app.dm.outParams.status = "";
             }
         };
         id_flowlayout.setAdapter(tagAdapter);

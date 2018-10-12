@@ -10,6 +10,14 @@ public class OutParamsBean {
     public String page = ""; //int	是		页码
     public String pageSize = ""; //int	是		每页记录数
 
+    public void clear() {
+        this.orderNo = "";
+        this.pickNo = "";
+        this.genTimeStart = "";
+        this.genTimeEnd = "";
+        this.status = "";
+    }
+
 }
 
 //    transNo	String	是		入库单号
