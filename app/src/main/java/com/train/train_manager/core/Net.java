@@ -223,11 +223,23 @@ public class Net {
 
     //    2.14出库（手工领料单下架）
     //    请求地址：/pick/onpick
-    public void pick_onpick(Callback callBack, String pickId, String detail) {
+    public void pick_onpick(Callback callBack, String pickId, String bstPartNo, String location, String qty) {
         String url = HOST + "/pick/onpick";
         FormBody.Builder params = new FormBody.Builder();
         params.add("pickId", pickId);
-        params.add("detail", detail);
+        JSONObject json = new JSONObject();
+        try {
+            json.put("bstPartNo", bstPartNo);
+            json.put("location", "" + location);
+            json.put("qty", "" + qty);
+        } catch (JSONException e) {
+        }
+        params.add("detail", json.toString());
+        Log.e("app", "pickId-------------" + pickId);
+        Log.e("app", "bstPartNo-------------" + bstPartNo);
+        Log.e("app", "location-------------" + location);
+        Log.e("app", "qty-------------" + qty);
+
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
@@ -307,7 +319,7 @@ public class Net {
 
     //    2.20 一类入库单确认完成
     //    请求地址： /trans/compInA
-//    {"data":{"transNo":"20181008224232847"},"code":200,"msg":"成功"}
+    //    {"data":{"transNo":"20181008224232847"},"code":200,"msg":"成功"}
     public void compInA(Callback callBack, String transNo) {
         String url = HOST + "/trans/compInA";
         FormBody.Builder params = new FormBody.Builder();

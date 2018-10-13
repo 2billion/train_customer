@@ -61,7 +61,12 @@ public class KuCunActivity extends BaseActivity {
         list.setAdapter(adapter);
 
         searchInput = findViewById(R.id.search_input);
-        searchInput.setText(BaseApplication.app.dm.kuCunParams.bstPartNo + "");
+        if (BaseApplication.app.dm.kuCunParams.bstPartNo != null) {
+            searchInput.setText(BaseApplication.app.dm.kuCunParams.bstPartNo + "");
+        } else if (BaseApplication.app.dm.kuCunParams.location != null) {
+            searchInput.setText(BaseApplication.app.dm.kuCunParams.location + "");
+        }
+
         searchInput.addTextChangedListener(new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 

@@ -9,6 +9,7 @@ import com.train.train_manager.act.bean.KuCunParams;
 import com.train.train_manager.act.bean.OrderBean;
 import com.train.train_manager.act.bean.OrderParamsBean;
 import com.train.train_manager.act.bean.OutBean;
+import com.train.train_manager.act.bean.OutDetailBean;
 import com.train.train_manager.act.bean.OutInfoListBean;
 import com.train.train_manager.act.bean.OutParamsBean;
 import com.train.train_manager.act.bean.PartBean;
@@ -47,6 +48,7 @@ public class DataManager {
     //   出库 详情
     public OutBean outBean; // 临时详情参数
     public OutInfoListBean outInfoListBean = new OutInfoListBean(); // 临时入库单详情
+    public OutDetailBean outDetailBean = new OutDetailBean(); // 确认出库
 
     // 库存
     public KuCunParams kuCunParams = new KuCunParams();

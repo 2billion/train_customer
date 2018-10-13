@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -31,15 +32,12 @@ import com.train.train_manager.act.ruku_record.RukuRecordActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeListener,
-        BarcodeReader.TriggerListener{
+        BarcodeReader.TriggerListener {
 
     @BindView(R.id.input_kuwei)
     EditText kuwei;
@@ -58,6 +56,11 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
     View main_btn_ico_4;
     @BindView(R.id.main_btn_ico_5)
     View main_btn_ico_5;
+
+    @BindView(R.id.input_del_1)
+    View input_del_1;
+    @BindView(R.id.input_del_2)
+    View input_del_2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,35 +86,36 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
 
                 barcodeReader.addBarcodeListener(MainActivity.this);
                 barcodeReader.addTriggerListener(MainActivity.this);
-                Log.e("app","init OK");
+                Log.e("app", "init OK");
 
 
-//                Map<String, Object> properties = new HashMap<String, Object>();
-//                // Set Symbologies On/Off
-//                properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
-//                properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
-//                properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
-//                properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
-//                properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
-//                properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
-//                properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
-//                properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
-//                properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
-//                properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
-//                properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
-//                // Set Max Code 39 barcode length
-//                properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
-//                // Turn on center decoding
-//                properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
-//                // Enable bad read response
-//                properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
-//                // Apply the settings
-//                barcodeReader.setProperties(properties);
+                //                Map<String, Object> properties = new HashMap<String, Object>();
+                //                // Set Symbologies On/Off
+                //                properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+                //                properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+                //                properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+                //                properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+                //                properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+                //                properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+                //                properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+                //                properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+                //                properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+                //                properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+                //                properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+                //                // Set Max Code 39 barcode length
+                //                properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+                //                // Turn on center decoding
+                //                properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+                //                // Enable bad read response
+                //                properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
+                //                // Apply the settings
+                //                barcodeReader.setProperties(properties);
             }
         });
 
 
     }
+
     private static BarcodeReader barcodeReader;
     private AidcManager manager;
 
@@ -128,6 +132,7 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                input_del_1.setVisibility(TextUtils.isEmpty(kuwei.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
@@ -139,12 +144,26 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             }
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                input_del_2.setVisibility(TextUtils.isEmpty(bst.getText()) ? View.INVISIBLE : View.VISIBLE);
             }
 
             public void afterTextChanged(Editable s) {
                 BaseApplication.app.dm.kuCunParams.bstPartNo = s.toString();
             }
         });
+
+        input_del_1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                kuwei.setText("");
+            }
+        });
+        input_del_2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                bst.setText("");
+            }
+        });
+
+
     }
 
     @OnClick({R.id.main_btn_ico_1, R.id.main_btn_ico_2, R.id.main_btn_ico_3, R.id.main_btn_ico_4, R.id.main_btn_ico_5})
@@ -205,34 +224,34 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
 
     @Override
     public void onBarcodeEvent(final BarcodeReadEvent event) {
-        Log.e("app","============================================onBarcodeEvent");
+        Log.e("app", "============================================onBarcodeEvent");
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 // update UI to reflect the data
-                Log.e("app","============================================");
-                Log.e("app","Barcode data: " + event.getBarcodeData());
-                Log.e("app","Character Set: " + event.getCharset());
-                Log.e("app","Code ID: " + event.getCodeId());
-                Log.e("app","AIM ID: " + event.getAimId());
-                Log.e("app","Timestamp: " + event.getTimestamp());
+                Log.e("app", "============================================");
+                Log.e("app", "Barcode data: " + event.getBarcodeData());
+                Log.e("app", "Character Set: " + event.getCharset());
+                Log.e("app", "Code ID: " + event.getCodeId());
+                Log.e("app", "AIM ID: " + event.getAimId());
+                Log.e("app", "Timestamp: " + event.getTimestamp());
             }
         });
     }
 
     @Override
     public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
-        Log.e("app","============================================onFailureEvent");
+        Log.e("app", "============================================onFailureEvent");
         runOnUiThread(new Runnable() {
             public void run() {
-                Log.e("app","=========== no data" );
+                Log.e("app", "=========== no data");
             }
         });
     }
 
     @Override
     public void onTriggerEvent(TriggerStateChangeEvent event) {
-        Log.e("app","============================================onTriggerEvent");
+        Log.e("app", "============================================onTriggerEvent");
         try {
             // only handle trigger presses
             // turn on/off aimer, illumination and decoding
@@ -261,6 +280,7 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             }
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();

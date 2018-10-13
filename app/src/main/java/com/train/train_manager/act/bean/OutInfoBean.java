@@ -26,6 +26,14 @@ public class OutInfoBean {
     public String orgName; //	String	否		单位名称
     public ArrayList<OutDetailBean> rqPickDetailList = new ArrayList<>(); //	Array	是		领料单内容列表
 
+    public String deliveryTime_show() {
+        if (this.deliveryTime != null) {
+            return this.deliveryTime.split(" ")[0];
+        } else {
+            return "";
+        }
+    }
+
 }
 
 //{

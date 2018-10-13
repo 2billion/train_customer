@@ -21,39 +21,68 @@
             android:textColor="@color/white"
             android:textSize="18dp" />
 
-        <EditText
-            android:id="@+id/input_kuwei"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/v_input_round"
-            android:ems="10"
-            android:gravity="center_vertical|left"
-            android:hint="@string/hint_main_kuwei"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="@color/gray666"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/btn_search_font_size" />
+            android:layout_height="wrap_content"
+            android:padding="20dp">
 
-        <EditText
-            android:id="@+id/input_bst"
+            <EditText
+                android:id="@+id/input_kuwei"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/v_input_round"
+                android:ems="10"
+                android:gravity="center_vertical|left"
+                android:hint="@string/hint_main_kuwei"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@color/gray666"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/btn_search_font_size" />
+
+            <ImageView
+                android:id="@+id/input_del_1"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ico_del_48_light"
+                android:visibility="invisible" />
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/v_input_round"
-            android:ems="10"
-            android:gravity="center_vertical|left"
-            android:hint="@string/hint_main_bst"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:textColor="@color/gray666"
-            android:textCursorDrawable="@null"
-            android:textSize="@dimen/btn_search_font_size" />
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+
+            <EditText
+                android:id="@+id/input_bst"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/v_input_round"
+                android:ems="10"
+                android:gravity="center_vertical|left"
+                android:hint="@string/hint_main_bst"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:textColor="@color/gray666"
+                android:textCursorDrawable="@null"
+                android:textSize="@dimen/btn_search_font_size" />
+
+            <ImageView
+                android:id="@+id/input_del_2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ico_del_48_light"
+                android:visibility="invisible" />
+        </FrameLayout>
 
         <Button
             android:id="@+id/submit"
@@ -68,9 +97,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/main_btn_ico_1"
@@ -150,10 +179,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:padding="10dp"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
         <LinearLayout
             android:id="@+id/main_btn_ico_5"

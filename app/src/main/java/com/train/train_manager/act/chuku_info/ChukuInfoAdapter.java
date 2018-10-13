@@ -28,6 +28,8 @@ public class ChukuInfoAdapter extends BaseAdapter {
 
         public TextView info21;
         public TextView info22;
+
+        public View item;
     }
 
     @Override
@@ -68,18 +70,38 @@ public class ChukuInfoAdapter extends BaseAdapter {
 
             holder.info21 = convertView.findViewById(R.id.info21);
             holder.info22 = convertView.findViewById(R.id.info22);
+
+            holder.item = convertView.findViewById(R.id.item);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        OutDetailBean bean = BaseApplication.app.dm.outInfoListBean.data.rqPickDetailList.get(position);
+        final OutDetailBean bean = BaseApplication.app.dm.outInfoListBean.data.rqPickDetailList.get(position);
 
         holder.title.setText(bean.partName);
-        holder.info1.setText("BST物料编码：" + bean.bstPartNo);
-        holder.info2.setText("路局物料编码：" + bean.buPartNo);
+        holder.info1.setText("BST物料编码：" + (bean.bstPartNo == null ? "" : bean.bstPartNo));
+        holder.info2.setText("路局物料编码：" + (bean.buPartNo == null ? "" : bean.buPartNo));
         holder.info3.setText("库位编码：" + bean.location);
-        holder.info4.setText("剩余需求：" + bean.requireQty + " 已交货数：" + bean.deliveryQty);
+        holder.info4.setText("剩余需求：" + bean.requireQty + " 已交货数：" + (int) bean.deliveryQty);
         holder.info5.setText("库存数量：" + bean.locQty + " 总需求量：" + bean.totalRequireQty);
+
+        final int status = BaseApplication.app.dm.outInfoListBean.data.status;
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (status == 0) {
+                    BaseApplication.showToast("您还未接单，不可进行出库操作！");
+                } else if (status == 1) {
+                    BaseApplication.app.dm.outDetailBean = bean;
+                    activity.goto_chuku();
+                } else if (status == 2) {
+                    BaseApplication.showToast("已到达待出库区，不可操作");
+                } else if (status == 3) {
+                    BaseApplication.showToast("领料单出库已完成，不可操作！");
+                }
+            }
+        });
 
         //        OutBean outBean = BaseApplication.app.dm.outList.get(position);
         //        //        领料单状态：0待下架1下架中2待交接3已完成
@@ -93,7 +115,7 @@ public class ChukuInfoAdapter extends BaseAdapter {
         //            holder.info22.setText("待出");
         //        }
 
-        holder.info21.setText("" + bean.requireQty);
+        holder.info21.setText("" + (Integer.valueOf(bean.totalRequireQty) - (int) bean.deliveryQty) + (bean.umi == null ? "" : bean.umi));
         holder.info22.setText("待出");
         return convertView;
     }

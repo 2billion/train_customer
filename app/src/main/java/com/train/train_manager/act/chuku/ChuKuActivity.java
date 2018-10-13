@@ -103,7 +103,8 @@ public class ChuKuActivity extends BaseActivity {
         });
 
         //    获取数据放最后
-        getDate();
+        log("------------------------- create refresh");
+        getData();
 
     }
 
@@ -111,7 +112,8 @@ public class ChuKuActivity extends BaseActivity {
     public int page = 1;
     public int pageSize = 10;
 
-    private void getDate() {
+    private void getData() {
+
 
         OutParamsBean bean = BaseApplication.app.dm.outParams;
 
@@ -157,17 +159,24 @@ public class ChuKuActivity extends BaseActivity {
 
     public void refresh() {
         ChuKuActivity.this.page = 1;
-        getDate();
+        getData();
     }
 
     public void loadMore() {
         ChuKuActivity.this.page++;
-        getDate();
+        getData();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         BaseApplication.app.dm.outParams.pickNo= "";
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        log("------------------------- onResume refresh");
+        refresh();
     }
 }

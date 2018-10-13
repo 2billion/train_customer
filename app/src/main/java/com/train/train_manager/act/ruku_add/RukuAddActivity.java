@@ -84,12 +84,11 @@ public class RukuAddActivity extends BaseActivity {
         });
 
         // 新增
-        btn_right.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
-            }
-        });
-
+//        btn_right.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
+//            }
+//        });
 
         bottom_btn_2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

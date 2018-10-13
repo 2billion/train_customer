@@ -48,6 +48,8 @@
 
         <activity android:name=".act.ruku_add.RukuUpdateActivity"></activity>
 
+        <activity android:name=".act.chuku_action.ChukuActionActivity"></activity>
+
 
         <!-- end -->
         <activity
