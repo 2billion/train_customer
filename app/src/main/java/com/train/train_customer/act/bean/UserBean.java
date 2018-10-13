@@ -2,32 +2,32 @@ package com.train.train_customer.act.bean;
 
 public class UserBean {
 
-    // old
-    //    public String customerId; //    String	是		客户ID
-    //    public String orgId; //    String	是		客户单位
-    //    public String userName; //    String	是		客户用户名
-    //    public String customerName; //    String	是		客户姓名
-    //    public int customerSex; //    int	是		性别
-    //    public String customerTel; //    String	否		电话
-    //    public String customerMail; //    String	否		邮箱
-    //    public String customerAddr; //    String	否		地址
-    //    public String customerDes; //    String	否		描述
-    //    public String customerImg; //    String	否		头像
+    public String customerId;//	String	是		客户ID
+    public String orgId;//	String	是		客户单位
+    public String userName;//	String	是		客户用户名
+    public String customerName;//	String	是		客户姓名
+    public int customerSex;//	int	是		性别
+    public String customerTel;//	String	否		电话
+    public String customerMail;//	String	否		邮箱
+    public String customerAddr;//	String	否		地址
+    public String customerDes;//	String	否		描述
+    public String customerImg;//	String	否		头像
 
 
-//    public String token;
-    public String userName;
-//    public String theme;
-//    public int platform;
-    public String userId;
-//    public long expiry;
-//    public String lastTokenTime;
-    public String portrait;
-//    public int appType;
-//    public String permissionModule;
-//    public String permissionInf;
-//    public String permissionRes;
 }
+
+// "userName": "customer",
+//         "orgId": 1,
+//         "buearuId": 1,
+//         "customerId": 1,
+//         "customerName": "上海动车段",
+//         "customerSex": 0,
+//         "customerTel": "18363671109",
+//         "customerMail": "971059634@qq.com",
+//         "customerAddr": "上海市",
+//         "customerDes": "上海动车段",
+//         "customerImg": null
+
 
 
 //{"count":null

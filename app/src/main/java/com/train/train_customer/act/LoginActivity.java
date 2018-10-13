@@ -36,7 +36,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void init() {
+
+        et_name.setText("gzdcd");
+        et_password.setText("123456");
         et_name.setSelection(et_name.length());
+
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

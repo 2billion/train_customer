@@ -1,6 +1,7 @@
 package com.train.train_customer.act.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -70,19 +71,19 @@ public class MineInfoUpdateActivity extends BaseActivity {
                 customer_name.setText(bean.userName);
                 customer_name.setSelection(customer_name.getText().toString().length());
             }
-//            if (bean.customerSex > -1) {
-//                boy.setSelected(bean.customerSex == 0);
-//                girl.setSelected(bean.customerSex != 0);
-//            }
-//            if (bean.customerTel != null) {
-//                customer_tel.setText(bean.customerTel);
-//            }
-//            if (bean.customerMail != null) {
-//                customer_mail.setText(bean.customerMail);
-//            }
-//            if (bean.customerDes != null) {
-//                customer_addr.setText(bean.customerAddr);
-//            }
+            if (bean.customerSex > -1) {
+                boy.setChecked(bean.customerSex == 0);
+                girl.setChecked(bean.customerSex != 0);
+            }
+            if (bean.customerTel != null) {
+                customer_tel.setText(bean.customerTel);
+            }
+            if (bean.customerMail != null) {
+                customer_mail.setText(bean.customerMail);
+            }
+            if (bean.customerDes != null) {
+                customer_addr.setText(bean.customerAddr);
+            }
         }
         submit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

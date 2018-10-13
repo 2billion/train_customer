@@ -60,8 +60,8 @@ public class Net {
 
     //    1.4获取用户信息
     //    请求地址： /customer/findMyInfo
-    public void findMyInfo(Callback callBack) {
-        String url = HOST + "/customer/findMyInfo";
+    public void findCustomerInfo(Callback callBack) {
+        String url = HOST + "/customer/findCustomerInfo";
         FormBody.Builder params = new FormBody.Builder();
         Request request = new Request.Builder().url(url).post(params.build()).addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);
@@ -304,11 +304,11 @@ public class Net {
     public void updateCustomerInfo(Callback callBack, String customerName, String customerSex, String customerTel, String customerMail, String customerAddr) {
         String url = HOST + "/customer/updateCustomerInfo";
         FormBody.Builder params = new FormBody.Builder();
-//        params.add("customerName", customerName);
-//        params.add("customerSex", customerSex);
-//        params.add("customerTel", customerTel);
-//        params.add("customerMail", customerMail);
-//        params.add("customerAddr", customerAddr);
+        params.add("customerName", customerName);
+        params.add("customerSex", customerSex);
+        params.add("customerTel", customerTel);
+        params.add("customerMail", customerMail);
+        params.add("customerAddr", customerAddr);
         params.add("customerName", customerName);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();

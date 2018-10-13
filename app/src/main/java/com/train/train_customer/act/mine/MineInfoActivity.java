@@ -83,30 +83,23 @@ public class MineInfoActivity extends BaseActivity {
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
 
-
-            if (bean.userName != null) {
-                customer_name.setText(bean.userName);
+            if (bean.customerName != null) {
+                customer_name.setText(bean.customerName);
                 customer_name.setSelection(customer_name.getText().toString().length());
             }
-
-
-            //            if (bean.customerName != null) {
-            //                customer_name.setText(bean.customerName);
-            //                customer_name.setSelection(customer_name.getText().toString().length());
-            //            }
-            //            if (bean.customerSex > -1) {
-            //                customerSex.setText(bean.customerSex == 0 ? "男" : "女");
-            //                customerSex.setSelection(customerSex.getText().toString().length());
-            //            }
-            //            if (bean.customerTel != null) {
-            //                customer_tel.setText(bean.customerTel);
-            //            }
-            //            if (bean.customerMail != null) {
-            //                customer_mail.setText(bean.customerMail);
-            //            }
-            //            if (bean.customerAddr != null) {
-            //                customer_addr.setText(bean.customerAddr);
-            //            }
+            if (bean.customerSex > -1) {
+                customerSex.setText(bean.customerSex == 0 ? "男" : "女");
+                customerSex.setSelection(customerSex.getText().toString().length());
+            }
+            if (bean.customerTel != null) {
+                customer_tel.setText(bean.customerTel);
+            }
+            if (bean.customerMail != null) {
+                customer_mail.setText(bean.customerMail);
+            }
+            if (bean.customerAddr != null) {
+                customer_addr.setText(bean.customerAddr);
+            }
         }
         customer_name.setEnabled(false);
         customerSex.setEnabled(false);
@@ -207,7 +200,7 @@ public class MineInfoActivity extends BaseActivity {
     }
 
     private void load_avatar() {
-        String url = Net.HOST + BaseApplication.app.dm.userBean.portrait;
+        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
         Picasso.get()
                 .load(url)
                 .resize(200, 200)
@@ -252,7 +245,7 @@ public class MineInfoActivity extends BaseActivity {
     }
 
     private void updateUserInfo() {
-        BaseApplication.app.net.findMyInfo(new NetCallback() {
+        BaseApplication.app.net.findCustomerInfo(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
@@ -273,12 +266,33 @@ public class MineInfoActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        UserBean bean = BaseApplication.app.dm.userBean;
-        if (bean != null) {
-            if (bean.userName != null && customer_name != null) {
-                customer_name.setText(bean.userName);
-                customer_name.setSelection(customer_name.getText().toString().length());
-            }
+        if (BaseApplication.app.reload_mine) {
+            updateUserInfo();
         }
+
+        //
+        //
+        //
+        //
+        // bean = BaseApplication.app.dm.userBean;
+        //        if (bean != null) {
+        //            if (bean.userName != null && customer_name != null) {
+        //                customer_name.setText(bean.userName);
+        //                customer_name.setSelection(customer_name.getText().toString().length());
+        //            }
+        //            if (bean.customerSex > -1) {
+        //                customerSex.setText(bean.customerSex == 0 ? "男" : "女");
+        //                customerSex.setSelection(customerSex.getText().toString().length());
+        //            }
+        //            if (bean.customerTel != null) {
+        //                customer_tel.setText(bean.customerTel);
+        //            }
+        //            if (bean.customerMail != null) {
+        //                customer_mail.setText(bean.customerMail);
+        //            }
+        //            if (bean.customerAddr != null) {
+        //                customer_addr.setText(bean.customerAddr);
+        //            }
+        //        }
     }
 }

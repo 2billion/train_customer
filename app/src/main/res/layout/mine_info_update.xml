@@ -92,7 +92,6 @@
                 android:id="@+id/boy"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:checked="true"
                 android:text="男" />
 
             <RadioButton

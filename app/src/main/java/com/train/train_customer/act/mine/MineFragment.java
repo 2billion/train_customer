@@ -76,7 +76,7 @@ public class MineFragment extends BaseFragment {
             }
         });
 
-        BaseApplication.app.net.findMyInfo(new NetCallback() {
+        BaseApplication.app.net.findCustomerInfo(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
@@ -124,14 +124,14 @@ public class MineFragment extends BaseFragment {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 loginName.setText(BaseApplication.app.dm.userBean.userName);
-                nickname.setText(BaseApplication.app.dm.userBean.userId+"");
+                nickname.setText(BaseApplication.app.dm.userBean.customerName);
                 loadAvatar();
             }
         });
     }
 
     private void loadAvatar() {
-        String url = Net.HOST + BaseApplication.app.dm.userBean.portrait;
+        String url = Net.HOST + BaseApplication.app.dm.userBean.customerImg;
         avatar.setPadding(0, 0, 0, 0);
         Picasso.get()
                 .load(url)
@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.portrait == null) {
+        if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.customerImg == null) {
             return;
         }
         loadAvatar();
