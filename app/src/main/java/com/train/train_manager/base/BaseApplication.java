@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.honeywell.aidc.AidcManager;
+import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.UnsupportedPropertyException;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -19,6 +23,9 @@ import com.train.train_manager.R;
 import com.train.train_manager.core.Cache;
 import com.train.train_manager.core.DataManager;
 import com.train.train_manager.core.Net;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseApplication extends Application {
 
@@ -36,6 +43,102 @@ public class BaseApplication extends Application {
     public boolean getAutoLogin() {
         return Cache.i().getBoolean("autoLogin", false);
     }
+
+    public static boolean needClearReader = false;
+    public static BarcodeReader barcodeReader;
+    public AidcManager manager;
+
+    public BarcodeReader.BarcodeListener reader ;
+
+    public void initReader() {
+        if (barcodeReader != null) {
+            return;
+        }
+        AidcManager.create(this, new AidcManager.CreatedCallback() {
+
+            @Override
+            public void onCreated(AidcManager aidcManager) {
+                manager = aidcManager;
+                barcodeReader = manager.createBarcodeReader();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        doInitReader();
+                    }
+                }, 500);
+
+            }
+        });
+    }
+
+    public void clearReader() {
+        Log.i("app","================ clearReader()");
+        if (needClearReader == true) {
+            if (manager != null) {
+                // close AidcManager to disconnect from the scanner service.
+                // once closed, the object can no longer be used.
+                manager.close();
+            }
+            if (barcodeReader != null) {
+                // unregister barcode event listener
+                barcodeReader.removeBarcodeListener(reader);
+                // unregister trigger state change listener
+                //                barcodeReader.removeTriggerListener(this);
+                barcodeReader.release();
+                barcodeReader.close();
+                barcodeReader = null;
+            }
+
+            Log.i("app","================ clearReader()   ok");
+        }
+    }
+
+    public void doInitReader() {
+        // get bar code instance from MainActivity
+        //        barcodeReader = getBarcodeObject();
+        Log.i("app","================ doInitReader()");
+        if (barcodeReader != null) {
+
+            // register bar code event listener
+            barcodeReader.addBarcodeListener(reader);
+            BaseApplication.showToast("init ok");
+
+            // set the trigger mode to client control
+            try {
+                barcodeReader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+                        BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
+            } catch (UnsupportedPropertyException e) {
+                Toast.makeText(this, "Failed to apply properties", Toast.LENGTH_SHORT).show();
+            }
+            // register trigger state change listener
+            //            barcodeReader.addTriggerListener(this);
+
+            Map<String, Object> properties = new HashMap<String, Object>();
+            // Set Symbologies On/Off
+            properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+            properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+            // Set Max Code 39 barcode length
+            properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 30);
+            // Turn on center decoding
+            properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+            // Disable bad read response, handle in onFailureEvent
+            properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, false);
+            // Apply the settings
+            barcodeReader.setProperties(properties);
+
+            Log.i("app","================ doInitReader()    ok");
+        }
+    }
+
 
     //static 代码段可以防止内存泄露
     static {
@@ -55,6 +158,7 @@ public class BaseApplication extends Application {
                 return new ClassicsFooter(context).setDrawableSize(20);
             }
         });
+
     }
 
     /**
@@ -90,10 +194,10 @@ public class BaseApplication extends Application {
         // 捕捉异常
         //        AppUncaughtExceptionHandler crashHandler = AppUncaughtExceptionHandler.getInstance();
         //        crashHandler.init(getApplicationContext());
+
     }
 
     public void initImagePicker() {
-
     }
 
     public void info() {

@@ -26,4 +26,18 @@
 
     <string name="hint_kucun_top_search"><font size="14">库位/物资编码查询</font></string>
 
+
+    <string name="menu_settings">Settings</string>
+    <string name="barcode">Barcode</string>
+    <string name="btnAutomaticBarcode">Automatic Control</string>
+    <string name="btnClientBarcode">Client Control</string>
+    <string name="btnScannerSelectBarcode">Scanner Selection Example</string>
+    <string name="btnSwitchScanners">Switch Scanners</string>
+    <string name="txtBarcodeTitle">Press the device\'s scan button to scan a barcode.</string>
+    <string name="txtMainTitle">Click on below buttons for options.</string>
+    <string name="txtPreamble">Preamble</string>
+    <string name="editPreamble"></string>
+    <string name="editPostamble"></string>
+    <string name="txtPostamble">Postamble</string>
+
 </resources>
