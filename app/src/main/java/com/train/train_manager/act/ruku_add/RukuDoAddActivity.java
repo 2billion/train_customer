@@ -175,4 +175,22 @@ public class RukuDoAddActivity extends BaseActivity {
 
     }
 
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                if (str.equals("")) {
+                    return;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.inaAddBean.tLocation = str_real;
+                    input1.setText(str_real.toString());
+                } else {
+                    BaseApplication.app.dm.inaAddBean.bstPartNo = str;
+                    input2.setText(str.toString());
+                }
+            }
+        });
+
+    }
+
 }

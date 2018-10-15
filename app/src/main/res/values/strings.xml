@@ -16,6 +16,7 @@
     <string name="hint_main_bst"><font size="14">BST物料编码</font></string>
 
     <string name="hint_ina_top_search"><font size="14">输入入库单号</font></string>
+    <string name="hint_ina_top_search_chu"><font size="14">输入领料单号</font></string>
 
     <item name="reku_record_adapter_1" type="id"></item>
     <item name="reku_record_adapter_2" type="id"></item>

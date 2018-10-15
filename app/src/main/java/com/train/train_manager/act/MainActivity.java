@@ -302,4 +302,23 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             barcodeReader.removeTriggerListener(this);
         }
     }
+
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (str.equals("")) {
+                    return ;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.kuCunParams.location = str_real;
+                    kuwei.setText(str_real.toString());
+                } else {
+                    BaseApplication.app.dm.kuCunParams.bstPartNo = str;
+                    bst.setText(str.toString());
+                }
+                startActivity(new Intent(MainActivity.this, KuCunActivity.class));
+            }
+        });
+    }
 }

@@ -173,7 +173,7 @@ public class ChukuInfoActivity extends BaseActivity {
                     bottom_btn_2.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             //                            BaseApplication.showToast("确认接单完成");
-                            wancheng_jiedan(BaseApplication.app.dm.outInfoListBean.data.pickId + "");
+                            wancheng_jiaojie(BaseApplication.app.dm.outInfoListBean.data.pickId + "");
                         }
                     });
                     break;
@@ -301,4 +301,28 @@ public class ChukuInfoActivity extends BaseActivity {
     }
 
 
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (str.equals("")) {
+                    return;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.outDetailBean.location = str_real;
+                } else {
+                    BaseApplication.app.dm.outDetailBean.bstPartNo = str;
+                }
+
+                OutInfoBean bean = BaseApplication.app.dm.outInfoListBean.data;
+                if (bean.status == 0) {
+                    BaseApplication.showToast("您还未接单，不可进行出库操作！");
+                } else if (bean.status == 3) {
+                    BaseApplication.showToast("领料单出库已完成，不可操作！");
+                }
+                startActivity(new Intent(ChukuInfoActivity.this, ChukuActionActivity.class));
+            }
+        });
+
+    }
 }

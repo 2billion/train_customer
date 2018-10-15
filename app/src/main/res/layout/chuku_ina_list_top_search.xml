@@ -24,12 +24,9 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:lines="1"
-        android:maxLines="1"
-        android:singleLine="true"
         android:background="@drawable/v_input_search"
         android:ems="10"
-        android:hint="@string/hint_kucun_top_search"
+        android:hint="@string/hint_ina_top_search_chu"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textColor="@color/gray666"
@@ -38,7 +35,7 @@
 
     <TextView
         android:id="@+id/search_btn"
-        android:layout_width="60dp"
+        android:layout_width="45dp"
         android:layout_height="match_parent"
         android:background="@drawable/v_header_btn"
         android:clickable="true"
@@ -47,5 +44,15 @@
         android:textColor="@color/white"
         android:textSize="@dimen/btn_search_font_size" />
 
+    <TextView
+        android:id="@+id/right_view_btn"
+        android:layout_width="45dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/v_header_btn"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="筛选"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_search_font_size" />
 
 </LinearLayout>

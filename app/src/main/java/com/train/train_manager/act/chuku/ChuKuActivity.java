@@ -1,5 +1,6 @@
 package com.train.train_manager.act.chuku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,8 +14,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_manager.R;
+import com.train.train_manager.act.MainActivity;
 import com.train.train_manager.act.bean.OutListBean;
 import com.train.train_manager.act.bean.OutParamsBean;
+import com.train.train_manager.act.kucun.KuCunActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.core.NetCallback;
@@ -178,5 +181,26 @@ public class ChuKuActivity extends BaseActivity {
         super.onResume();
         log("------------------------- onResume refresh");
         refresh();
+    }
+
+
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (str.equals("")) {
+                    return ;
+//                } else if (str.startsWith("#")) {
+//                    String str_real = str.replace("#", "");
+//                    BaseApplication.app.dm.kuCunParams.location = str_real;
+//                    kuwei.setText(str_real.toString());
+                } else {
+                    BaseApplication.app.dm.outParams.pickNo = str;
+                    searchInput.setText(str.toString());
+                }
+                refresh();
+            }
+        });
+
     }
 }

@@ -2,6 +2,7 @@ package com.train.train_manager.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ public abstract class BaseActivity extends Activity {
     protected void onResume() {
         super.onResume();
         BaseApplication.app.initApp(this);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);            //竖屏
     }
 
     /**

@@ -71,7 +71,7 @@ public class ChukuActionActivity extends BaseActivity {
             }
 
             public void afterTextChanged(Editable s) {
-                BaseApplication.app.dm.inaAddBean.tLocation = s.toString();
+                BaseApplication.app.dm.outDetailBean.location = s.toString();
             }
         });
         input2.addTextChangedListener(new TextWatcher() {
@@ -83,7 +83,7 @@ public class ChukuActionActivity extends BaseActivity {
             }
 
             public void afterTextChanged(Editable s) {
-                BaseApplication.app.dm.inaAddBean.bstPartNo = s.toString();
+                BaseApplication.app.dm.outDetailBean.bstPartNo = s.toString();
             }
         });
         input3.addTextChangedListener(new TextWatcher() {
@@ -179,8 +179,27 @@ public class ChukuActionActivity extends BaseActivity {
                     BaseApplication.app.showToast(bean.msg);
                 }
             }
-        }, pickId, bstPartNo,location, requireQty);
+        }, pickId, bstPartNo, location, requireQty);
 
+    }
+
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (str.equals("")) {
+                    return;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.outDetailBean.location = str_real;
+                    input1.setText(str_real.toString());
+                } else {
+                    BaseApplication.app.dm.outDetailBean.bstPartNo = str;
+                    input2.setText(str.toString());
+                }
+
+            }
+        });
     }
 
 }

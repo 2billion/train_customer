@@ -1,5 +1,6 @@
 package com.train.train_manager.act.kucun;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_manager.R;
+import com.train.train_manager.act.MainActivity;
 import com.train.train_manager.act.bean.KuCunListBean;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
@@ -159,5 +161,24 @@ public class KuCunActivity extends BaseActivity {
         super.onDestroy();
         BaseApplication.app.dm.kuCunParams.bstPartNo = "";
         BaseApplication.app.dm.kuCunParams.location = "";
+    }
+
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                if (str.equals("")) {
+                    return ;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.kuCunParams.location = str_real;
+                    searchInput.setText(str_real.toString());
+                } else {
+                    BaseApplication.app.dm.kuCunParams.bstPartNo = str;
+                    searchInput.setText(str.toString());
+                }
+                refresh();
+            }
+        });
+
     }
 }

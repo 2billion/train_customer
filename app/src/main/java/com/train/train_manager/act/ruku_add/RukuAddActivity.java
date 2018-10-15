@@ -84,11 +84,11 @@ public class RukuAddActivity extends BaseActivity {
         });
 
         // 新增
-//        btn_right.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
-//            }
-//        });
+        btn_right.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
+            }
+        });
 
         bottom_btn_2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -262,4 +262,25 @@ public class RukuAddActivity extends BaseActivity {
                     }
                 }).show();
     }
+
+    public void on_back(final String str) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (str.equals("")) {
+                    return;
+                } else if (str.startsWith("#")) {
+                    String str_real = str.replace("#", "");
+                    BaseApplication.app.dm.inaAddBean.tLocation = str_real;
+                } else {
+                    BaseApplication.app.dm.inaAddBean.bstPartNo = str;
+                }
+                if (!BaseApplication.app.dm.inaAddBean.tLocation.equals("") && !BaseApplication.app.dm.inaAddBean.bstPartNo.equals("")) {
+                    startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
+                }
+            }
+        });
+
+    }
 }
+
