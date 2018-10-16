@@ -53,6 +53,17 @@ public class Net {
         call.enqueue(callBack);
     }
 
+    //    2.2登录（芯片卡）
+    //    请求地址：/login/checkinCard
+    public void checkinCard(Callback callBack, String cardId) {
+        String url = HOST + "/login/checkinCard";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("cardId", cardId);
+        Request request = new Request.Builder().post(params.build()).url(url).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
     //    2.3登出
     //    请求地址：/login/checkout
 
