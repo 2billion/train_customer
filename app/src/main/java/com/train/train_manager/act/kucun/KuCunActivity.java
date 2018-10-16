@@ -18,6 +18,7 @@ import com.train.train_manager.act.MainActivity;
 import com.train.train_manager.act.bean.KuCunListBean;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
+import com.train.train_manager.base.Reader;
 import com.train.train_manager.core.NetCallback;
 
 import java.io.IOException;
@@ -99,6 +100,13 @@ public class KuCunActivity extends BaseActivity {
 
         //    获取数据放最后
         getDate();
+
+        this.reader = new Reader() {
+            @Override
+            public void back(String code) {
+                on_back(code);
+            }
+        };
 
     }
 

@@ -20,6 +20,7 @@ import com.train.train_manager.act.bean.OutParamsBean;
 import com.train.train_manager.act.kucun.KuCunActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
+import com.train.train_manager.base.Reader;
 import com.train.train_manager.core.NetCallback;
 
 import java.io.IOException;
@@ -108,6 +109,13 @@ public class ChuKuActivity extends BaseActivity {
         //    获取数据放最后
         log("------------------------- create refresh");
         getData();
+
+        this.reader = new Reader() {
+            @Override
+            public void back(String code) {
+                on_back(code);
+            }
+        };
 
     }
 

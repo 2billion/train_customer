@@ -20,6 +20,7 @@ import com.train.train_manager.act.bean.OutInfoListBean;
 import com.train.train_manager.act.chuku_action.ChukuActionActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
+import com.train.train_manager.base.Reader;
 import com.train.train_manager.core.NetCallback;
 
 import java.io.IOException;
@@ -94,6 +95,13 @@ public class ChukuInfoActivity extends BaseActivity {
 
         //    获取数据放最后
         getDate();
+
+        this.reader = new Reader() {
+            @Override
+            public void back(String code) {
+                on_back(code);
+            }
+        };
 
     }
 

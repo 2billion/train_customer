@@ -13,6 +13,7 @@ import com.train.train_manager.R;
 import com.train.train_manager.act.bean.InAAddBackListBean;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
+import com.train.train_manager.base.Reader;
 import com.train.train_manager.core.NetCallback;
 
 import java.io.IOException;
@@ -138,7 +139,12 @@ public class RukuDoAddActivity extends BaseActivity {
         BaseApplication.app.dm.inaAddBean.tLocation = input1.getText().toString();
         BaseApplication.app.dm.inaAddBean.bstPartNo = input2.getText().toString();
         BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(input3.getText().toString());
-
+        this.reader = new Reader() {
+            @Override
+            public void back(String code) {
+                on_back(code);
+            }
+        };
     }
 
     private void do_add() {

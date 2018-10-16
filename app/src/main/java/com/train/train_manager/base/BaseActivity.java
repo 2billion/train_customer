@@ -15,15 +15,13 @@ import com.honeywell.aidc.BarcodeReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseActivity extends Activity implements BarcodeReader.BarcodeListener {
+public abstract class BaseActivity extends Activity  {
 
     public Reader reader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //        ButterKnife.bind(this);
-//        BaseApplication.app.reader = this;
 //        BaseApplication.app.initReader();
     }
 
@@ -51,41 +49,41 @@ public abstract class BaseActivity extends Activity implements BarcodeReader.Bar
     @Override
     protected void onPause() {
         super.onPause();
-//        BaseApplication.app.clearReader();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+//        BaseApplication.app.reader = this;
         BaseApplication.app.initApp(this);
-//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);            //竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);            //竖屏
     }
 
-    @Override
-    public void onBarcodeEvent(final BarcodeReadEvent event) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // update UI to reflect the data
-                List<String> list = new ArrayList<String>();
-                list.add("Barcode data: " + event.getBarcodeData());
-                list.add("Character Set: " + event.getCharset());
-                list.add("Code ID: " + event.getCodeId());
-                list.add("AIM ID: " + event.getAimId());
-                list.add("Timestamp: " + event.getTimestamp());
-
-                log("=================onBarcodeEvent=====" + event.getBarcodeData());
-
-                if (reader != null) {
-                    reader.back(event.getBarcodeData());
-                }
-
-            }
-        });
-    }
-    @Override
-    public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
-
-    }
+//    @Override
+//    public void onBarcodeEvent(final BarcodeReadEvent event) {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // update UI to reflect the data
+//                List<String> list = new ArrayList<String>();
+//                list.add("Barcode data: " + event.getBarcodeData());
+//                list.add("Character Set: " + event.getCharset());
+//                list.add("Code ID: " + event.getCodeId());
+//                list.add("AIM ID: " + event.getAimId());
+//                list.add("Timestamp: " + event.getTimestamp());
+//
+//                log("=================onBarcodeEvent=====" + event.getBarcodeData());
+//
+//                if (reader != null) {
+//                    reader.back(event.getBarcodeData());
+//                }
+//
+//            }
+//        });
+//    }
+//    @Override
+//    public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
+//        log("=================onFailureEvent=====" + barcodeFailureEvent.toString());
+//    }
 
 }

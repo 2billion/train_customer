@@ -18,6 +18,7 @@ import com.train.train_manager.act.bean.InAInfoListBean;
 import com.train.train_manager.act.ruku.RukuOKActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
+import com.train.train_manager.base.Reader;
 import com.train.train_manager.core.NetCallback;
 
 import java.io.IOException;
@@ -95,6 +96,13 @@ public class RukuAddActivity extends BaseActivity {
                 ruku();
             }
         });
+
+        this.reader = new Reader() {
+            @Override
+            public void back(String code) {
+                on_back(code);
+            }
+        };
 
     }
 
