@@ -322,6 +322,8 @@ public class ChukuInfoActivity extends BaseActivity {
                     BaseApplication.app.dm.outDetailBean.bstPartNo = str;
                 }
 
+                BaseApplication.app.dm.outDetailBean.pickId = BaseApplication.app.dm.outBean.pickId;
+
                 OutInfoBean bean = BaseApplication.app.dm.outInfoListBean.data;
                 if (bean.status == 0) {
                     BaseApplication.showToast("您还未接单，不可进行出库操作！");

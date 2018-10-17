@@ -1,19 +1,25 @@
 package com.honeywell.barcodeexample;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.honeywell.aidc.*;
+import com.honeywell.aidc.BarcodeFailureEvent;
+import com.honeywell.aidc.BarcodeReadEvent;
+import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.ScannerUnavailableException;
+import com.honeywell.aidc.TriggerStateChangeEvent;
+import com.honeywell.aidc.UnsupportedPropertyException;
 import com.train.train_manager.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AutomaticBarcodeActivity extends Activity implements BarcodeReader.BarcodeListener,
         BarcodeReader.TriggerListener {
@@ -87,6 +93,7 @@ public class AutomaticBarcodeActivity extends Activity implements BarcodeReader.
                 list.add("Code ID: " + event.getCodeId());
                 list.add("AIM ID: " + event.getAimId());
                 list.add("Timestamp: " + event.getTimestamp());
+                Log.e("app", "--------------------demo code:" + event.getBarcodeData());
 
                 final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(
                         AutomaticBarcodeActivity.this, android.R.layout.simple_list_item_1, list);

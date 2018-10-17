@@ -18,6 +18,10 @@ public class OutParamsBean {
         this.status = "";
     }
 
+    public String info(){
+        return "orderNo:"+orderNo+" pickNo:"+pickNo+" status:"+status;
+    }
+
 }
 
 //    transNo	String	是		入库单号

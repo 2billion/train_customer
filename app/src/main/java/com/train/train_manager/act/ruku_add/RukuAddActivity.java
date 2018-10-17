@@ -283,9 +283,9 @@ public class RukuAddActivity extends BaseActivity {
                 } else {
                     BaseApplication.app.dm.inaAddBean.bstPartNo = str;
                 }
-                if (!BaseApplication.app.dm.inaAddBean.tLocation.equals("") && !BaseApplication.app.dm.inaAddBean.bstPartNo.equals("")) {
-                    startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
-                }
+                //                if (!BaseApplication.app.dm.inaAddBean.tLocation.equals("") && !BaseApplication.app.dm.inaAddBean.bstPartNo.equals("")) {
+                startActivity(new Intent(RukuAddActivity.this, RukuDoAddActivity.class));
+                //                }
             }
         });
 

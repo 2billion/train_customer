@@ -13,14 +13,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.honeywell.aidc.AidcManager;
 import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
 import com.honeywell.aidc.UnsupportedPropertyException;
-import com.honeywell.barcodeexample.ClientBarcodeActivity;
 import com.train.train_manager.R;
 import com.train.train_manager.act.chuku.ChuKuActivity;
 import com.train.train_manager.act.kucun.KuCunActivity;
@@ -38,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeListener{
+public class MainActivity extends BaseActivity{
 
     @BindView(R.id.input_kuwei)
     EditText kuwei;
@@ -127,75 +125,6 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             }
         };
 
-        AidcManager.create(this, new AidcManager.CreatedCallback() {
-
-            @Override
-            public void onCreated(AidcManager aidcManager) {
-                manager = aidcManager;
-                barcodeReader = manager.createBarcodeReader();
-
-                if (barcodeReader != null) {
-
-                    // register bar code event listener
-                    barcodeReader.addBarcodeListener(MainActivity.this);
-
-                    // set the trigger mode to client control
-                    try {
-                        barcodeReader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
-                                BarcodeReader.TRIGGER_CONTROL_MODE_CLIENT_CONTROL);
-                    } catch (UnsupportedPropertyException e) {
-
-                    }
-                    // register trigger state change listener
-//                    barcodeReader.addTriggerListener(MainActivity.this);
-
-                    Map<String, Object> properties = new HashMap<String, Object>();
-                    // Set Symbologies On/Off
-                    properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
-                    properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
-                    properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
-                    properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
-                    properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
-                    properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
-                    properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
-                    properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
-                    properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
-                    properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
-                    properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
-                    // Set Max Code 39 barcode length
-                    properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
-                    // Turn on center decoding
-                    properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
-                    // Disable bad read response, handle in onFailureEvent
-                    properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, false);
-                    // Apply the settings
-                    barcodeReader.setProperties(properties);
-                }
-            }
-        });
-    }
-
-    @Override
-    public void onBarcodeEvent(final BarcodeReadEvent event) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // update UI to reflect the data
-                log("============================ "+event.getBarcodeData());
-
-            }
-        });
-    }
-
-    @Override
-    public void onFailureEvent(BarcodeFailureEvent arg0) {
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                BaseApplication.showToast("-----------------wrong");
-            }
-        });
     }
 
     @OnClick({R.id.main_btn_ico_1, R.id.main_btn_ico_2, R.id.main_btn_ico_3, R.id.main_btn_ico_4, R.id.main_btn_ico_5})
@@ -249,6 +178,7 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
             // 利用handler延迟发送更改状态信息
             mHandler.sendEmptyMessageDelayed(0, 2000);
         } else {
+            BaseApplication.app.destroyReader();
             finish();
             System.exit(0);
         }
@@ -258,31 +188,19 @@ public class MainActivity extends BaseActivity implements BarcodeReader.BarcodeL
     @Override
     protected void onResume() {
         super.onResume();
-
+        log("------------------------------onResume()");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
+        log("------------------------------onPause()");
     }
 
     @Override
     public void onDestroy() {
-//        BaseApplication.app.needClearReader = true;
         super.onDestroy();
-
-        if (barcodeReader != null) {
-            // close BarcodeReader to clean up resources.
-            barcodeReader.close();
-            barcodeReader = null;
-        }
-
-        if (manager != null) {
-            // close AidcManager to disconnect from the scanner service.
-            // once closed, the object can no longer be used.
-            manager.close();
-        }
+        log("------------------------------onResume()");
     }
 
     public void on_back(final String str) {

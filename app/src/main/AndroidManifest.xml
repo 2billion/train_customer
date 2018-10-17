@@ -26,14 +26,15 @@
             android:theme="@style/Base.Theme.AppCompat"/>
         <activity android:name=".act.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+            <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".act.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".act.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -43,7 +44,13 @@
             </intent-filter>
         </activity>
         <!-- 我的 -->
-        <activity android:name=".act.mine.MineActivity"></activity>
+        <activity android:name=".act.mine.MineActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.AUTOMATICBARCODEACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".act.ruku.RukuActivity"></activity>
 
         <activity android:name=".act.ruku_record.RukuRecordActivity"></activity>
@@ -88,11 +95,11 @@
             android:name="com.honeywell.barcodeexample.AutomaticBarcodeActivity"
             android:label="@string/barcode"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.AUTOMATICBARCODEACTIVITY" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.AUTOMATICBARCODEACTIVITY" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name="com.honeywell.barcodeexample.ClientBarcodeActivity"

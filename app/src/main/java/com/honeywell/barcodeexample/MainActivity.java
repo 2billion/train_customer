@@ -66,7 +66,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // get the intent action string from AndroidManifest.xml
-                Intent barcodeIntent = new Intent("android.intent.action.AUTOMATICBARCODEACTIVITY");
+//                Intent barcodeIntent = new Intent("android.intent.action.AUTOMATICBARCODEACTIVITY");
+                Intent barcodeIntent = new Intent(MainActivity.this,AutomaticBarcodeActivity.class);
                 startActivity(barcodeIntent);
             }
         });

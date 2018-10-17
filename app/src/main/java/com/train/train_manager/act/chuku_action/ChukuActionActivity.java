@@ -167,7 +167,6 @@ public class ChukuActionActivity extends BaseActivity {
         String bstPartNo = BaseApplication.app.dm.outDetailBean.bstPartNo;
         String requireQty = BaseApplication.app.dm.outDetailBean.requireQty;
 
-
         BaseApplication.app.net.pick_onpick(new NetCallback() {
             @Override
             public void failure(Call call, IOException e) {

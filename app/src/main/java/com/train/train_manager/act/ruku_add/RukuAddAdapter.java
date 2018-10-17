@@ -71,7 +71,7 @@ public class RukuAddAdapter extends BaseAdapter {
         holder.info1.setText("BST物料编码：" + bean.bstPartNo);
         holder.info2.setText("入库库位：" + bean.tLocation);
         holder.info3.setText("入库时间：" + bean.operTime);
-        holder.info.setText((int) bean.qty + bean.ume);
+        holder.info.setText((int) bean.qty + (bean.ume == null ? "" : bean.ume));
         holder.item.setTag(bean);
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override

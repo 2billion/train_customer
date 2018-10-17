@@ -213,6 +213,7 @@ public class Net {
         params.add("status", bean.status);
         params.add("page", page);
         params.add("pageSize", pageSize);
+        Log.e("app","=========="+bean.info());
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);

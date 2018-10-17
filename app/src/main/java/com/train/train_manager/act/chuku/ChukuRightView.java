@@ -185,7 +185,7 @@ public class ChukuRightView {
             @Override
             public void unSelected(int position, View view) {
                 super.unSelected(position, view);
-                BaseApplication.app.dm.ina_status = -1;
+//                BaseApplication.app.dm.ina_status = -1;
                 BaseApplication.app.dm.outParams.status = "";
             }
         };

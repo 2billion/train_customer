@@ -11,18 +11,15 @@ import android.view.inputmethod.InputMethodManager;
 import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.ScannerUnavailableException;
 
-import java.util.ArrayList;
-import java.util.List;
+public abstract class BaseActivity extends Activity {
 
-public abstract class BaseActivity extends Activity  {
-
-    public Reader reader;
+    public Reader reader = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        BaseApplication.app.initReader();
     }
 
     /**
@@ -43,7 +40,6 @@ public abstract class BaseActivity extends Activity  {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        BaseApplication.app.clearReader();
     }
 
     @Override
@@ -54,36 +50,21 @@ public abstract class BaseActivity extends Activity  {
     @Override
     protected void onResume() {
         super.onResume();
-//        BaseApplication.app.reader = this;
         BaseApplication.app.initApp(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);            //竖屏
+        if (BaseApplication.barcodeReader != null) {
+            try {
+                BaseApplication.barcodeReader.claim();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+                BaseApplication.showToast("Scanner unavailable");
+            }
+        }
     }
 
-//    @Override
-//    public void onBarcodeEvent(final BarcodeReadEvent event) {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                // update UI to reflect the data
-//                List<String> list = new ArrayList<String>();
-//                list.add("Barcode data: " + event.getBarcodeData());
-//                list.add("Character Set: " + event.getCharset());
-//                list.add("Code ID: " + event.getCodeId());
-//                list.add("AIM ID: " + event.getAimId());
-//                list.add("Timestamp: " + event.getTimestamp());
-//
-//                log("=================onBarcodeEvent=====" + event.getBarcodeData());
-//
-//                if (reader != null) {
-//                    reader.back(event.getBarcodeData());
-//                }
-//
-//            }
-//        });
-//    }
-//    @Override
-//    public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
-//        log("=================onFailureEvent=====" + barcodeFailureEvent.toString());
-//    }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        log("--------------------- reader is " + (this.reader==null? "null" : "present"));
+    }
 }

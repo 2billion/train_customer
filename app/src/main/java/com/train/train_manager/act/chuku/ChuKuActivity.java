@@ -1,6 +1,5 @@
 package com.train.train_manager.act.chuku;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,10 +13,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.train.train_manager.R;
-import com.train.train_manager.act.MainActivity;
 import com.train.train_manager.act.bean.OutListBean;
 import com.train.train_manager.act.bean.OutParamsBean;
-import com.train.train_manager.act.kucun.KuCunActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.base.Reader;
@@ -105,6 +102,9 @@ public class ChuKuActivity extends BaseActivity {
                 finish();
             }
         });
+        //        首次进来，初始化状态
+        BaseApplication.app.dm.outParams.status = "";
+
 
         //    获取数据放最后
         log("------------------------- create refresh");
@@ -181,7 +181,7 @@ public class ChuKuActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BaseApplication.app.dm.outParams.pickNo= "";
+        BaseApplication.app.dm.outParams.pickNo = "";
     }
 
     @Override
@@ -197,11 +197,11 @@ public class ChuKuActivity extends BaseActivity {
             @Override
             public void run() {
                 if (str.equals("")) {
-                    return ;
-//                } else if (str.startsWith("#")) {
-//                    String str_real = str.replace("#", "");
-//                    BaseApplication.app.dm.kuCunParams.location = str_real;
-//                    kuwei.setText(str_real.toString());
+                    return;
+                    //                } else if (str.startsWith("#")) {
+                    //                    String str_real = str.replace("#", "");
+                    //                    BaseApplication.app.dm.kuCunParams.location = str_real;
+                    //                    kuwei.setText(str_real.toString());
                 } else {
                     BaseApplication.app.dm.outParams.pickNo = str;
                     searchInput.setText(str.toString());
