@@ -20,6 +20,9 @@ import com.train.train_customer.core.Cache;
 import com.train.train_customer.core.DataManager;
 import com.train.train_customer.core.Net;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BaseApplication extends Application {
 
     public Net net;
@@ -27,6 +30,7 @@ public class BaseApplication extends Application {
     private static Toast mToast = null;
     public static Activity curAct = null;
     public static BaseApplication app = null;
+    private List<Activity> AllActivitites = new ArrayList<Activity>();
 
     public boolean reload_list_cart = false;
     public boolean reload_list_order = false;
@@ -65,6 +69,7 @@ public class BaseApplication extends Application {
      */
     public void initApp(Activity act) {
         curAct = act;
+        AllActivitites.add(act);
     }
 
 
@@ -76,6 +81,12 @@ public class BaseApplication extends Application {
                 .getLaunchIntentForPackage("com.train.train_customer");
         k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         getApplicationContext().startActivity(k);
+
+        for (Activity activity : AllActivitites) {
+            if (activity != null) {
+                activity.finish();
+            }
+        }
     }
 
     @Override

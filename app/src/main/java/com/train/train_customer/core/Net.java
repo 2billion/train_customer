@@ -320,7 +320,6 @@ public class Net {
         params.add("customerTel", customerTel);
         params.add("customerMail", customerMail);
         params.add("customerAddr", customerAddr);
-        params.add("customerName", customerName);
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.token).build();
         Call call = client.newCall(request);

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main);
         //初始化
         init();
+        BaseApplication.app.initApp(this);
     }
 
     private void init() {

@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.train.train_customer.R;
+import com.train.train_customer.base.BaseActivity;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

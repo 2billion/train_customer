@@ -1,0 +1,13 @@
+<!-- res/drawable/button_shape_normal.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle" >
+
+    <!-- rounded corner -->
+
+    <solid android:color="@color/white"></solid>
+
+    <stroke
+        android:width="2dip"
+        android:color="#dbdadb" />
+
+</shape>

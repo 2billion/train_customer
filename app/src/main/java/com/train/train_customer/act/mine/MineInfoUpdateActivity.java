@@ -68,7 +68,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
         UserBean bean = BaseApplication.app.dm.userBean;
         if (bean != null) {
             if (bean.userName != null) {
-                customer_name.setText(bean.userName);
+                customer_name.setText(bean.customerName);
                 customer_name.setSelection(customer_name.getText().toString().length());
             }
             if (bean.customerSex > -1) {
@@ -95,7 +95,7 @@ public class MineInfoUpdateActivity extends BaseActivity {
     private void do_submit() {
 
         String customerName = customer_name.getText().toString();
-        int customerSex = boy.isSelected() ? 1 : 0;
+        int customerSex = boy.isChecked() ? 1 : 0;
         String customerTel = customer_tel.getText().toString();
         String customerMail = customer_mail.getText().toString();
         String customerAddr = customer_addr.getText().toString();

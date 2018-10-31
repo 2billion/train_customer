@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity {
     private void init() {
 
         et_name.setText("gzdcd");
-//        et_password.setText("123456");
+        et_password.setText("123456");
         et_name.setSelection(et_name.length());
 
         findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
@@ -59,12 +59,19 @@ public class LoginActivity extends BaseActivity {
         });
         autoLogin();
 
-        //初始化NfcAdapter
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        //初始化PendingIntent
-        // 初始化PendingIntent，当有NFC设备连接上的时候，就交给当前Activity处理
-        pi = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
-                .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        try{
+
+            //初始化NfcAdapter
+            mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+            //初始化PendingIntent
+            // 初始化PendingIntent，当有NFC设备连接上的时候，就交给当前Activity处理
+            pi = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
+                    .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        }catch (Exception ex){
+
+        }
+
+
 
     }
 
@@ -145,17 +152,22 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mNfcAdapter.enableForegroundDispatch(this, pi, null, null);
+        try {
+            mNfcAdapter.enableForegroundDispatch(this, pi, null, null);
+        }catch (Exception ex){}
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        try {
         // 当前app正在前端界面运行，这个时候有intent发送过来，那么系统就会调用onNewIntent回调方法，将intent传送过来
         // 我们只需要在这里检验这个intent是否是NFC相关的intent，如果是，就调用处理方法
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(intent.getAction())) {
             processIntent(intent);
         }
+        }catch (Exception ex){}
     }
 
     /**

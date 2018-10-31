@@ -47,6 +47,7 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:paddingLeft="8dp"
+            android:layout_marginTop="8dp"
             android:paddingRight="8dp">
 
             <TextView
@@ -147,9 +148,9 @@
                 android:minLines="3"
                 android:layout_margin="4dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/white"
+                android:background="@drawable/v_input_white"
                 android:gravity="top|left"
-                android:hint="@string/order_info_reason"
+                android:hint="请填写申请订单变更原因"
                 android:paddingBottom="4dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"

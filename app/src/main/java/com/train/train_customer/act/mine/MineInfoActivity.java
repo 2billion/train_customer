@@ -255,6 +255,37 @@ public class MineInfoActivity extends BaseActivity {
                 UserDataBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.dm.userBean = bean.data;
+
+
+                    runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            UserBean b = BaseApplication.app.dm.userBean;
+            if (b != null) {
+
+                if (b.customerName != null) {
+                    customer_name.setText(b.customerName);
+                    customer_name.setSelection(customer_name.getText().toString().length());
+                }
+                if (b.customerSex > -1) {
+                    customerSex.setText(b.customerSex == 0 ? "男" : "女");
+                    customerSex.setSelection(customerSex.getText().toString().length());
+                }
+                if (b.customerTel != null) {
+                    customer_tel.setText(b.customerTel);
+                }
+                if (b.customerMail != null) {
+                    customer_mail.setText(b.customerMail);
+                }
+                if (b.customerAddr != null) {
+                    customer_addr.setText(b.customerAddr);
+                }
+            }
+
+        }
+    });
+
+
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
                 }

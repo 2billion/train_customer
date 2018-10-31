@@ -31,7 +31,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="请筛选"
@@ -41,11 +40,11 @@
                 android:id="@+id/ok"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_marginRight="14dp"
+                android:layout_marginRight="8dp"
                 android:background="@drawable/v_btn_block_blue_light"
                 android:text="确定"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/reset"
@@ -54,7 +53,7 @@
                 android:background="@drawable/v_btn_block_yellow_light"
                 android:text="重置"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 

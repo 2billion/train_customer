@@ -122,6 +122,7 @@
         <EditText
             android:id="@+id/customer_tel"
             style="@style/input_update_item"
+            android:hint="电话"
             android:inputType="phone" />
 
     </LinearLayout>
@@ -144,6 +145,7 @@
 
         <EditText
             android:id="@+id/customer_mail"
+            android:hint="邮箱"
             style="@style/input_update_item"
             android:inputType="textEmailAddress" />
 
@@ -167,6 +169,7 @@
 
         <EditText
             android:id="@+id/customer_addr"
+            android:hint="地址"
             style="@style/input_update_item" />
 
     </LinearLayout>
