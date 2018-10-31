@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_record;
+package com.train.train_manager.act.ruku_one.ruku_record;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

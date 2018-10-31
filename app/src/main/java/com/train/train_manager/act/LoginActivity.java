@@ -62,6 +62,9 @@ public class LoginActivity extends BaseActivity {
         pi = PendingIntent.getActivity(this, 0, new Intent(this, getClass())
                 .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
+        et_name.setText("admin");
+        et_password.setText("123456");
+
     }
 
     private void autoLogin() {
@@ -141,7 +144,9 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mNfcAdapter.enableForegroundDispatch(this, pi, null, null);
+        if (mNfcAdapter != null) {
+            mNfcAdapter.enableForegroundDispatch(this, pi, null, null);
+        }
     }
 
     @Override

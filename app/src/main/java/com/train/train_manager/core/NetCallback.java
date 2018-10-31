@@ -25,7 +25,12 @@ public abstract class NetCallback implements Callback {
         String responseStr = response.body().string();
         Log.i("api", "=========url:" + call.request().url().toString());
         Log.i("api", "=========back:" + responseStr);
-        this.response(call, responseStr);
+
+        try {
+            this.response(call, responseStr);
+        } catch (Exception ex) {
+            Log.i("api", "========= error:" + ex.getMessage());
+        }
     }
 
     public abstract void failure(Call call, IOException e);

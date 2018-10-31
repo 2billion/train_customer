@@ -225,4 +225,11 @@ public class MineInfoActivity extends BaseActivity {
         });
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUserInfo();
+    }
+
 }

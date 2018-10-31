@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_add;
+package com.train.train_manager.act.ruku_one.ruku_add;
 
 import android.os.Bundle;
 import android.text.Editable;

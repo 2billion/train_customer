@@ -15,22 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.honeywell.aidc.AidcManager;
-import com.honeywell.aidc.BarcodeFailureEvent;
-import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
-import com.honeywell.aidc.UnsupportedPropertyException;
 import com.train.train_manager.R;
 import com.train.train_manager.act.chuku.ChuKuActivity;
 import com.train.train_manager.act.kucun.KuCunActivity;
 import com.train.train_manager.act.mine.MineActivity;
 import com.train.train_manager.act.ruku.RukuActivity;
-import com.train.train_manager.act.ruku_record.RukuRecordActivity;
+import com.train.train_manager.act.ruku_one.ruku_record.RukuRecordActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.base.Reader;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +49,10 @@ public class MainActivity extends BaseActivity{
     View main_btn_ico_4;
     @BindView(R.id.main_btn_ico_5)
     View main_btn_ico_5;
+
+//    @BindView(R.id.main_btn_ico_6)
+//    View main_btn_ico_6;
+
 
     @BindView(R.id.input_del_1)
     View input_del_1;
@@ -145,6 +143,9 @@ public class MainActivity extends BaseActivity{
             case R.id.main_btn_ico_5:
                 startActivity(new Intent(MainActivity.this, MineActivity.class));
                 break;
+//            case R.id.main_btn_ico_6:
+//                startActivity(new Intent(MainActivity.this, com.train.train_manager.act.ruku_two.ruku_record.RukuRecordActivity.class));
+//                break;
         }
 
 

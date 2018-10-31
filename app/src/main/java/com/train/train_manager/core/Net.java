@@ -213,7 +213,7 @@ public class Net {
         params.add("status", bean.status);
         params.add("page", page);
         params.add("pageSize", pageSize);
-        Log.e("app","=========="+bean.info());
+        Log.e("app", "==========" + bean.info());
         Request request = new Request.Builder().url(url).post(params.build())
                 .addHeader("token", BaseApplication.app.dm.getToken()).build();
         Call call = client.newCall(request);
@@ -378,6 +378,59 @@ public class Net {
         Call call = client.newCall(request);
         call.enqueue(callBack);
     }
+
+    // =============================================
+    // 新需求
+
+    //    2.24获取用户全局信息
+    //    请求地址： /user/userdata
+    public void userdata(Callback callBack) {
+        String url = HOST + "/user/userdata";
+        FormBody.Builder params = new FormBody.Builder();
+        //        params.add("pickId", pickId);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+
+    //    2.26获取二类入库单列表
+    //    请求地址：/operStock/listInB
+
+    //    billNo	String	否		入库单号
+    //    timeStart	String	否		创建开始时间
+    //    timeEnd	String	否		创建结束时间
+    //    status	int	否		状态：1已启动2已完成
+    //    page	int	是		页码
+    //    pageSize	int	是		每页记录数
+    public void listInB(Callback callBack, String page, String pageSize, String billNo, String timeStart, String timeEnd, String status) {
+        String url = HOST + "/operStock/listInB";
+        FormBody.Builder params = new FormBody.Builder();
+        params.add("billNo", billNo);
+        params.add("timeStart", timeStart);
+        params.add("timeEnd", timeEnd);
+        params.add("status", status);
+        params.add("page", page);
+        params.add("pageSize", pageSize);
+        Request request = new Request.Builder().url(url).post(params.build())
+                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+        Call call = client.newCall(request);
+        call.enqueue(callBack);
+    }
+
+    //    //     2.11 一类入库单详情
+    //    //    请求地址： /trans/getDetailByTransNo
+    //    //    transNo	String	否		入库单号
+    //    public void getDetailByTransNo(Callback callBack, String transNo) {
+    //        String url = HOST + "/trans/getDetailByTransNo";
+    //        FormBody.Builder params = new FormBody.Builder();
+    //        params.add("transNo", transNo);
+    //        Request request = new Request.Builder().url(url).post(params.build())
+    //                .addHeader("token", BaseApplication.app.dm.getToken()).build();
+    //        Call call = client.newCall(request);
+    //        call.enqueue(callBack);
+    //    }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

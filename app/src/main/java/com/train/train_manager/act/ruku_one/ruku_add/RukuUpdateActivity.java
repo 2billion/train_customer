@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_add;
+package com.train.train_manager.act.ruku_one.ruku_add;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -116,7 +116,7 @@ public class RukuUpdateActivity extends BaseActivity {
                 }.getType();
                 InAAddBackListBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
-                    BaseApplication.app.showToast("添加成功");
+                    BaseApplication.app.showToast("修改成功");
                     BaseApplication.app.dm.inaAddBean.transNo = bean.data.transNo;
                     BaseApplication.app.dm.inaAddBean.transId = bean.data.transId;
 

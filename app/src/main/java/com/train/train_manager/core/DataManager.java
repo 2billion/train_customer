@@ -41,6 +41,17 @@ public class DataManager {
     public List<InAInfoBean> list_InAInfo = new ArrayList<>(); // 临时入库单列表
     public InABean info_InABean = new InABean(); // 临时详情参数
 
+    // 二类入库单，入库记录筛选
+    public List<InABean> listInB = new ArrayList<>();
+    public String inb_billNo = "";
+    public String inb_timeStart = "";
+    public String inb_timeEnd = "";
+    public int inb_status = 0;  //状态：1已启动2已完成
+
+    // 一类入库单 列表
+    public InAAddParamsBean inaAddBean_2 = new InAAddParamsBean();
+    public List<InAInfoBean> list_InAInfo_2 = new ArrayList<>(); // 临时入库单列表
+    public InABean info_InABean_2 = new InABean(); // 临时详情参数
 
     //   出库
     public OutParamsBean outParams = new OutParamsBean();

@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_record;
+package com.train.train_manager.act.ruku_two.ruku_record;
 
 import android.app.DatePickerDialog;
 import android.text.Editable;

@@ -86,7 +86,7 @@ public class ChukuAdapter extends BaseAdapter {
             holder.status.setBackgroundResource(R.drawable.v_label_round_blue);
         } else if (bean.status == 1) {
             holder.status.setText("下架中");
-            holder.status.setBackgroundResource(R.drawable.v_label_round_gray);
+            holder.status.setBackgroundResource(R.drawable.v_label_round_xiajia);
         } else if (bean.status == 2) {
             holder.status.setText("待交接");
             holder.status.setBackgroundResource(R.drawable.v_label_round_red);

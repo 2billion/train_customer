@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_record;
+package com.train.train_manager.act.ruku_one.ruku_record;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.train.train_manager.R;
 import com.train.train_manager.act.bean.InABean;
-import com.train.train_manager.act.ruku_add.RukuAddActivity;
+import com.train.train_manager.act.ruku_one.ruku_add.RukuAddActivity;
 import com.train.train_manager.base.BaseApplication;
 
 public class RukuRecordAdapter extends BaseAdapter {
@@ -92,9 +92,15 @@ public class RukuRecordAdapter extends BaseAdapter {
         holder.item.setOnLongClickListener(new View.OnLongClickListener() {
             public boolean onLongClick(View v) {
                 InABean bean = (InABean) v.getTag();
-                BaseApplication.app.dm.info_InABean = bean;
-                activity.delete_ruku_record(bean.transNo);
-                return false;
+                if (bean.status == 2){
+                    BaseApplication.showToast("入库单已完成，不可删除");
+                    return true;
+                }else{
+                    BaseApplication.app.dm.info_InABean = bean;
+                    activity.delete_ruku_record(bean.transNo);
+                    return false;
+
+                }
             }
         });
 

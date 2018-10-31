@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_add;
+package com.train.train_manager.act.ruku_one.ruku_add;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,7 +15,7 @@ import com.train.train_manager.R;
 import com.train.train_manager.act.bean.BaseBean;
 import com.train.train_manager.act.bean.CompInABean;
 import com.train.train_manager.act.bean.InAInfoListBean;
-import com.train.train_manager.act.ruku.RukuOKActivity;
+import com.train.train_manager.act.ruku_one.RukuOKActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 import com.train.train_manager.base.Reader;
@@ -209,9 +209,11 @@ public class RukuAddActivity extends BaseActivity {
         if (BaseApplication.app.dm.inaAddBean.status == 2) {
             bottom_btn_2.setEnabled(false);
             bottom_btn_2.setText("已完成");
+            btn_right.setVisibility(View.INVISIBLE);
         } else {
             bottom_btn_2.setEnabled(true);
             bottom_btn_2.setText("确认入库");
+            btn_right.setVisibility(View.VISIBLE);
         }
     }
 

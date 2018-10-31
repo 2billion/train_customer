@@ -13,6 +13,10 @@ public class InABean {
     public String userId;
     public int status;
 
+    //    二类入库用
+    public String billNo;
+
+
     public String compTimeStr() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

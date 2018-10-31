@@ -10,6 +10,9 @@ public class InAAddParamsBean {
 
     public int status = 0;
 
+    public int operId;
+    public String billNo;
+
     public void clear() {
         this.bstPartNo = "";
         this.tLocation = "";

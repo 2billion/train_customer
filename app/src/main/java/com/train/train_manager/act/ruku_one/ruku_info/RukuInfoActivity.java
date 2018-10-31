@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku_info;
+package com.train.train_manager.act.ruku_one.ruku_info;
 
 import android.os.Bundle;
 import android.view.View;
@@ -95,7 +95,7 @@ public class RukuInfoActivity extends BaseActivity {
                 btn_right.setVisibility(View.INVISIBLE);
                 bottom_btn_2.setClickable(false);
                 bottom_btn_2.setEnabled(false);
-                bottom_btn_2.setText("已完成");
+                bottom_btn_2.setText("已完成!!");
             }
         }
         //    获取数据放最后

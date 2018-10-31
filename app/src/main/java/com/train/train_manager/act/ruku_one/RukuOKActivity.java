@@ -1,4 +1,4 @@
-package com.train.train_manager.act.ruku;
+package com.train.train_manager.act.ruku_one;
 
 import android.os.Bundle;
 import android.view.View;

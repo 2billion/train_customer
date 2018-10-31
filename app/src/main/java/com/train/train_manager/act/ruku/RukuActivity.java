@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.train.train_manager.R;
-import com.train.train_manager.act.ruku_add.RukuAddActivity;
+import com.train.train_manager.act.ruku_one.ruku_add.RukuAddActivity;
 import com.train.train_manager.base.BaseActivity;
 import com.train.train_manager.base.BaseApplication;
 
@@ -34,6 +34,7 @@ public class RukuActivity extends BaseActivity {
             }
         });
 
+
     }
 
     @OnClick({R.id.line2, R.id.line1})
@@ -41,9 +42,12 @@ public class RukuActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.line1:
                 BaseApplication.app.dm.list_InAInfo.clear();
-                startActivity(new Intent(RukuActivity.this, RukuAddActivity.class));
+                startActivity(new Intent(RukuActivity.this, com.train.train_manager.act.ruku_one.ruku_record.RukuRecordActivity.class));
                 break;
             case R.id.line2:
+                BaseApplication.app.dm.list_InAInfo_2.clear();
+
+                startActivity(new Intent(RukuActivity.this, com.train.train_manager.act.ruku_two.ruku_record.RukuRecordActivity.class));
                 BaseApplication.showToast("暂时不能选择二类入库单");
                 break;
         }
@@ -53,6 +57,9 @@ public class RukuActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        BaseApplication.app.dm.inaAddBean.tLocation = "";
+        BaseApplication.app.dm.inaAddBean.bstPartNo = "";
+        BaseApplication.app.dm.inaAddBean.qty = 0;
         if (BaseApplication.app.goHome == true) {
             BaseApplication.app.goHome = false;
             finish();

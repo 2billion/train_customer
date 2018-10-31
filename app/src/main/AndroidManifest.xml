@@ -53,18 +53,21 @@
         </activity>
         <activity android:name=".act.ruku.RukuActivity"></activity>
 
-        <activity android:name=".act.ruku_record.RukuRecordActivity"></activity>
-        <activity android:name=".act.ruku_info.RukuInfoActivity"></activity>
-        <activity android:name=".act.ruku_add.RukuAddActivity"></activity>
-        <activity android:name=".act.ruku_add.RukuDoAddActivity"></activity>
         <activity android:name=".act.chuku.ChuKuActivity"></activity>
         <activity android:name=".act.chuku_info.ChukuInfoActivity"></activity>
         <activity android:name=".act.kucun.KuCunActivity"></activity>
-        <activity android:name=".act.ruku.RukuOKActivity"></activity>
 
-        <activity android:name=".act.ruku_add.RukuUpdateActivity"></activity>
+        <activity android:name=".act.ruku_one.ruku_record.RukuRecordActivity"></activity>
+        <activity android:name=".act.ruku_one.ruku_info.RukuInfoActivity"></activity>
+        <activity android:name=".act.ruku_one.ruku_add.RukuAddActivity"></activity>
+        <activity android:name=".act.ruku_one.ruku_add.RukuDoAddActivity"></activity>
+        <activity android:name=".act.ruku_one.RukuOKActivity"></activity>
+        <activity android:name=".act.ruku_one.ruku_add.RukuUpdateActivity"></activity>
 
         <activity android:name=".act.chuku_action.ChukuActionActivity"></activity>
+
+        <!-- 二类入库 -->
+        <activity android:name=".act.ruku_two.ruku_record.RukuRecordActivity"></activity>
 
 
         <!-- end -->
