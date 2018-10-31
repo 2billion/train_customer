@@ -72,8 +72,8 @@ public class AppUncaughtExceptionHandler implements Thread.UncaughtExceptionHand
     }
 
     private void byebye() {
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
+//        android.os.Process.killProcess(android.os.Process.myPid());
+//        System.exit(0);
     }
 
     private boolean handlelException(Throwable ex) {

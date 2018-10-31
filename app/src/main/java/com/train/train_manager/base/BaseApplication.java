@@ -1,5 +1,6 @@
 package com.train.train_manager.base;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +25,9 @@ import com.train.train_manager.core.Cache;
 import com.train.train_manager.core.DataManager;
 import com.train.train_manager.core.Net;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BaseApplication extends Application {
@@ -74,8 +77,10 @@ public class BaseApplication extends Application {
      */
     public void initApp(BaseActivity act) {
         curAct = act;
+        AllActivitites.add(act);
     }
 
+    private List<Activity> AllActivitites = new ArrayList<Activity>();
 
     public void restart() {
         //        ActivityManager am = (ActivityManager) getApplicationContext().getSystemService(getApplicationContext().ACTIVITY_SERVICE);
@@ -85,6 +90,12 @@ public class BaseApplication extends Application {
                 .getLaunchIntentForPackage("com.train.train_manager");
         k.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         getApplicationContext().startActivity(k);
+
+        for (Activity activity : AllActivitites) {
+            if (activity != null) {
+                activity.finish();
+            }
+        }
     }
 
     @Override

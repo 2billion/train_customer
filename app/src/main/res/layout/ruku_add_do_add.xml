@@ -173,7 +173,7 @@
             style="@style/btn_blue"
             android:layout_width="match_parent"
             android:layout_marginBottom="100dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="添加并继续" />
 
     </LinearLayout>
