@@ -123,9 +123,11 @@ public class MineFragment extends BaseFragment {
     public void initUI() {
         getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                loginName.setText(BaseApplication.app.dm.userBean.userName);
-                nickname.setText(BaseApplication.app.dm.userBean.customerName);
-                loadAvatar();
+                try {
+                    loginName.setText(BaseApplication.app.dm.userBean.userName);
+                    nickname.setText(BaseApplication.app.dm.userBean.customerName);
+                    loadAvatar();
+                }catch(Exception e){}
             }
         });
     }
@@ -144,10 +146,12 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        reload_list();
         if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.customerImg == null) {
             return;
         }
         loadAvatar();
+
     }
 
     @Override

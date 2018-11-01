@@ -245,6 +245,7 @@ public class MineInfoActivity extends BaseActivity {
     }
 
     private void updateUserInfo() {
+        Log.e("app","-------------updateUserInfo ");
         BaseApplication.app.net.findCustomerInfo(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
