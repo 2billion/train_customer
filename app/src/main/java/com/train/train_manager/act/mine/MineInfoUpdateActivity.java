@@ -1,6 +1,7 @@
 package com.train.train_manager.act.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -78,6 +79,9 @@ public class MineInfoUpdateActivity extends BaseActivity {
         String user_name_str = user_name.getText().toString();
         String user_desc_str = user_desc.getText().toString();
         String post_str = post.getText().toString();
+        Log.e("app","--------user_name_str-----"+user_name_str);
+        Log.e("app","-----user_desc_str--------"+user_desc_str);
+        Log.e("app","--------post_str-----"+post_str);
 
         BaseApplication.app.net.editpersonal(new NetCallback() {
             public void failure(Call call, IOException e) {

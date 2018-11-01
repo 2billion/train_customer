@@ -120,14 +120,17 @@ public class MineActivity extends BaseActivity {
     public void initUI() {
         runOnUiThread(new Runnable() {
             public void run() {
+                try{
                 loginName.setText(BaseApplication.app.dm.userBean.userName);
                 nickname.setText(BaseApplication.app.dm.userBean.userId);
+                }catch(Exception e){}
                 loadAvatar();
             }
         });
     }
 
     private void loadAvatar() {
+        try{
         if (BaseApplication.app.dm.userBean.userHeader == null){
             return ;
         }
@@ -139,12 +142,14 @@ public class MineActivity extends BaseActivity {
                 .transform(new CircleTransform(MineActivity.this))
                 .centerCrop()
                 .into(avatar);
+        }catch(Exception e){}
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (BaseApplication.app.dm.userBean == null || BaseApplication.app.dm.userBean.userHeader == null) {
+            initUI();
             return;
         }
         loadAvatar();

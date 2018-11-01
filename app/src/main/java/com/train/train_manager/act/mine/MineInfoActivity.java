@@ -208,16 +208,38 @@ public class MineInfoActivity extends BaseActivity {
     }
 
     private void updateUserInfo() {
-        BaseApplication.app.net.findMyInfo(new NetCallback() {
+        Log.e("app", "-----------updateUserInfo");
+        BaseApplication.app.net.info(new NetCallback() {
             public void failure(Call call, IOException e) {
             }
 
             public void response(Call call, String responseStr) throws IOException {
                 Type cvbType = new TypeToken<UserDataBean>() {
                 }.getType();
-                UserDataBean bean = new Gson().fromJson(responseStr, cvbType);
+                final UserDataBean bean = new Gson().fromJson(responseStr, cvbType);
                 if (bean.isOK()) {
                     BaseApplication.app.dm.userBean = bean.data;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bean.data.userId != null) {
+                                user_id.setText(bean.data.userId);
+                                user_id.setSelection(user_id.getText().toString().length());
+                            }
+                            if (bean.data.userName != null) {
+                                user_name.setText(bean.data.userName);
+                            }
+                            if (bean.data.userDesc != null) {
+                                user_desc.setText(bean.data.userDesc);
+                            }
+                            if (bean.data.deptName != null) {
+                                dept_name.setText(bean.data.deptName);
+                            }
+                            if (bean.data.post != null) {
+                                post.setText(bean.data.post);
+                            }
+                        }
+                    });
                 } else {
                     BaseApplication.app.showToast("请求失败" + bean.msg);
                 }
