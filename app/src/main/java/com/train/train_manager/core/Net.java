@@ -143,7 +143,7 @@ public class Net {
         params.add("transNo", bean.transNo);
         JSONObject jsonArray = new JSONObject();
         try {
-            jsonArray.put("transId", bean.transId);
+            jsonArray.put("transId", (bean.transId==0 ? "" : bean.transId)) ;
             jsonArray.put("bstPartNo", bean.bstPartNo);
             jsonArray.put("tLocation", bean.tLocation);
             jsonArray.put("qty", bean.qty);

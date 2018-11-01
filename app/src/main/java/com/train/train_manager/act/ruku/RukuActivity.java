@@ -42,7 +42,10 @@ public class RukuActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.line1:
                 BaseApplication.app.dm.list_InAInfo.clear();
-                startActivity(new Intent(RukuActivity.this, com.train.train_manager.act.ruku_one.ruku_record.RukuRecordActivity.class));
+                BaseApplication.app.dm.inaAddBean.transNo = "";
+//                  清库
+                startActivity(new Intent(RukuActivity.this,RukuAddActivity.class));
+//                startActivity(new Intent(RukuActivity.this, com.train.train_manager.act.ruku_one.ruku_record.RukuRecordActivity.class));
                 break;
             case R.id.line2:
                 BaseApplication.app.dm.list_InAInfo_2.clear();

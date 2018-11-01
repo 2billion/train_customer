@@ -136,14 +136,12 @@ public class RukuDoAddActivity extends BaseActivity {
         //        input2.setText("37810095S");
         //        input3.setText("1");
 
-        input1.setText(BaseApplication.app.dm.inaAddBean.tLocation + "");
-        input2.setText(BaseApplication.app.dm.inaAddBean.bstPartNo + "");
-        input3.setText(BaseApplication.app.dm.inaAddBean.qty + "");
+//        input1.setText(BaseApplication.app.dm.inaAddBean.tLocation + "");
+//        input2.setText(BaseApplication.app.dm.inaAddBean.bstPartNo + "");
+//        input3.setText(BaseApplication.app.dm.inaAddBean.qty + "");
 
 
-        //        BaseApplication.app.dm.inaAddBean.tLocation = input1.getText().toString();
-        //        BaseApplication.app.dm.inaAddBean.bstPartNo = input2.getText().toString();
-        //        BaseApplication.app.dm.inaAddBean.qty = Integer.valueOf(input3.getText().toString());
+
         this.reader = new Reader() {
             @Override
             public void back(String code) {
@@ -176,7 +174,7 @@ public class RukuDoAddActivity extends BaseActivity {
                 if (bean.isOK()) {
                     BaseApplication.app.showToast(bean.msg);
                     BaseApplication.app.dm.inaAddBean.transNo = bean.data.transNo;
-                    BaseApplication.app.dm.inaAddBean.transId = bean.data.transId;
+                    BaseApplication.app.dm.inaAddBean.transId = 0;
 
                     runOnUiThread(new Runnable() {
                         @Override

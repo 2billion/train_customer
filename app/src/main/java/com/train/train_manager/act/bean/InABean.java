@@ -22,7 +22,7 @@ public class InABean {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date date = sdf.parse(this.operTime);
             return sdf.format(date);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "";
         }

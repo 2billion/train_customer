@@ -84,6 +84,7 @@ public class RukuRecordAdapter extends BaseAdapter {
                 InABean bean = (InABean) v.getTag();
                 BaseApplication.app.dm.inaAddBean.transNo = bean.transNo;
                 BaseApplication.app.dm.inaAddBean.status = bean.status;
+                BaseApplication.app.dm.list_InAInfo.clear();
                 activity.startActivity(new Intent(activity, RukuAddActivity.class));
 
             }
